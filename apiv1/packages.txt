@@ -1,0 +1,14 @@
+asgiref==3.6.0
+async-timeout==4.0.2
+certifi @ file:///C:/b/abs_85o_6fm0se/croot/certifi_1671487778835/work/certifi
+Django==4.1
+django-cors-headers==3.13.0
+django-redis==5.2.0
+djangorestframework==3.14.0
+Pillow==9.4.0
+PyMySQL==1.0.2
+pytz==2022.7.1
+redis==4.5.1
+sqlparse==0.4.3
+tzdata==2022.7
+wincertstore==0.2
