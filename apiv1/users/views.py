@@ -24,62 +24,65 @@ from rest_framework import generics
 
 import jwt,datetime,django_redis 
 from .models import AnyUser as User,AdminUser
-from .serializers import LoginSerializer,RegisterSerializer,UserListSerializer,CreateSerializer
+from .serializers import LoginSerializer,EmailRegistererializer,CellRegistererializer,UserListSerializer,CreateSerializer
 from .exceptions import UserAlreadyExists
+from utils.crypto import CryptoAES
 
 
-
-
-class AnyUserLoginRegister(APIView):
-   def get(self,request,*args,**kwargs):
-      ''' Any用户登录 '''
-      serializer = LoginSerializer(data=request.data)
-
-      if not serializer.is_valid():
-          return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
-      
-      # 判断用户名是否存在；
-      try:    
-        # 获取用户信息
-        user = User.objects.get(username=request.data.get('username'))
-      except User.DoesNotExist:
-        return Response({"msg":"用户不存在"},status=HTTP_204_NO_CONTENT)
-      
-      # 密码加密解密
-
-      # 用户存在，进行密码校验
-      if not check_password(serializer.validated_data['username'],user.password):
-          return Response({'msg':"用户名或密码输入错误"},status=HTTP_202_ACCEPTED)
-      
-      # 获取用户的 token
-      import jwt,datetime,django_redis 
-      salt = settings.SECRET_KEY
-      # 构造Header，默认如下
-      headers = {
-          'typ':'jwt',
-          'alg':'HS256'
-      }
-      # 构造Payload
-      payload = {
-          'id':user.id,#自定义用户ID
-          'username':user.username,#自定义用户名
-          'exp':datetime.datetime.utcnow()+datetime.timedelta(days=1),# 设置超时时间，7 天内
-      }
-      token = jwt.encode(headers=headers,payload=payload,key=salt,algorithm='HS256')
-      redis_con = django_redis.get_redis_connection('default') 
-      redis_con.set(token,user.username,60*60*24)
-      return Response(data={
-          "Id":user.id,
-          "Username":user.username,
-          "Token":token,
-      },status=HTTP_200_OK)
-      
-   def post(self,request,*args,**kwargs):
-      ''' 注册 Any用户 '''
-      import django_redis
-      serializer = self.serializer_class[1](data=request.data)
-      if not serializer.is_valid(raise_exception=True):
+@api_view(['get'])
+def AnyUserLogin(self,request,*args,**kwargs):
+    ''' Any用户登录 '''
+    # aes = CryptoAES(b'1111111111000000',b'0000001111111111')
+    # query_params = {'username':request.query_params['username'],'password':request.query_params['password']}
+    # query_params = aes.decodeDict(query_params)
+    # serializer = LoginSerializer(data=query_params)
+    serializer = self.serializer_class[0](data=request.query_params)
+    if not serializer.is_valid():
         return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
+    # 判断用户名是否存在；
+    try:    
+      # 获取用户信息
+      user = User.objects.get(username=serializer.validated_data['username'])
+    except User.DoesNotExist:
+      return Response({"msg":"用户不存在"},status=HTTP_204_NO_CONTENT)
+    
+    # 用户存在，进行密码校验
+    if not check_password(serializer.validated_data['username'],user.password):
+        return Response({'msg':"用户名或密码输入错误"},status=HTTP_202_ACCEPTED)
+    
+    # 获取用户的 token
+    import jwt,datetime,django_redis 
+    salt = settings.SECRET_KEY
+    # 构造Header，默认如下
+    headers = {
+        'typ':'jwt',
+        'alg':'HS256'
+    }
+    # 构造Payload
+    payload = {
+        'id':user.id,#自定义用户ID
+        'username':user.username,#自定义用户名
+        'exp':datetime.datetime.utcnow()+datetime.timedelta(days=1),# 设置超时时间，7 天内
+    }
+    token = jwt.encode(headers=headers,payload=payload,key=salt,algorithm='HS256')
+    redis_con = django_redis.get_redis_connection('default') 
+    redis_con.set(token,user.username,60*60*24)
+    return Response(data={
+        "Id":user.id,
+        "Username":user.username,
+        "Token":token,
+    },status=HTTP_200_OK)
+
+@api_view(['POST'])
+def AnyUserRegister(self,request,*args,**kwargs):
+    ''' 注册 Any用户 '''
+    import django_redis
+    if kwargs['type'] == 'cell':
+      ce
+      #  手机注册
+      serializer = CellRegistererializer(data=request.data)
+      if not serializer.is_valid(raise_exception=True):
+        return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)  
       # 2. 检验 code 是否过期。
       cellphone = serializer.validated_data['cell']
       code = serializer.validated_data['code']
@@ -101,7 +104,22 @@ class AnyUserLoginRegister(APIView):
       headers = self.get_success_headers(serializer.data)
       print(headers)
       return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
+    elif kwargs['type'] == 'email':
+      emailRegister(self,request)
+    else:
+       return Response(HTTP_404_NOT_FOUND)
+    
 
+
+    def emailRegister():
+       print('email')
+
+
+class AnyUserLoginRegister(APIView):
+    
+   queryset = User.objects.all()
+   serializer_class = [LoginSerializer,EmailRegistererializer,CellRegistererializer] 
+    
 
 class AnyUserListCreate(generics.ListCreateAPIView):
 

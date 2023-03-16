@@ -15,7 +15,6 @@ from rest_framework.permissions import BasePermission
 from utils.utils import username_re,email_re,cellphone_re,password_re,randomStr6_re
 
 
-
 ''' 以下是重写 DRF 的 CharField.to_internal_value() 和 RegexField 以及 增加自定义字段 CheckPassword 和 VerificationCode'''
 
 

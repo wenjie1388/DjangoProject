@@ -2,6 +2,7 @@
 from django.urls import path,include,re_path
 
 from .views import (
+    AnyUserLogin,
     AnyUserLoginRegister,
     AdminLogin,
     Logout,
@@ -17,6 +18,7 @@ urlpatterns=[
 
 
     re_path(r'^anyuser/login$',AnyUserLoginRegister.as_view(),name="anyuserlogin"),
+    re_path(r'^anyuser/register/<type>$',AnyUserLoginRegister.as_view(),name="anyuserlogin"),
     re_path(r'^adminuser/login$',AdminLogin.as_view(),name="adminlogin"),
     # re_path(r'^login$',Login,name="login"),
     # re_path(r'^$',UserSearch.as_view(),name="Search"),

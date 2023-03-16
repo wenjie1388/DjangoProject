@@ -1,0 +1,10 @@
+# 开发环境
+
+DEBUG__ = True
+
+
+MYSQLNAME = 'pl'
+MYSQLUSER = 'root'
+MYSQLPASSWORD = 'root'
+MYSQLHOST = '127.0.0.1'
+MYSQLPORT = 3306

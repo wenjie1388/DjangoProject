@@ -1,0 +1,10 @@
+# 上线环境
+
+__DEBUG__ = False
+
+
+MYSQLNAME = 'pl'
+MYSQLUSER = 'root'
+MYSQLPASSWORD = 'root'
+MYSQLHOST = '127.0.0.1'
+MYSQLPORT = 3306

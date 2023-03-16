@@ -17,6 +17,16 @@ class LoginSerializer(serializers.Serializer):
     username = UsernameField()
     password = PasswordField()
 
+class EmailRegistererializer(serializers.Serializer):
+    email=serializers.EmailField()
+    code = RandomStringField_6()
+    password = PasswordField()
+    
+class CellRegistererializer(serializers.Serializer):
+    cell = CellphoneField()
+    code = RandomStringField_6()
+    password = PasswordField()
+
 class CreateSerializer(serializers.Serializer):
     
     GENDER = [
@@ -33,14 +43,6 @@ class CreateSerializer(serializers.Serializer):
 
 
     def create(self, **kwargs):
-        # if User.objects.filter(username=self.validated_data['username']) == []:
-        #     raise UserAlreadyExists
-        # pw = self.set_password()
-        # User.objects.create(
-        #     username=self.validated_data['username'],
-        #     password=pw,
-        #     cell=self.validated_data['cell'],
-        # )
         if self.validated_data.get('password',None):
             User.objects.create(**self.validated_data)
         else:

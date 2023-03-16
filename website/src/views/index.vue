@@ -1,44 +1,46 @@
 <template>
-  <el-row :gutter="20">
-    <el-col :span="4" :offset="4">
-      <!-- 博主卡片 -->
-      <div class="grid-content">
-        <Login />
-      </div>
-    </el-col>
-    <el-col :span="8">
-      <div class="grid-content ">
-        <!-- 文章 -->
-        <Activle />
-      </div>
-    </el-col>
-    <el-col :span="4">
-      <div class="grid-content ep-bg-purple">{{ $route.params.username }}</div>
-    </el-col>
-  </el-row>
+  <el-menu
+    :default-active="activeIndex"
+    class="el-menu-demo"
+    mode="horizontal"
+    :ellipsis="false"
+    @select="handleSelect"
+  >
+    <el-menu-item index="0">LOGO</el-menu-item>
+    <el-menu-item index="1">社区</el-menu-item>
+    <el-menu-item index="2">课程</el-menu-item>
+    <div class="flex-grow" >
+        <el-input
+      v-model="input1"
+      size="large"
+      placeholder="Please Input"
+      :suffix-icon="Search"
+    />
+    </div>
+    <el-menu-item index="3" v-if='is_login == false'>登录/注册</el-menu-item>
+    <el-sub-menu index="4" v-if='is_login == true'>
+      <template #title>Workspace</template>
+      <el-menu-item index="4-1">item one</el-menu-item>
+      <el-sub-menu index="4-2">
+        <template #title>item four</template>
+        <el-menu-item index="4-2-1">item one</el-menu-item>
+      </el-sub-menu>
+    </el-sub-menu>
+  </el-menu>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue';
-import Login from '../components/login/index.vue';
-import Activle from '../components/article/index.vue'
+import { Search } from '@element-plus/icons-vue';
+const is_login = false;
+const activeIndex = ref('1');
+const handleSelect = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath);
+};
 </script>
 
-<style scoped>
-.el-row {
-  margin-bottom: 20px;
-}
-
-.el-row:last-child {
-  margin-bottom: 0;
-}
-
-.el-col {
-  border-radius: 4px;
-}
-
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
+<style>
+.flex-grow {
+  flex-grow: 1;
 }
 </style>
