@@ -4,22 +4,9 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 // 静态路由
 export const constantRoutes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '/index',
     name: 'home',
     component: () => import('@/views/index.vue'),
-    children: [
-      {
-        path: 'user',
-        component: () => import('@/views/system/user/index.vue'),
-        name:'User',
-        meta:{ hidden : true }
-      },
-      {
-        path: '401',
-        component: () => import('@/views/error-page/401.vue'),
-        meta: { hidden: true }
-      },
-    ]
   },
   // {
   //   path: '/redirect',

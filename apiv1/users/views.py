@@ -29,6 +29,56 @@ from .exceptions import UserAlreadyExists
 from utils.crypto import CryptoAES
 
 
+class AnyUserLoginRegister(APIView):
+    queryset = User.objects.all()
+    serializer_class = [LoginSerializer,EmailRegistererializer,CellRegistererializer] 
+    
+    def get(self,request,*args,**kwargs):
+        ''' Any用户登录 '''
+
+        pass
+
+   
+
+    def post(self,request,*args,**kwargs):
+        if kwargs['type'] == 'cell':
+          # 手机注册
+          print("Cell")
+          # self.cellRegister(self,request)
+        elif kwargs['type'] == 'email':
+          # 邮箱注册
+          print("Email")
+          # self.emailRegister(self,request)
+        else:
+          return Response(HTTP_404_NOT_FOUND)
+    
+    def emailRegister(self,request):
+        serializer = EmailRegistererializer(data=request.data)
+        if not serializer.is_valid(raise_exception=True):
+          return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)  
+        # 2. 检验 code 是否过期。
+        cellphone = serializer.validated_data['cell']
+        code = serializer.validated_data['code']
+        # 获取 redis.conn 的 verify_code 中 key 为 code 的信息
+        redis_con = django_redis.get_redis_connection('verify_code') 
+        # 判断 手机验证码是否过期
+        if redis_con.ttl(cellphone) == -2:
+          return Response({'msg':'验证码已失效'},status=HTTP_400_BAD_REQUEST)
+
+        # 3. 检验验证码是否匹配。
+        if  redis_con.get(cellphone).decode() != code:
+            return Response({'msg':'验证码错误'},status=HTTP_400_BAD_REQUEST)
+
+        # 4. 检验完成创建用户
+        try:
+          serializer.create()
+        except UserAlreadyExists:
+            return Response({'msg':"用户已存在"},status=HTTP_400_BAD_REQUEST)
+        return Response(serializer.data, status=HTTP_201_CREATED)
+    
+    def cellRegister(self,request):
+        pass
+
 @api_view(['get'])
 def AnyUserLogin(self,request,*args,**kwargs):
     ''' Any用户登录 '''
@@ -78,32 +128,32 @@ def AnyUserRegister(self,request,*args,**kwargs):
     ''' 注册 Any用户 '''
     import django_redis
     if kwargs['type'] == 'cell':
-      ce
+      cellRegister(self,request,*args,**kwargs)
       #  手机注册
-      serializer = CellRegistererializer(data=request.data)
-      if not serializer.is_valid(raise_exception=True):
-        return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)  
-      # 2. 检验 code 是否过期。
-      cellphone = serializer.validated_data['cell']
-      code = serializer.validated_data['code']
-      # 获取 redis.conn 的 verify_code 中 key 为 code 的信息
-      redis_con = django_redis.get_redis_connection('verify_code') 
-      # 判断 手机验证码是否过期
-      if redis_con.ttl(cellphone) == -2:
-        return Response({'msg':'验证码已失效'},status=HTTP_400_BAD_REQUEST)
+      # serializer = CellRegistererializer(data=request.data)
+      # if not serializer.is_valid(raise_exception=True):
+      #   return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)  
+      # # 2. 检验 code 是否过期。
+      # cellphone = serializer.validated_data['cell']
+      # code = serializer.validated_data['code']
+      # # 获取 redis.conn 的 verify_code 中 key 为 code 的信息
+      # redis_con = django_redis.get_redis_connection('verify_code') 
+      # # 判断 手机验证码是否过期
+      # if redis_con.ttl(cellphone) == -2:
+      #   return Response({'msg':'验证码已失效'},status=HTTP_400_BAD_REQUEST)
 
-      # 3. 检验验证码是否匹配。
-      if  redis_con.get(cellphone).decode() != code:
-          return Response({'msg':'验证码错误'},status=HTTP_400_BAD_REQUEST)
+      # # 3. 检验验证码是否匹配。
+      # if  redis_con.get(cellphone).decode() != code:
+      #     return Response({'msg':'验证码错误'},status=HTTP_400_BAD_REQUEST)
 
-      # 4. 检验完成创建用户
-      try:
-        serializer.create()
-      except UserAlreadyExists:
-          return Response({'msg':"用户已存在"},status=HTTP_400_BAD_REQUEST)
-      headers = self.get_success_headers(serializer.data)
-      print(headers)
-      return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
+      # # 4. 检验完成创建用户
+      # try:
+      #   serializer.create()
+      # except UserAlreadyExists:
+      #     return Response({'msg':"用户已存在"},status=HTTP_400_BAD_REQUEST)
+      # headers = self.get_success_headers(serializer.data)
+      # print(headers)
+      # return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
     elif kwargs['type'] == 'email':
       emailRegister(self,request)
     else:
@@ -113,6 +163,9 @@ def AnyUserRegister(self,request,*args,**kwargs):
 
     def emailRegister():
        print('email')
+
+    def cellRegister():
+       print('cell')
 
 
 class AnyUserLoginRegister(APIView):

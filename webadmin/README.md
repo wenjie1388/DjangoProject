@@ -52,7 +52,8 @@ npm install @wangeditor/editor-for-vue
 npm i vite-plugin-svg-icons -D
 npm install fast-glob
 npm install nprogress
-
+npm install pinia
+npm install vue-router
 
 
 
