@@ -12,7 +12,7 @@ from rest_framework.fields import CharField as _CharField
 from rest_framework.serializers import Serializer
 from rest_framework.permissions import BasePermission
 
-from utils.utils import username_re,email_re,cellphone_re,password_re,randomStr6_re
+from utils.utils import username_re,email_re,cellphone_re,password_re,auth_code_6_re
 
 
 ''' 以下是重写 DRF 的 CharField.to_internal_value() 和 RegexField 以及 增加自定义字段 CheckPassword 和 VerificationCode'''
@@ -86,11 +86,11 @@ class CellphoneField(CharField):
         validator = RegexValidator(self.regex, message=self.error_messages['invalid'])
         self.validators.append(validator)
 
-class RandomStringField_6(CharField):
+class AuthCode6Field(CharField):
     default_error_messages = {
         'invalid': _('This value does not match the required pattern.')
     }
-    regex = randomStr6_re
+    regex = auth_code_6_re
 
     def __init__(self, **kwargs):
         self.allow_blank = True

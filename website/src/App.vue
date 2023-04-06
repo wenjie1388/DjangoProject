@@ -7,8 +7,8 @@
           <el-image style="width: 100px; height: 58px;display: flex;"
             src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" fit="contain" />
         </div>
-        <el-menu-item index="index">首页</el-menu-item>
-        <el-menu-item index="2">社区</el-menu-item>
+        <el-menu-item index="/">首页</el-menu-item>
+        <el-menu-item index="bbs">社区</el-menu-item>
         <el-menu-item index="3">课程</el-menu-item>
         <div class="flex-grow" style="display: flex">
           <el-input v-model="input1" size="large" placeholder="Please Input" :suffix-icon="Search" />
@@ -34,7 +34,7 @@
 import { ref } from "vue";
 import { Search } from "@element-plus/icons-vue";
 const is_login = false;
-const activeIndex = ref("index");
+const activeIndex = ref("/");
 const input1 = "";
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);

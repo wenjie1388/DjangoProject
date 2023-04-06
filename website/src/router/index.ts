@@ -4,21 +4,17 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 // 静态路由
 export const constantRoutes: RouteRecordRaw[] = [
   {
-    path: '/index',
+    path: '/',
     name: 'home',
     component: () => import('@/views/index.vue'),
   },
-  // {
-  //   path: '/redirect',
-  //   component: Layout,
-  //   meta: { hidden: true },
-  //   children: [
-  //     {
-  //       path: '/redirect/:path(.*)',
-  //       component: () => import('@/views/redirect/index.vue')
-  //     }
-  //   ]
-  // },
+  
+  {
+    path: '/bbs',
+    component: () => import('@/views/bbs/index.vue'),
+    meta: { hidden: true }
+  },
+  
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
@@ -31,7 +27,17 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
 
   
-
+// {
+  //   path: '/redirect',
+  //   component: Layout,
+  //   meta: { hidden: true },
+  //   children: [
+  //     {
+  //       path: '/redirect/:path(.*)',
+  //       component: () => import('@/views/redirect/index.vue')
+  //     }
+  //   ]
+  // },
   // 外部链接
   /*{
         path: '/external-link',

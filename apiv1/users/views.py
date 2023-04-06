@@ -3,9 +3,12 @@ from django.contrib.auth import views
 from django.conf import settings
 from django.core.cache import cache
 from django.contrib.auth.hashers import check_password,make_password
+from django.db.utils import IntegrityError
+
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.utils.translation import gettext as _
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -19,68 +22,37 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
 from rest_framework.settings import api_settings
 from rest_framework import authentication, permissions,mixins
-from rest_framework import generics
+from rest_framework.generics import  ListAPIView,ListCreateAPIView
+from rest_framework import viewsets
 
 
 import jwt,datetime,django_redis 
 from .models import AnyUser as User,AdminUser
-from .serializers import LoginSerializer,EmailRegistererializer,CellRegistererializer,UserListSerializer,CreateSerializer
+from .serializers import (
+   AnyUserModelSerializer,
+   AnyUserCreateSerializer,
+   AnyUserListSerializer,
+   AnyUserLoginSerializer,
+   AnyUserRegisterCellSerializer,
+   AnyUserRegisterEmailSerializer,
+  
+   AdminUserModelSerializer,
+   AdminUserLoginSerializer,
+   AdminUserListSerializer,
+   AdminUserCreateSerializer,
+   AdminUserLoginSerializer,
+   )
 from .exceptions import UserAlreadyExists
 from utils.crypto import CryptoAES
+from utils.utils import JwtToken,send_mail_to_adminuser
 
 
-class AnyUserLoginRegister(APIView):
-    queryset = User.objects.all()
-    serializer_class = [LoginSerializer,EmailRegistererializer,CellRegistererializer] 
-    
-    def get(self,request,*args,**kwargs):
-        ''' Any用户登录 '''
 
-        pass
 
-   
+''' 以下是AnyUser的接口 '''
 
-    def post(self,request,*args,**kwargs):
-        if kwargs['type'] == 'cell':
-          # 手机注册
-          print("Cell")
-          # self.cellRegister(self,request)
-        elif kwargs['type'] == 'email':
-          # 邮箱注册
-          print("Email")
-          # self.emailRegister(self,request)
-        else:
-          return Response(HTTP_404_NOT_FOUND)
-    
-    def emailRegister(self,request):
-        serializer = EmailRegistererializer(data=request.data)
-        if not serializer.is_valid(raise_exception=True):
-          return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)  
-        # 2. 检验 code 是否过期。
-        cellphone = serializer.validated_data['cell']
-        code = serializer.validated_data['code']
-        # 获取 redis.conn 的 verify_code 中 key 为 code 的信息
-        redis_con = django_redis.get_redis_connection('verify_code') 
-        # 判断 手机验证码是否过期
-        if redis_con.ttl(cellphone) == -2:
-          return Response({'msg':'验证码已失效'},status=HTTP_400_BAD_REQUEST)
-
-        # 3. 检验验证码是否匹配。
-        if  redis_con.get(cellphone).decode() != code:
-            return Response({'msg':'验证码错误'},status=HTTP_400_BAD_REQUEST)
-
-        # 4. 检验完成创建用户
-        try:
-          serializer.create()
-        except UserAlreadyExists:
-            return Response({'msg':"用户已存在"},status=HTTP_400_BAD_REQUEST)
-        return Response(serializer.data, status=HTTP_201_CREATED)
-    
-    def cellRegister(self,request):
-        pass
-
-@api_view(['get'])
-def AnyUserLogin(self,request,*args,**kwargs):
+@api_view(['GET'])
+def AnyUserLoginView(self,request,*args,**kwargs):
     ''' Any用户登录 '''
     # aes = CryptoAES(b'1111111111000000',b'0000001111111111')
     # query_params = {'username':request.query_params['username'],'password':request.query_params['password']}
@@ -124,60 +96,55 @@ def AnyUserLogin(self,request,*args,**kwargs):
     },status=HTTP_200_OK)
 
 @api_view(['POST'])
-def AnyUserRegister(self,request,*args,**kwargs):
+def AnyUserRegisterView(request,type):
     ''' 注册 Any用户 '''
     import django_redis
-    if kwargs['type'] == 'cell':
-      cellRegister(self,request,*args,**kwargs)
+    if type == 'cell':
       #  手机注册
-      # serializer = CellRegistererializer(data=request.data)
-      # if not serializer.is_valid(raise_exception=True):
-      #   return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)  
-      # # 2. 检验 code 是否过期。
-      # cellphone = serializer.validated_data['cell']
-      # code = serializer.validated_data['code']
-      # # 获取 redis.conn 的 verify_code 中 key 为 code 的信息
-      # redis_con = django_redis.get_redis_connection('verify_code') 
-      # # 判断 手机验证码是否过期
-      # if redis_con.ttl(cellphone) == -2:
-      #   return Response({'msg':'验证码已失效'},status=HTTP_400_BAD_REQUEST)
+      serializer = AnyUserRegisterCellSerializer(data=request.data)
+      if not serializer.is_valid(raise_exception=True):
+        return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
+      
+      verify_filter = serializer.validated_data['cell']
 
-      # # 3. 检验验证码是否匹配。
-      # if  redis_con.get(cellphone).decode() != code:
-      #     return Response({'msg':'验证码错误'},status=HTTP_400_BAD_REQUEST)
+    elif type == 'email':
+      #  邮箱注册
+      serializer = AnyUserRegisterEmailSerializer(data=request.data)
+      if not serializer.is_valid(raise_exception=True):
+        return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
 
-      # # 4. 检验完成创建用户
-      # try:
-      #   serializer.create()
-      # except UserAlreadyExists:
-      #     return Response({'msg':"用户已存在"},status=HTTP_400_BAD_REQUEST)
-      # headers = self.get_success_headers(serializer.data)
-      # print(headers)
-      # return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
-    elif kwargs['type'] == 'email':
-      emailRegister(self,request)
+      verify_filter = serializer.validated_data['email']
     else:
        return Response(HTTP_404_NOT_FOUND)
-    
+
+    verify_code = serializer.validated_data.pop('code')
+    # 获取 redis.conn 的 verify_code 中 key 为 code 的信息
+    redis_con = django_redis.get_redis_connection('verify_code') 
+
+    # 2. 检验 verify_filter 是否过期。
+    if redis_con.ttl(verify_filter) == -2:
+      return Response({'msg':'验证码已失效'},status=HTTP_400_BAD_REQUEST)
+
+    # 3. 检验验证码是否匹配。
+    if  redis_con.get(verify_filter).decode() != verify_code:
+        return Response({'msg':'验证码错误'},status=HTTP_400_BAD_REQUEST)
+    # 4. 检验完成创建用户
+    try:
+      serializer.create()
+    except IntegrityError:
+        return Response({'msg':"用户已存在"},status=HTTP_400_BAD_REQUEST)
+    return Response(serializer.data, status=HTTP_201_CREATED)
 
 
-    def emailRegister():
-       print('email')
+class AnyUserViewset(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = AnyUserModelSerializer
+   
 
-    def cellRegister():
-       print('cell')
-
-
-class AnyUserLoginRegister(APIView):
-    
-   queryset = User.objects.all()
-   serializer_class = [LoginSerializer,EmailRegistererializer,CellRegistererializer] 
-    
-
-class AnyUserListCreate(generics.ListCreateAPIView):
+class AnyUserListCreateView():
 
     queryset = User.objects.all()
-    serializer_class = [UserListSerializer,CreateSerializer] 
+    serializer_class = [AnyUserListSerializer,AnyUserCreateSerializer] 
 
     def list(self,request, *args, **kwargs):
       queryset = self.get_queryset()
@@ -223,115 +190,121 @@ class AnyUserListCreate(generics.ListCreateAPIView):
       return queryset[(pageNum-1)*pageSize:pageSize]
 
 
-class AnyUserUpdateDelete(mixins.UpdateModelMixin,
-                          mixins.DestroyModelMixin,
-                          GenericAPIView):
+class AnyUserUpdateDeleteView(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    GenericAPIView
+    ):
    
-   def update(self, request, *args, **kwargs):
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases for
+        the user as determined by the username portion of the URL.
+        """
+        username = self.kwargs['username']
+        return User.objects.filter(user__username=username)
 
 
+''' 以下是AdminUser模型的接口 '''
 
-      return super().update(request, *args, **kwargs)
-   
-
-   
-# class UserSearch(generics.ListAPIView):
-#     queryset = User.objects.filter(is_staff=False)
-#     serializer_class = UserListSerializer
-
-#     def list(self,request,*args,**kwargs):
-#       queryset = self.get_queryset()
-#       total = queryset.count()
-#       serializer = self.serializer_class(queryset, many=True)
-#       return Response({'total':total,'list':serializer.data},status=HTTP_200_OK)
-
-
-
-class AdminLogin(APIView):
-    serializer_class = LoginSerializer 
-
-    def get(self,request,*args,**kwargs):
-      ''' Admin用户登录 
+class AdminUserLoginView(APIView):
+    
+    def get(self,request):
+      ''' Admin登录 
       username:
       password:
       return {'id':user.id,'username':user.username,'token':jwt_token}
       '''
+      serializer_class = AdminUserLoginSerializer
 
-      # 密码解密
-
-
-
-      serializer = self.serializer_class(data=request.query_params)
+      serializer = serializer_class(data=request.query_params)
       if not serializer.is_valid():
           return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
-
 
       # 判断用户名是否存在；
       try:
           user = AdminUser.objects.get(username=serializer.validated_data['username'])
       except AdminUser.DoesNotExist:
         return Response({"msg":"用户不存在"},status=HTTP_400_BAD_REQUEST)  
-      
 
       # 用户存在，进行密码校验
       if not check_password(serializer.validated_data['password'],user.password):
           return Response({'msg':"用户名或密码输入错误"},status=HTTP_400_BAD_REQUEST)
-      
 
-      # 获取用户的 toke
-      salt = settings.SECRET_KEY
-      # 构造Header，默认如下
-      headers = {
-          'typ':'jwt',
-          'alg':'HS256'
-      }
-      # 构造Payload
-      payload = {
+      # 获取 JWT
+      token=JwtToken.get_HS256({
           'id':user.id,#自定义用户ID
           'username':user.username,#自定义用户名
           'exp':datetime.datetime.utcnow()+datetime.timedelta(days=1),# 设置超时时间，7 天内
-      }
-      token = jwt.encode(headers=headers,payload=payload,key=salt,algorithm='HS256')
+      })
+
+      # 连接 redis 存JWT
       redis_con = django_redis.get_redis_connection('default') 
       redis_con.set(token,user.username,60*60*24)
-
       return Response(data={
           "id":user.id,
           "username":user.username,
           "token":token,
       },status=HTTP_200_OK)
 
+class AdminUserView(APIView):
+    '''  用户列表|新增 AdminUser  '''
+    queryset = AdminUser.objects.all()
+    serializer_class = [AdminUserListSerializer,AdminUserCreateSerializer]
 
-class UserInfoDelete(RetrieveDestroyAPIView):
-   
-    def retrieve(request, *args, **kwargs):
-        ''' 获取用户信息 '''
-        pass
-    
-    def destroy(request, *args, **kwargs):
-        ''' 删除用户 '''
-        pass
-    
+    def get(self,request, *args, **kwargs):
+      queryset = self.get_queryset()
+      total = queryset.count()
+      serializer = self.serializer_class[0](queryset, many=True)
+      return Response({'total':total,'list':serializer.data},status=HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+      """ 添加 AdminUser 记录
+      request.data:
+        username:
+
+      初始字段：
+        password: 随机密码，方式 
+      """
+      serializer = self.serializer_class[1](data=request.data)
+      if not serializer.is_valid(raise_exception=True):
+        return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
+      total = AdminUser.objects.filter(username=serializer.validated_data['username']).count()
+      if total > 0:
+         return Response({_('message'):_('User already exists')},status=HTTP_400_BAD_REQUEST)
+      pw = AdminUser.get_initial_password()
+      user_dict = {**serializer.validated_data,**{'password':pw}}
+      adminuser_obj = serializer.create(user_dict)
+      serializer = AdminUserListSerializer(adminuser_obj,many=False)
+      if not send_mail_to_adminuser(adminuser_obj):
+         adminuser_obj.delete()
+         return Response({'msg':'邮箱发送失败'},status=HTTP_400_BAD_REQUEST)
+      return Response(serializer.data, status=HTTP_201_CREATED)
+
+class PurchaseList(ListAPIView):
+    serializer_class = AdminUserModelSerializer
+
     def get_queryset(self):
-      keywords = self.qrequest.query_params.get('keywords',None)
-      status = self.qrequest.query_params.get('status',None)
-      pageNum= self.qrequest.query_params.get('pageNum',None)
-      pageSize=self.qrequest.query_params.get('pageSize',None)
-      if keywords is not None:
-          #  搜索关键词
-          queryset1=self.queryset.filter(username=keywords)
-          
-          # queryset2=self.queryset.filter(cell=keywords)
-          total = queryset1.count()
-          return  Response({'total':total,'list':queryset1},status=HTTP_200_OK)
-      return super().get_queryset(self)
+        """
+        This view should return a list of all the purchases for
+        the user as determined by the username portion of the URL.
+        """
+        username = self.kwargs['id']
+        # return User.objects.filter(purchaser__username=username)
     
 
+    ''' 检索|更新|删除 AdminUser'''
+    # queryset = AdminUser.objects.all()
+    # serializer_class = AdminUserListSerializer 
 
 
+   
 
 
-
+''' ...... '''
 @api_view(['Delete'])
 def Logout(request,uid):
     ''' 用户注销 '''
@@ -340,9 +313,6 @@ def Logout(request,uid):
     except User.DoesNotExist:
         return Response(data={"msg":"用户不存在",},status=HTTP_400_BAD_REQUEST)
     return Response(data={"msg":"退出成功",},status=HTTP_200_OK)
-
-
-
 
 @api_view(['GET'])
 def Repetition(request,name):

@@ -33,7 +33,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
-    'rest_framework.authtoken',
+    # 'rest_framework.authtoken',
 ]
 # from django.middleware.security import SecurityMiddleware
 MIDDLEWARE = [
@@ -185,19 +185,27 @@ REST_FRAMEWORK = {
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'LOCATION': REDIS1_LOCATION,
         "OPTIONS": {
         },
     },
     "session": {  # 存储 session
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2",
+        "LOCATION": REDIS2_LOCATION,
         "OPTIONS": {
         },
     },
     "verify_code": {  # 存储 验证码
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/3",
+        "LOCATION": REDIS3_LOCATION,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+             "CONNECTION_POOL_KWARGS": {"max_connections": 100}, # 最大的连接池数量，django-redis 使用 redis.py 的连接池，默认不关闭连接，尽可能重用连接 
+        },
+    },
+    "staks": {  # 存储 验证码
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS10_LOCATION,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
              "CONNECTION_POOL_KWARGS": {"max_connections": 100}, # 最大的连接池数量，django-redis 使用 redis.py 的连接池，默认不关闭连接，尽可能重用连接 
@@ -210,7 +218,6 @@ SESSION_CACHE_ALIAS = "session"
 # 文件和图片上传配置
 MEDIA_ROOT = os.path.join(BASE_DIR, '../upload')
 MEDIA_URL = '/media/'
-
 
 
 # *===============================================* #
@@ -232,6 +239,27 @@ JWT_AUTH = {
 
 # from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 # from django.utils.translation 
+
+
+
+# =============================================== #
+# **************** 发送邮箱 配置 ***************** #
+# =============================================== #
+EMAIL_BACKEND = EMAIL_BACKEND1
+EMAIL_HOST = EMAIL_HOST1
+EMAIL_PORT = EMAIL_PORT1  
+EMAIL_HOST_USER = EMAIL_HOST_USER1
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD1  
+EMAIL_USE_TLS = EMAIL_USE_TLS1  
+EMAIL_FROM = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+
+
+
+
 
 
 

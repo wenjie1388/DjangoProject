@@ -20,7 +20,7 @@ class UserBase(models.Model):
     ]
     username = models.CharField(
         verbose_name='用户名',
-        max_length=20,
+        max_length=50,
         unique=True,
     )
     password = models.CharField(
@@ -96,8 +96,9 @@ class UserBase(models.Model):
 
         return check_password(raw_password, self.password, setter)
     
-    def get_initial_password(self):
-        ''' 返回初始密码 '''
+    @staticmethod
+    def get_initial_password():
+        ''' 返回24位初始密码 '''
         return get_RandomPassword(24)
 
 
@@ -111,9 +112,7 @@ class UserBase(models.Model):
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
-
-
-    
+ 
 
 
 

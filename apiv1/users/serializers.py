@@ -1,34 +1,73 @@
 from rest_framework import serializers
+
 from django.utils.translation import gettext as _
-from django.core.validators import BaseValidator
-from django.core.validators import (RegexValidator)
+from django.core.validators import BaseValidator,RegexValidator
+from django.db.utils import IntegrityError
 
-from .models import AnyUser as User
+from .models import AnyUser as User,AdminUser
 
-from .utils import UsernameField,PasswordField,CellphoneField,RandomStringField_6
+from .utils import UsernameField,PasswordField,CellphoneField,AuthCode6Field
 from .exceptions import UserAlreadyExists
 
 from utils.utils import get_RandomPassword
 
 
+''' 以下是基类序列器 '''
 
-''' 以下是序列器：登录序列器 、 用户注册序列器'''
-class LoginSerializer(serializers.Serializer):
+class LoginBaseSerializer(serializers.Serializer):
     username = UsernameField()
     password = PasswordField()
 
-class EmailRegistererializer(serializers.Serializer):
-    email=serializers.EmailField()
-    code = RandomStringField_6()
+class RegisterBaseSerializer(serializers.Serializer):
+    ''' 注册基类 '''
     password = PasswordField()
-    
-class CellRegistererializer(serializers.Serializer):
-    cell = CellphoneField()
-    code = RandomStringField_6()
-    password = PasswordField()
+    code = AuthCode6Field()
 
-class CreateSerializer(serializers.Serializer):
-    
+    def create(self):
+      name=self.validated_data.get('email')
+      email=self.validated_data.get('email')
+      pw=self.validated_data.get('password')
+      user_obj = User.objects.create(username=name,email=email,password=pw)
+      # try:
+      #   user_obj = User.objects.create(username=name,email=email,password=pw)
+      # except IntegrityError:
+      #     raise IntegrityError
+      return user_obj
+
+
+
+
+''' 以下是AnyUser模型的序列器 '''
+
+class AnyUserModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ('address','avatar','idcard','name','introduction')
+        # 将exclude属性设置成一个从序列化器中排除的字段列表。
+        # 但是你也可以使用depth选项轻松生成嵌套关联：
+        # fields = ('__all__')
+
+class AnyUserLoginSerializer(serializers.Serializer):
+    pass
+
+class AnyUserRegisterEmailSerializer(RegisterBaseSerializer):
+    ''' 邮箱注册序列器 '''
+    email=serializers.EmailField()
+
+class AnyUserRegisterCellSerializer(RegisterBaseSerializer):
+    ''' 手机号注册序列器 '''
+    cell = CellphoneField()
+
+class AnyUserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ('address','avatar','idcard','name','introduction')
+        # 将exclude属性设置成一个从序列化器中排除的字段列表。
+        # 但是你也可以使用depth选项轻松生成嵌套关联：
+        # fields = ('id','username','cell','gender','name','idcard','email','is_active','last_login','date_joined')
+
+class AnyUserCreateSerializer(serializers.Serializer):
+    ''' 添加用户序列器 '''
     GENDER = [
         ('M','男'),
         ('F','女'),
@@ -54,20 +93,36 @@ class CreateSerializer(serializers.Serializer):
     def get_initial_password(self):
         ''' 返回初始密码 '''
         return get_RandomPassword(24)
-        
-    
 
-class RegisterSerializer(serializers.Serializer):
+
+
+
+''' 以下是AdminUser模型的序列器 '''
+
+class AdminUserLoginSerializer(LoginBaseSerializer):
     pass
 
-class UserListSerializer(serializers.ModelSerializer):
+class AdminUserListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        exclude = ('address','avatar','idcard','name','introduction')
+        model = AdminUser
+        # exclude = ('address','avatar')
         # 将exclude属性设置成一个从序列化器中排除的字段列表。
         # 但是你也可以使用depth选项轻松生成嵌套关联：
         # fields = ('id','username','cell','gender','name','idcard','email','is_active','last_login','date_joined')
-
+    
+class AdminUserCreateSerializer(serializers.Serializer):
+    ''' 添加管理员 序列器'''
+    username = UsernameField()
+    email = serializers.EmailField()
+    
+    def create(self,validated_data):
+        return AdminUser.objects.create(**validated_data)
+    
+class AdminUserModelSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = AdminUser
+        exclude = ('address','avatar')
 
 
 
