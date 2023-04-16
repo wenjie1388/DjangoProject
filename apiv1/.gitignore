@@ -1,0 +1,13 @@
+# VSCode stuff:
+.vscode
+
+
+# Django stuff:
+*.log
+pro.py
+db.sqlite3
+db.sqlite3-journal
+apiv1/*/__pycache__/
+apiv1/*/migrations/
+upload/*/*.*
+upload/*/*/*.*
