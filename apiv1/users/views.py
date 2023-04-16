@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView,RetrieveDestroyAPIView
 from rest_framework.status import (
     HTTP_200_OK,HTTP_201_CREATED,HTTP_202_ACCEPTED,HTTP_204_NO_CONTENT,
-    HTTP_400_BAD_REQUEST,HTTP_401_UNAUTHORIZED,HTTP_404_NOT_FOUND,HTTP_406_NOT_ACCEPTABLE,
+    HTTP_400_BAD_REQUEST,HTTP_401_UNAUTHORIZED,HTTP_404_NOT_FOUND,HTTP_405_METHOD_NOT_ALLOWED,HTTP_406_NOT_ACCEPTABLE,
     HTTP_500_INTERNAL_SERVER_ERROR
 )
 from rest_framework.authtoken.models import Token
@@ -29,10 +29,12 @@ from rest_framework import viewsets
 import jwt,datetime,django_redis 
 from .models import AnyUser as User,AdminUser
 from .serializers import (
+   AnyUserLoginUsernameSerializer,
+   AnyUserLoginCellSerializer,
+   AnyUserLoginEmailSerializer,
    AnyUserModelSerializer,
    AnyUserCreateSerializer,
    AnyUserListSerializer,
-   AnyUserLoginSerializer,
    AnyUserRegisterCellSerializer,
    AnyUserRegisterEmailSerializer,
   
@@ -52,26 +54,62 @@ from utils.utils import JwtToken,send_mail_to_adminuser
 ''' 以下是AnyUser的接口 '''
 
 @api_view(['GET'])
-def AnyUserLoginView(self,request,*args,**kwargs):
+def AnyUserLoginView(request):
     ''' Any用户登录 '''
-    # aes = CryptoAES(b'1111111111000000',b'0000001111111111')
-    # query_params = {'username':request.query_params['username'],'password':request.query_params['password']}
-    # query_params = aes.decodeDict(query_params)
-    # serializer = LoginSerializer(data=query_params)
-    serializer = self.serializer_class[0](data=request.query_params)
-    if not serializer.is_valid():
-        return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
-    # 判断用户名是否存在；
-    try:    
-      # 获取用户信息
-      user = User.objects.get(username=serializer.validated_data['username'])
-    except User.DoesNotExist:
-      return Response({"msg":"用户不存在"},status=HTTP_204_NO_CONTENT)
+    # 获取请求数据，判断登录方式。若无用户信息，则进行注册
+    req_params = request.query_params.dict()
+    try:
+      method = req_params.pop("method")
+    except KeyError:
+       return Response({'msg':f'{method} 方法不存在'},status=HTTP_400_BAD_REQUEST)
+    if method == "username":
+        serializer = AnyUserLoginUsernameSerializer(data=req_params)
+        serializer.is_valid(raise_exception=True)
+          
+        try:
+          # 获取用户信息
+          username = serializer.validated_data['username']
+          user = User.objects.get(username=username)
+        except User.DoesNotExist:
+          return Response({"msg":f"账户：{username} 不存在。"},status=HTTP_400_BAD_REQUEST)
+        
+    elif method == "cell":
+        serializer = AnyUserLoginCellSerializer(data=req_params)
+        serializer.is_valid(raise_exception=True)
+        
+        try:
+          # 获取用户信息
+          cell = serializer.validated_data['cell']
+          user = User.objects.get(cell=cell)
+        except User.DoesNotExist:
+          return Response({"msg":f"手机号：{cell} 不存在。"},status=HTTP_400_BAD_REQUEST) 
+        
+
+    elif method == "email":
+        serializer = AnyUserLoginEmailSerializer(data=req_params)
+        serializer.is_valid(raise_exception=True)
+        
+        try:
+          # 获取用户信息
+          email = serializer.validated_data['email']
+          user = User.objects.get(email=email)
+        except User.DoesNotExist:
+          return Response({"msg":f"邮箱：{email} 不存在。"},status=HTTP_400_BAD_REQUEST)        
+        except User.MultipleObjectsReturned:
+          return Response({"msg":f"邮箱：{email} 重复存在。"},status=HTTP_400_BAD_REQUEST)
+    else:
+        return Response({"method": f" {method} 方式不被允许。"},status=HTTP_400_BAD_REQUEST)
     
+    if user.is_activate == False:
+       return Response({"mgs":["此账号未激活"]},status=HTTP_400_BAD_REQUEST)
+
     # 用户存在，进行密码校验
-    if not check_password(serializer.validated_data['username'],user.password):
-        return Response({'msg':"用户名或密码输入错误"},status=HTTP_202_ACCEPTED)
-    
+    # if not check_password(serializer.validated_data['password'],user.password):
+    _password = serializer.validated_data['password']
+    password = user.password
+    if _password !=password :
+        return Response({'msg':"用户名或密码输入错误"},status=HTTP_400_BAD_REQUEST)
+
     # 获取用户的 token
     import jwt,datetime,django_redis 
     salt = settings.SECRET_KEY
@@ -96,50 +134,50 @@ def AnyUserLoginView(self,request,*args,**kwargs):
     },status=HTTP_200_OK)
 
 @api_view(['POST'])
-def AnyUserRegisterView(request,type):
+def AnyUserRegisterView(request):
     ''' 注册 Any用户 '''
     import django_redis
-    if type == 'cell':
+
+    req_data = request.data
+    method = request.query_params.get("method",None)
+    if method is None:
+       return Response({'msg':['缺少 method 参数']},status=HTTP_400_BAD_REQUEST)
+
+    if method == 'cell':
       #  手机注册
-      serializer = AnyUserRegisterCellSerializer(data=request.data)
-      if not serializer.is_valid(raise_exception=True):
-        return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
-      
-      verify_filter = serializer.validated_data['cell']
+      serializer = AnyUserRegisterCellSerializer(data=req_data)
+      serializer.is_valid(raise_exception=True)
 
-    elif type == 'email':
+    elif method == 'email':
       #  邮箱注册
-      serializer = AnyUserRegisterEmailSerializer(data=request.data)
-      if not serializer.is_valid(raise_exception=True):
-        return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
+      serializer = AnyUserRegisterEmailSerializer(data=req_data)
+      serializer.is_valid(raise_exception=True)
 
-      verify_filter = serializer.validated_data['email']
     else:
-       return Response(HTTP_404_NOT_FOUND)
+       return Response({"msg":["method 参数错误，只能是 'Cell' 或 'Email'."]},HTTP_400_BAD_REQUEST)
 
-    verify_code = serializer.validated_data.pop('code')
+    verify_code = serializer.validated_data['code']
     # 获取 redis.conn 的 verify_code 中 key 为 code 的信息
     redis_con = django_redis.get_redis_connection('verify_code') 
-
+    verify_method = serializer.validated_data[method]
     # 2. 检验 verify_filter 是否过期。
-    if redis_con.ttl(verify_filter) == -2:
-      return Response({'msg':'验证码已失效'},status=HTTP_400_BAD_REQUEST)
+    if redis_con.ttl(verify_method) == -2:
+      return Response({'msg':['验证码错误或已失效']},status=HTTP_400_BAD_REQUEST)
 
     # 3. 检验验证码是否匹配。
-    if  redis_con.get(verify_filter).decode() != verify_code:
-        return Response({'msg':'验证码错误'},status=HTTP_400_BAD_REQUEST)
+    if  redis_con.get(verify_method).decode() != verify_code:
+        return Response({'msg':['验证码错误']},status=HTTP_400_BAD_REQUEST)
+    
     # 4. 检验完成创建用户
-    try:
-      serializer.create()
-    except IntegrityError:
-        return Response({'msg':"用户已存在"},status=HTTP_400_BAD_REQUEST)
-    return Response(serializer.data, status=HTTP_201_CREATED)
-
+    user_info = serializer.create()
+    if not user_info:
+      return Response({'msg':["用户已存在"]},status=HTTP_400_BAD_REQUEST)
+    return Response(user_info, status=HTTP_201_CREATED)
 
 class AnyUserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = AnyUserModelSerializer
-   
+    lookup_field = "id"
 
 class AnyUserListCreateView():
 
@@ -188,7 +226,6 @@ class AnyUserListCreateView():
       if username is not None:
          queryset=self.queryset.filter(username=username)
       return queryset[(pageNum-1)*pageSize:pageSize]
-
 
 class AnyUserUpdateDeleteView(
     mixins.RetrieveModelMixin,

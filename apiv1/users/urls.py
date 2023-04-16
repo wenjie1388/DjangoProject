@@ -1,6 +1,6 @@
 
 from django.urls import path,include,re_path
-from rest_framework.routers import DefaultRouter
+from rest_framework import routers
 from .views import (
     AnyUserViewset,
     AnyUserLoginView,
@@ -12,13 +12,16 @@ from .views import (
 
 )
 
+
+
 urlpatterns=[
     # AnyUser接口
 
-    # re_path(r'^anyuser/(?P<id>.+)/$',AnyUserLoginView,name="anyuserlogin"),
+    # re_path(r'',include(router.urls)),
     re_path(r'^anyuser/login$',AnyUserLoginView,name="anyuserLogin"),
-    path('anyuser/register/<type>',AnyUserRegisterView,name="anyuserRegister"),
-  
+    re_path(r'^anyuser/register$',AnyUserRegisterView,name="anyuserRegister"),
+    # re_path(r'^anyuser/(?P<id>.+)/$',AnyUserViewset.as_view({"get":""}),name="anyUserViewset"),
+
     # ''' AdminUser接口 '''
     re_path(r'^adminuser$',AdminUserView.as_view(),name="AdminUser"),
     re_path(r'^adminuser/(?P<id>.+)/$',AdminUserView.as_view(),name="AdminUser"),
@@ -34,7 +37,7 @@ urlpatterns=[
     # path('test',AdminTestList.as_view(),name="test"),
 ]
 
-router = DefaultRouter()
-router.register('anyuser',AnyUserViewset)
 
+router = routers.SimpleRouter()
+router.register(r'anyuser', AnyUserViewset)
 urlpatterns += router.urls

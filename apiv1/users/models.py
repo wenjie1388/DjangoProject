@@ -20,7 +20,7 @@ class UserBase(models.Model):
     ]
     username = models.CharField(
         verbose_name='用户名',
-        max_length=50,
+        max_length=128,
         unique=True,
     )
     password = models.CharField(
@@ -30,19 +30,21 @@ class UserBase(models.Model):
     )
     cell = models.CharField(
         verbose_name='手机号',
-        max_length=11,
+        max_length=128,
+        unique=True,
     )
     name = models.CharField(
         verbose_name='姓名',
-        max_length=10,
+        max_length=128,
     )
     idcard = models.CharField(
         verbose_name='身份证件',
-        max_length=18,
+        max_length=128,
+        unique=True,
     )
     gender = models.CharField( 
         verbose_name='性别',
-        max_length=1,
+        max_length=128,
         choices=GENDER,
         help_text="M是男；F是女！",
         blank=True,
@@ -54,21 +56,20 @@ class UserBase(models.Model):
     )
     email = models.EmailField(
         verbose_name="邮箱",
+        max_length=128,
         blank=True,
+        unique=True,
     )
     address = models.CharField(
         verbose_name="居住地",
-        max_length=50,
+        max_length=128,
         blank=True,
     )
     date_joined = models.DateField(
         verbose_name="注册时间",
         auto_now_add=True,
     )
-    is_anonymous = models.BooleanField(
-        verbose_name="是否已激活",
-        default=False,
-    )
+    
     is_authenticated=models.BooleanField(
         verbose_name="是否已认证",
         default=False,
@@ -78,7 +79,7 @@ class UserBase(models.Model):
 
     def __str__(self) -> str:
         return self.username
-    
+
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
         self._password = raw_password
@@ -97,11 +98,9 @@ class UserBase(models.Model):
         return check_password(raw_password, self.password, setter)
     
     @staticmethod
-    def get_initial_password():
+    def get_default_password():
         ''' 返回24位初始密码 '''
         return get_RandomPassword(24)
-
-
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
@@ -112,9 +111,6 @@ class UserBase(models.Model):
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
- 
-
-
 
 class AdminUser(UserBase,PermissionsMixin):
     from .utils import AdminUserManager
@@ -142,7 +138,10 @@ class AdminUser(UserBase,PermissionsMixin):
         '是否是超级管理员',
         default=False,
     )
-
+    is_anonymous = models.BooleanField(
+        verbose_name="是否匿名者",
+        default=False,
+    )
     objects = AdminUserManager()
     REQUIRED_FIELDS = ["email"]
     USERNAME_FIELD = "username"
@@ -151,10 +150,8 @@ class AdminUser(UserBase,PermissionsMixin):
     class Meta:
         db_table = 'admin'
         ordering = ('id',)
-        verbose_name = ('admin')
-        verbose_name_plural = ('admins')
-
-    
+        verbose_name = 'admin'
+        verbose_name_plural = 'admins'
 
 class AnyUser(UserBase):
     ''' User 表 '''
@@ -164,16 +161,15 @@ class AnyUser(UserBase):
         blank=True,
     )
     
-
+    is_activate = models.BooleanField(
+        verbose_name="是否已激活",
+        default=False,
+    )
     class Meta:
         db_table = 'user'
         ordering = ('id',)
-        verbose_name = ('user')
-        verbose_name_plural = ('users')
-
-    
-    
-
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
 
 
 '''

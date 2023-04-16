@@ -2,20 +2,24 @@ from rest_framework import serializers
 
 from django.utils.translation import gettext as _
 from django.core.validators import BaseValidator,RegexValidator
-from django.db.utils import IntegrityError
 
+from django.db import IntegrityError
+from django.contrib.auth.hashers import (
+    check_password,
+    is_password_usable,
+    make_password,
+)
 from .models import AnyUser as User,AdminUser
 
 from .utils import UsernameField,PasswordField,CellphoneField,AuthCode6Field
 from .exceptions import UserAlreadyExists
 
-from utils.utils import get_RandomPassword
+from utils.utils import get_RandomPassword,get_RandomString
 
 
 ''' 以下是基类序列器 '''
 
 class LoginBaseSerializer(serializers.Serializer):
-    username = UsernameField()
     password = PasswordField()
 
 class RegisterBaseSerializer(serializers.Serializer):
@@ -24,17 +28,26 @@ class RegisterBaseSerializer(serializers.Serializer):
     code = AuthCode6Field()
 
     def create(self):
-      name=self.validated_data.get('email')
-      email=self.validated_data.get('email')
-      pw=self.validated_data.get('password')
-      user_obj = User.objects.create(username=name,email=email,password=pw)
-      # try:
-      #   user_obj = User.objects.create(username=name,email=email,password=pw)
-      # except IntegrityError:
-      #     raise IntegrityError
-      return user_obj
+      email=self.validated_data.get("email",None)
+      cell=self.validated_data.get("cell",None)
+      pw=self.validated_data.get("password",None)
+      username=get_RandomString(24)
+      
+      if email is not None:
+        # 邮箱注册
+        user_info = {"username":username,"password":pw,"email":email}
 
-
+      elif cell is not None:
+        # 手机号码注册
+        user_info = {"username":username,"password":pw,"cell":cell}
+      else:
+          return 0
+      
+      try:
+        User.objects.create(**user_info)
+      except IntegrityError:
+          return 0
+      return user_info
 
 
 ''' 以下是AnyUser模型的序列器 '''
@@ -47,8 +60,14 @@ class AnyUserModelSerializer(serializers.ModelSerializer):
         # 但是你也可以使用depth选项轻松生成嵌套关联：
         # fields = ('__all__')
 
-class AnyUserLoginSerializer(serializers.Serializer):
-    pass
+class AnyUserLoginEmailSerializer(LoginBaseSerializer):
+    email = serializers.EmailField()
+
+class AnyUserLoginUsernameSerializer(LoginBaseSerializer):
+    username = UsernameField()
+
+class AnyUserLoginCellSerializer(LoginBaseSerializer):
+    cell = CellphoneField()
 
 class AnyUserRegisterEmailSerializer(RegisterBaseSerializer):
     ''' 邮箱注册序列器 '''

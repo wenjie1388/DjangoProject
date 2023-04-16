@@ -33,6 +33,9 @@ def get_RandomPassword(length):
     T3 = random.choice('@,.!#~?&^')
     return ''.join([T1,T2,T3])
 
+def getRandomUsername():
+    pass
+
 def get_auth_code_6():
     letters = [random.choice(string.ascii_letters) for n in range(3)]
     digits = [random.choice(string.digits) for n in range(3)]
@@ -42,8 +45,6 @@ def get_auth_code_6():
         authcode+=d
     return authcode
 
-    
-
 class JwtToken(object):
     
     def get_HS256(payload_):
@@ -51,7 +52,6 @@ class JwtToken(object):
         # 构造Header，默认如下
         headers = {'typ':'jwt','alg':'HS256'}
         return jwt.encode(headers=headers,payload=payload_,key=salt,algorithm='HS256')
-
 
 def send_mail_to_adminuser(AdminUser):
     '''在大多数情况里，你可以使用 django.core.mail.send_mail() 来发送邮件。
