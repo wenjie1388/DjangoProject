@@ -2,7 +2,6 @@
 
 __DEBUG__ = False
 
-
 MYSQLNAME = 'pl'
 MYSQLUSER = 'root'
 MYSQLPASSWORD = 'root'
