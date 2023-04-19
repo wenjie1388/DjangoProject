@@ -20,20 +20,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
+    'article.apps.ArticleConfig',
     # 'course.apps.CourseConfig',
     'utils.apps.UtilsConfig',
 
 
     'rest_framework',
     'corsheaders',
-    # 'rest_framework.authtoken',
+    'rest_framework.authtoken',
 ]
 # from django.middleware.security import SecurityMiddleware
 MIDDLEWARE = [
@@ -180,7 +181,7 @@ REST_FRAMEWORK = {
               'rest_framework.authentication.BasicAuthentication',       
           ),
         }
-
+from rest_framework.authentication import TokenAuthentication
 # 配置redis数据库
 CACHES = {
     'default': {
@@ -225,12 +226,14 @@ MEDIA_URL = '/media/'
 # *===============================================* #
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        "rest_framework.authentication.BasicAuthentication",
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ]
 }
+
 
 JWT_AUTH = {
     # token有效期为24小时

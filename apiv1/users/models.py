@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import UserManager,PermissionsMixin,AbstractBaseUser,AbstractUser as _AbstractUser
-from django.contrib.auth.hashers import (
-    check_password,
-    is_password_usable,
-    make_password,
-)
+# from django.contrib.auth.hashers import (
+#     check_password,
+#     is_password_usable,
+#     make_password,
+# )
 from django.conf import settings
-
-from utils.utils import get_RandomString,get_RandomPassword
+from rest_framework.authtoken.models import Token
+from utils.utils import get_RandomString,get_RandomPassword,send_mail
+from .utils import AnyUserManager,AdminUserManager
 
 def user_img_path(instance, filename):
     return 'users/{0}/{1}{2}'.format(instance.course.id,get_RandomString(24), filename)
@@ -74,46 +75,44 @@ class UserBase(models.Model):
         verbose_name="是否已认证",
         default=False,
     )
+
     class Meta:
         abstract = True
-
-    def __str__(self) -> str:
-        return self.username
-
-    def set_password(self, raw_password):
-        self.password = make_password(raw_password)
-        self._password = raw_password
-
-    def check_password(self, raw_password):
-        """
-        Return a boolean of whether the raw_password was correct. Handles
-        hashing formats behind the scenes.
-        """
-        def setter(raw_password):
-            self.set_password(raw_password)
-            # Password hash upgrades shouldn't be considered password changes.
-            self._password = None
-            self.save(update_fields=["password"])
-
-        return check_password(raw_password, self.password, setter)
     
-    @staticmethod
-    def get_default_password():
-        ''' 返回24位初始密码 '''
-        return get_RandomPassword(24)
+    @property
+    def is_anonymous(self):
+        """
+        Always return False. This is a way of comparing User objects to
+        anonymous users.
+        """
+        return False
+    # def set_password(self, raw_password):
+    #     self.password = make_password(raw_password)
+    #     self._password = raw_password
 
-    def email_user(self, subject, message, from_email=None, **kwargs):
+    # def check_password(self, raw_password):
+    #     """
+    #     Return a boolean of whether the raw_password was correct. Handles
+    #     hashing formats behind the scenes.
+    #     """
+    #     def setter(raw_password):
+    #         self.set_password(raw_password)
+    #         # Password hash upgrades shouldn't be considered password changes.
+    #         self._password = None
+    #         self.save(update_fields=["password"])
+
+    #     return check_password(raw_password, self.password, setter)
+    
+    def email_user(self, subject, message,to_email ,from_email=settings.EMAIL_HOST_USER, **kwargs):
         """Send an email to this user."""
-        print(subject, message, from_email, [self.email], **kwargs)
-        raise "已经打印"
+        send_mail(subject, message, from_email, [to_email], **kwargs)
 
-    
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
 
-class AdminUser(UserBase,PermissionsMixin):
-    from .utils import AdminUserManager
+# class AdminUser(UserBase,PermissionsMixin):
+class AdminUser(UserBase):
     DEPARTMENT = [
         ('D','开发部门'),
         ('A','审核部门'),
@@ -138,10 +137,7 @@ class AdminUser(UserBase,PermissionsMixin):
         '是否是超级管理员',
         default=False,
     )
-    is_anonymous = models.BooleanField(
-        verbose_name="是否匿名者",
-        default=False,
-    )
+    
     objects = AdminUserManager()
     REQUIRED_FIELDS = ["email"]
     USERNAME_FIELD = "username"
@@ -163,8 +159,9 @@ class AnyUser(UserBase):
     
     is_activate = models.BooleanField(
         verbose_name="是否已激活",
-        default=False,
+        default=True,
     )
+    objects = AnyUserManager()
     class Meta:
         db_table = 'user'
         ordering = ('id',)

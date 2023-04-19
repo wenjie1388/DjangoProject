@@ -1,18 +1,15 @@
 
-from django.apps import apps
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
-from django.contrib.auth.base_user import  BaseUserManager
-from django.contrib.auth.hashers import make_password
-from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext as _
-from django.db import models
+from django.contrib.auth.models import Permission
+from django.db.models import Manager
 # from django.core.exceptions
 from rest_framework.fields import CharField as _CharField
 from rest_framework.serializers import Serializer
 from rest_framework.permissions import BasePermission
 
-from utils.utils import username_re,email_re,cellphone_re,password_re,auth_code_6_re
+from utils.utils import username_re,email_re,cellphone_re,password_re,auth_code_6_re,get_RandomPassword
 
 
 ''' 以下是重写 DRF 的 CharField.to_internal_value() 和 RegexField 以及 增加自定义字段 CheckPassword 和 VerificationCode'''
@@ -112,63 +109,31 @@ class IsActivateUser(BasePermission):
 
 ''' 以下是所有 user 管理器 '''
 
-class AnyUserManager(BaseUserManager):
-  use_in_migrations = True
-
-  # def _create_user(self, username, email, password, **extra_fields):
-  #     """
-  #     Create and save a user with the given username, email, and password.
-  #     """
-  #     if not username:
-  #         raise ValueError("The given username must be set")
-  #     email = self.normalize_email(email)
-  #     # Lookup the real model class from the global app registry so this
-  #     # manager method can be used in migrations. This is fine because
-  #     # managers are by definition working on the real model.
-  #     GlobalUserModel = apps.get_model(
-  #         self.model._meta.app_label, self.model._meta.object_name
-  #     )
-  #     username = GlobalUserModel.normalize_username(username)
-  #     user = self.model(username=username, email=email, **extra_fields)
-  #     user.password = make_password(password)
-  #     user.save(using=self._db)
-  #     return user
-
-  # def create_user(self, username, email=None, password=None, **extra_fields):
-  #     extra_fields.setdefault("is_staff", False)
-  #     extra_fields.setdefault("is_superuser", False)
-  #     return self._create_user(username, email, password, **extra_fields)
-
-class AdminUserManager(BaseUserManager):
-    use_in_migrations = True
-
-    def _create_user(self, username, email, password, **extra_fields):
+class BaseManager(Manager):
+    
+    @classmethod
+    def normalize_email(cls, email):
         """
-        Create and save a user with the given username, email, and password.
+        Normalize the email address by lowercasing the domain part of it.
         """
-        if not username:
-            raise ValueError("The given username must be set")
-        email = self.normalize_email(email)
-        user = self.model(username=username, email=email, **extra_fields)
-        user.password = make_password(password)
-        user.save(using=self._db)
-        return user
+        email = email or ""
+        try:
+            email_name, domain_part = email.strip().rsplit("@", 1)
+        except ValueError:
+            pass
+        else:
+            email = email_name + "@" + domain_part.lower()
+        return email
+    
+    def make_random_password(self,length=24,):
+        return get_RandomPassword(length)
 
-    def create_user(self, username, email=None, password=None, **extra_fields):
-        extra_fields.setdefault("is_anonymous", False)
-        extra_fields.setdefault("is_superuser", False)
-        return self._create_user(username, email, password, **extra_fields)
+class AnyUserManager(BaseManager):
+    pass
 
-    def create_superuser(self, username, email=None, password=None, **extra_fields):
-        extra_fields.setdefault("is_anonymous", True)
-        extra_fields.setdefault("is_superuser", True)
 
-        if extra_fields.get("is_anonymous") is not True:
-            raise ValueError("Superuser must have is_anonymous=True.")
-        if extra_fields.get("is_superuser") is not True:
-            raise ValueError("Superuser must have is_superuser=True.")
-
-        return self._create_user(username, email, password, **extra_fields)
+class AdminUserManager(BaseManager):
+    pass
 
 
 ''' 以下是各种功能函数 '''

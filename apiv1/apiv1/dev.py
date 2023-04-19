@@ -29,7 +29,6 @@ EMAIL_HOST1 = 'smtp.qq.com'
 EMAIL_PORT1 = 25  # 或者 465/587是设置了 SSL 加密方式
 # EMAIL_HOST_USER1 = '1293426034@qq.com'
 EMAIL_HOST_USER1 = 'wenjie1388@foxmail.com'
-
 EMAIL_HOST_PASSWORD1 = 'vctgmzghjpbribcc'  # 第三方登陆使用的授权密码
 EMAIL_USE_TLS1 = True  # 这里必须是 True，否则发送不成功
 

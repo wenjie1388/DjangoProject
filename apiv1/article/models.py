@@ -1,30 +1,75 @@
 from django.db import models
 
-# Create your models here.
-from django.contrib.auth.models import User 
-#导入Django自带用户模块
-# from DjangoUeditor.models import UEditorField
+from users.models import AnyUser
+from utils.utils import get_RandomString
 
-# 文章分类
-class Category(models.Model):
-    name = models.CharField('博客分类', max_length=100)
-    index = models.IntegerField(default=999, verbose_name='分类排序')
+def article_img_path(instance, filename):
+    return 'article/{0}/{1}{2}'.format(instance.author,get_RandomString(24), filename)
+
+
+
+
+# 文章一级分类
+class Nav1(models.Model):
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+      )
 
     class Meta:
-        verbose_name = '博客分类'
-        verbose_name_plural = verbose_name
+        db_table = 'nav1'
+        ordering = ('id',)
+        verbose_name = 'nav1'
+        verbose_name_plural = 'nav1s'
 
     def __str__(self):
         return self.name
+
+# 文章二级分类
+class Nav2(models.Model):
+    name = models.CharField(
+        max_length=100,
+      )
+    nav1 = models.ForeignKey(
+        Nav1,
+        on_delete=models.CASCADE,
+        to_field='name',
+      )
+
+    class Meta:
+        db_table = 'nav2'
+        ordering = ('id',)
+        verbose_name = 'nav2'
+        verbose_name_plural = 'nav2s'
+
+    def __str__(self):
+        return f'{self.Nav1}_{self.name}'
+
+
+''' 阅读量 '''
+class Pageviews(models.Model):
+    name = models.CharField(max_length=50)
+    class Meta:
+        verbose_name = 'tag'
+        verbose_name_plural = 'tags'
+
+    def __str__(self):
+        return self.name
+
+
+''' 
 #文章标签
 class Tag(models.Model):
-    name = models.CharField('文章标签',max_length=100)
+    name = models.CharField(max_length=50)
     class Meta:
-        verbose_name = '文章标签'
-        verbose_name_plural = verbose_name
+        verbose_name = 'tag'
+        verbose_name_plural = 'tags'
 
     def __str__(self):
         return self.name
+
+
+
 #推荐位
 class Tui(models.Model):
     name = models.CharField('推荐位',max_length=100)
@@ -36,35 +81,6 @@ class Tui(models.Model):
     def __str__(self):
         return self.name
 
-#文章
-class Article(models.Model):
-    title = models.CharField('标题', max_length=70)
-    excerpt = models.TextField('摘要', max_length=200, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, verbose_name='分类', blank=True, null=True)
-     #使用外键关联分类表与分类是一对多关系
-    tags = models.ManyToManyField(Tag,verbose_name='标签', blank=True)
-    #使用外键关联标签表与标签是多对多关系
-    img = models.ImageField(upload_to='article_img/%Y/%m/%d/', verbose_name='文章图片', blank=True, null=True)
-    body = models.TextField(
-        
-    )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者')
-
-    #  文章作者，这里User是从django.contrib.auth.models导入的。
-    #  这里我们通过 ForeignKey 把文章和 User 关联了起来。
-
-    views = models.PositiveIntegerField('阅读量', default=0)
-    tui = models.ForeignKey(Tui, on_delete=models.DO_NOTHING, verbose_name='推荐位', blank=True, null=True)
-    
-    created_time = models.DateTimeField('发布时间', auto_now_add=True)
-    modified_time = models.DateTimeField('修改时间', auto_now=True)
-
-    class Meta:
-        verbose_name = '文章'
-        verbose_name_plural = '文章'
-
-    def __str__(self):
-        return self.title
 
 #Banner
 class Banner(models.Model):
@@ -89,5 +105,57 @@ class Link(models.Model):
     def __str__(self):
         return self.name
     class Meta:
+        db_table = 'admin'
+        ordering = ('id',)
         verbose_name = '友情链接'
         verbose_name_plural = '友情链接'
+
+
+
+        '''
+
+
+#文章
+class Article(models.Model):
+    '''
+    title:标题
+    abstract:摘要
+    img:封面
+    body:内容
+    author:作者
+    create_date:创建日期
+
+    '''
+    title = models.CharField(max_length=64)
+    abstract = models.TextField(max_length=128)
+    img = models.ImageField(upload_to=article_img_path,default='article/default/default.png')
+    body = models.TextField()
+    author = models.ForeignKey(AnyUser, on_delete=models.CASCADE)
+    create_date = models.DateTimeField(auto_now_add=True)
+    # modified_date = models.DateTimeField('修改时间', auto_now=True)
+    category1 = models.ManyToManyField(Nav1)
+    category2 = models.ManyToManyField(Nav2)
+    #使用外键关联分类表与分类是一对多关系
+    # tags = models.ManyToManyField(Tag, blank=True)
+    #使用外键关联标签表与标签是多对多关系
+    # views = models.PositiveIntegerField('阅读量', default=0)
+    # tui = models.ForeignKey(Tui, on_delete=models.DO_NOTHING, verbose_name='推荐位', blank=True, null=True)
+
+    class Meta:
+        db_table = 'article'
+        ordering = ('author','create_date')
+        verbose_name = 'article'
+        verbose_name_plural = 'articles'
+
+    def __str__(self):
+        return f'{self.id}:{self.title}:{self.user}'
+
+class article_info(models.Model):
+    '''
+    id
+    封面
+    标题
+    摘要
+    标签
+    '''
+    pass

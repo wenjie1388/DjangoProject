@@ -46,7 +46,7 @@ from .serializers import (
    )
 from .exceptions import UserAlreadyExists
 from utils.crypto import CryptoAES
-from utils.utils import JwtToken,send_mail_to_adminuser
+from utils.utils import JwtToken,send_mail
 
 
 
@@ -172,7 +172,10 @@ def AnyUserRegisterView(request):
     user_info = serializer.create()
     if not user_info:
       return Response({'msg':["用户已存在"]},status=HTTP_400_BAD_REQUEST)
-    return Response(user_info, status=HTTP_201_CREATED)
+    return Response(status=HTTP_201_CREATED)
+
+
+
 
 class AnyUserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -316,9 +319,9 @@ class AdminUserView(APIView):
       user_dict = {**serializer.validated_data,**{'password':pw}}
       adminuser_obj = serializer.create(user_dict)
       serializer = AdminUserListSerializer(adminuser_obj,many=False)
-      if not send_mail_to_adminuser(adminuser_obj):
-         adminuser_obj.delete()
-         return Response({'msg':'邮箱发送失败'},status=HTTP_400_BAD_REQUEST)
+      # if not send_mail(adminuser_obj):
+      #    adminuser_obj.delete()
+      #    return Response({'msg':'邮箱发送失败'},status=HTTP_400_BAD_REQUEST)
       return Response(serializer.data, status=HTTP_201_CREATED)
 
 class PurchaseList(ListAPIView):

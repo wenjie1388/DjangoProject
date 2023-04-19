@@ -13,7 +13,7 @@
         <div class="flex-grow" style="display: flex">
           <el-input v-model="input1" size="large" placeholder="Please Input" :suffix-icon="Search" />
         </div>
-        <el-menu-item index="3" v-if="is_login == false">登录/注册</el-menu-item>
+        <el-menu-item index="login" v-if="is_login == false">登录/注册</el-menu-item>
         <el-sub-menu index="4" v-if="is_login == true">
           <template #title>wenjie1388</template>
           <el-menu-item index="4-1">个人中心</el-menu-item>

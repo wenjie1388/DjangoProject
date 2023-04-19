@@ -53,7 +53,7 @@ class JwtToken(object):
         headers = {'typ':'jwt','alg':'HS256'}
         return jwt.encode(headers=headers,payload=payload_,key=salt,algorithm='HS256')
 
-def send_mail_to_adminuser(AdminUser):
+def send_mail(subject, message, from_email, email, method='register' ,**kwargs):
     '''在大多数情况里，你可以使用 django.core.mail.send_mail() 来发送邮件。
     参数 subject, message, from_email 和 recipient_list 是必须的。
     subject: 一个字符串。
@@ -69,14 +69,19 @@ def send_mail_to_adminuser(AdminUser):
 
     '''
     try:
-        send_mail(
-        subject='管理员账号',
-        message='请把密码妥善保管或及时更改密码！',
-        from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[AdminUser.email],
-        fail_silently=False,
-        html_message=f'<p>用户名：{AdminUser.username}</p><p>密码：{AdminUser.password}</p>'
-        )
+        if method== 'register':
+          username = kwargs['username']
+          password = kwargs['password']
+          send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=email,
+            fail_silently=False,
+            html_message=f'<p>用户名：{username}</p><p>密码：{password}</p>'
+          )
+        else:
+          return 0
     except:
         return 0
     return 1
