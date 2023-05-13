@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'article.apps.ArticleConfig',
     # 'course.apps.CourseConfig',
     'utils.apps.UtilsConfig',
+    # 'auth.apps.AuthConfig',
 
 
     'rest_framework',
@@ -176,12 +177,14 @@ CORS_ALLOW_HEADERS = (
 # *================================================ #
 REST_FRAMEWORK = {
           'DEFAULT_AUTHENTICATION_CLASSES': (
-              'rest_framework.authentication.TokenAuthentication',       # 首先进行token认证
-              'rest_framework.authentication.SessionAuthentication',     # 
-              'rest_framework.authentication.BasicAuthentication',       
+            'rest_framework.authentication.BasicAuthentication',
+            'rest_framework.authentication.SessionAuthentication',
+              # 'rest_framework.authentication.TokenAuthentication',       # 首先进行token认证
+              # 'rest_framework.authentication.SessionAuthentication',     # 
+              # 'rest_framework.authentication.BasicAuthentication',       
           ),
         }
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication,BasicAuthentication,SessionAuthentication
 # 配置redis数据库
 CACHES = {
     'default': {

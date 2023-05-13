@@ -9,7 +9,7 @@ from rest_framework.fields import CharField as _CharField
 from rest_framework.serializers import Serializer
 from rest_framework.permissions import BasePermission
 
-from utils.utils import username_re,email_re,cellphone_re,password_re,auth_code_6_re,get_RandomPassword
+from auth.utils import username_re,email_re,cellphone_re,password_re,auth_code_6_re,get_RandomPassword
 
 
 ''' 以下是重写 DRF 的 CharField.to_internal_value() 和 RegexField 以及 增加自定义字段 CheckPassword 和 VerificationCode'''

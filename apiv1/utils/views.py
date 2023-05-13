@@ -1,3 +1,7 @@
+
+from django.shortcuts import render
+
+from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -14,6 +18,29 @@ import django_redis
 from .tasks import send_mail_code
 from .utils import get_RandomString,get_auth_code_6
 from .serializer import CellphoneSerializer,EmailSerializer
+
+
+class CaptchaViews(APIView):
+   
+   key = None
+   value = None
+
+   @classmethod()
+   def get_key(self,request):
+      pass
+   
+   def get(self,request,*wargs,**kwargs):
+      method = request.query_params.get("method")
+
+      # 手机验证码
+      if method == "cell":
+         key = "cell"
+         value = request.query_params.get("method")
+      
+
+      # 邮箱验证码
+      pass
+      
 
 ''' 手机验证码接口 '''
 @api_view(['GET'])
@@ -63,3 +90,7 @@ def EmailCodeView(request, *args, **kwargs):
     #     return Response({'msg':[f"{email}不存在"]},status=HTTP_400_BAD_REQUEST)
     # 4. 最后返回验证码。
     return Response({'emailcode':[emailcode]},status=HTTP_200_OK)
+
+
+
+# class 

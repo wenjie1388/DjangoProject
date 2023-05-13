@@ -28,31 +28,6 @@
   <el-row :gutter="0">
     <el-col :span="12" :offset="2">
       <el-tabs v-model="activetabs" class="demo-tabs" @tab-click="handleClick">
-        <el-tab-pane label="关注" name="Attention">
-          <div class="Attention-box" v-for="info in Attentiondata" style="display: flex;">
-            <div class="left">
-              <a :href="info.URL">
-                <img :src="info.URL" alt="">
-              </a>
-            </div>
-            <div class="right" style="">
-              <a href="#">
-                <div class="title">{{ info.title }}</div>
-                <div class="digest">{{ info.digest }}</div>
-              </a>
-              <div class="tags">
-                <a href="#">
-                  <el-icon>
-                    <Pointer />
-                  </el-icon>
-                  <span>{{ info.num }} 赞</span>
-                </a>
-                <a href="#"></a>
-                <a href="#">作者：{{ info.author }}</a>
-              </div>
-            </div>
-          </div>
-        </el-tab-pane>
         <el-tab-pane label="推荐" name="Recommend">
           <div class="Recommend-box" v-for="info in Recommenddata" style="display: flex;">
             <div class="left">
@@ -113,9 +88,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+// 页面依赖
+import { ref, onMounted } from 'vue'
 import type { TabsPaneContext, } from 'element-plus'
 import { Pointer } from '@element-plus/icons-vue'
+
+// cookie 依赖
+import { getId, getToken } from "@/utils/auth";
+
+// 状态管理依赖
+import { useUserStore } from "@/store/modules/user";
+const userStore = useUserStore();
+
 const activetabs = ref('Recommend')
 const count = ref(0)
 const load = () => {
@@ -236,11 +220,32 @@ const hotnewsdata = [
     title: '很喜欢这个数字',
     digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
   },
+  {
+    id: '5',
+    title: '很喜欢这个数字',
+    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
+  },
+  {
+    id: '6',
+    title: '很喜欢这个数字6',
+    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
+  },
 ]
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
 }
+
+async function getCarousel() {
+
+};
+onMounted(() => {
+  // 初始化轮播图
+  getCarousel();
+  // 初始化热点
+  // 初始化推荐
+  // 初始化热榜
+})
 </script>
 
 <style lang="scss">
@@ -248,9 +253,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   border-radius: 4px;
 }
 
-.grid-content {
-  background-color: brown;
-}
+.grid-content {}
 
 .news-card {
 

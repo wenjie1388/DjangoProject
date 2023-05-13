@@ -7,23 +7,58 @@ export const constantRoutes: RouteRecordRaw[] = [
     path: '/',
     name: 'home',
     component: () => import('@/views/index.vue'),
+    meta: { auth: false },
   },
-  
   {
     path: '/bbs',
     component: () => import('@/views/bbs/index.vue'),
-    meta: { hidden: true }
+    meta: { auth: false },
   },
   
   {
     path: '/login',
+    name: 'login',
     component: () => import('@/views/login/index.vue'),
-    meta: { hidden: true }
+    meta: { auth: false },
+  },
+  {
+    path: '/user-center/:id/',
+    name:'userCenter',
+    component: () => import('@/views/userCenter/index.vue'),
+    redirect: { name: 'profile'},
+    meta: { auth: true },
+    children: [
+      {
+        path: 'profile',
+        name: 'profile',
+        component: () => import('@/views/userCenter/components/profile/index.vue'),
+        alias: ['']
+      },
+      {
+        path: 'account',
+        name: "account",
+        component: () => import('@/views/userCenter/components/account/index.vue'),
+        meta: { auth: true },
+      },
+      {
+        path: 'history',
+        name: "history",
+        component: () => import('@/views/userCenter/components/history/index.vue'),
+        meta: { auth: true },
+      },
+      {
+        path: 'setting',
+        name: "setting",
+        component: () => import('@/views/userCenter/components/setting/index.vue'),
+        meta: { auth: true },
+      },
+    ],
   },
   {
     path: '/404',
+    name:'404',
     component: () => import('@/views/error-page/404.vue'),
-    meta: { hidden: true }
+    meta: { auth: false },
   },
 
   

@@ -13,36 +13,83 @@
         <div class="flex-grow" style="display: flex">
           <el-input v-model="input1" size="large" placeholder="Please Input" :suffix-icon="Search" />
         </div>
-        <el-menu-item index="login" v-if="is_login == false">登录/注册</el-menu-item>
-        <el-sub-menu index="4" v-if="is_login == true">
-          <template #title>wenjie1388</template>
-          <el-menu-item index="4-1">个人中心</el-menu-item>
-          <el-menu-item index="4-2">内容管理</el-menu-item>
+        <el-menu-item index="login" v-if="userStore.id == ''">登录/注册</el-menu-item>
+        <el-sub-menu index="" v-else>
+          <template #title>{{ userStore.nickname }}</template>
+          <router-link :to="{ name: 'userCenter', params: { id: userStore.id } }" class="user-box">个人中心</router-link>
+          <router-link :to="{ name: 'userCenter', params: { id: userStore.id } }" class="user-box">内容管理</router-link>
         </el-sub-menu>
       </el-menu>
     </el-header>
-    <el-main style="width: 100%;">
+    <el-main style="width: 100%;background: #FAFAFA;height:500px">
       <router-view />
     </el-main>
-    <el-footer style="width: 100%;height:auto">
-      Footer
+    <el-footer style="width: 100%;height: auto;position: absolute;bottom: 0px;text-align:center">
+      <div><span>关于我们
+          招贤纳士
+          商务合作
+        </span></div>
     </el-footer>
   </el-container>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { Search } from "@element-plus/icons-vue";
-const is_login = false;
+
+
+// cookie 依赖
+import { getId, getToken } from "@/utils/auth";
+
+// 状态管理依赖
+import { useUserStore } from "@/store/modules/user";
+import { useAppStore } from "@/store/modules/app";
+const userStore = useUserStore();
+
+
+
+const isLogin = ref(false);
 const activeIndex = ref("/");
 const input1 = "";
 const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
+
+  // console.log(key, keyPath);
 };
+
+async function getUser() {
+  if (!getToken()) {
+    isLogin.value = false;
+    userStore.status = true;
+  } else {
+    userStore
+      .getInfo()
+      .then(() => {
+        isLogin.value = true;
+      })
+  }
+  console.log('$id:' + userStore.$id, 'id:' + userStore.nickname)
+}
+
+
+onMounted(() => {
+  // 初始化用户
+  getUser();
+});
+
 </script>
 
 <style scoped>
 .flex-grow {
   flex-grow: 1;
+}
+
+.user-box {
+  color: #000;
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  line-height: 40px;
+
 }
 </style>

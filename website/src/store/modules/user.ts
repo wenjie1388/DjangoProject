@@ -1,45 +1,38 @@
 import { defineStore } from 'pinia';
 
-import { getToken, setToken, removeToken } from '@/utils/auth';
+import { getToken, setToken, removeToken,setId,getId,removeId } from '@/utils/auth';
 import { loginApi, logoutApi } from '@/api/auth';
 import { getUserInfo } from '@/api/user';
 import { resetRouter } from '@/router';
 import { store } from '@/store';
-import { LoginData } from '@/api/auth/types';
+import { LoginDataC } from '@/api/auth/types';
 import { ref } from 'vue';
 import { UserInfo } from '@/api/user/types';
 
 export const useUserStore = defineStore('user', () => {
   // state
-  const token = ref<string>(getToken() || '');
   const id = ref<string>('');
-  const username = ref<string>(''); // 用户名
-  const name = ref<string>('');     // 姓名
+  const token = ref<string>(getToken() || '');
+  const nickname = ref<string>(''); // 网名
+  const password = ref<string>(''); // 密码
   const avatar = ref<string>(''); // 用户头像
-  const joined = ref<string>(''); // 注册时间
-  // const roles = ref<Array<string>>([]); // 用户角色编码集合 → 判断路由权限
-  // const perms = ref<Array<string>>([]); // 用户权限编码集合 → 判断按钮权限
-  const status = ref<string>(''); // 用户激活权限 → 判断路由权限
-  const active = ref<boolean>(false); // 用户激活权限 → 判断路由权限
-  const staff = ref<boolean>(false); // 用户职工权限 → 判断组件权限
-  const admin = ref<boolean>(false); // 用户管理员权限 → 判断按钮权限  
+  const cellphone = ref<string>(''); // 手机
+  const email = ref<string>(''); // 邮箱
+  const active = ref<boolean>(false); // false=无法登录
+  const status = ref<boolean>(false); // true=重新登录
 
   // actions
   // 登录
-  function login(loginData: LoginData) {
+  function login(loginData: LoginDataC) {
     return new Promise<void>((resolve, reject) => {
       loginApi(loginData)
-        .then((response) => {
-          if (response.status != 200) {
-            reject(response.data['msg']);
-          }else{
-            const { Id,Username, Token } = response.data;
-            token.value = Token;
-            id.value = Id;
-            username.value = Username;
-            setToken(Token);
-            resolve();
-          }
+        .then((data) => {
+          const { tokenType, accessToken } = data;
+          token.value = tokenType + " " + accessToken; // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
+          id.value = data.id
+          setToken(token.value);
+          setId(id.value);
+          resolve();
         })
         .catch(error => {
           reject(error);
@@ -47,20 +40,21 @@ export const useUserStore = defineStore('user', () => {
     });
   }
 
-  // 获取信息(用户昵称、角色集合、权限集合)
-  function getInfo(id: string) {
+  // 获取简洁信息(用户昵称、角色集合、权限集合)
+  function getInfo() {
     return new Promise<UserInfo>((resolve, reject) => {
-      getUserInfo(id)
-        .then(response => {
-          const { Name, Avatar, Active, Staff, Admin, Joined, Status } = response.data;
-          joined.value = Joined;
-          avatar.value = Avatar;
-          active.value = Active;
-          staff.value = Staff;
-          admin.value = Admin;
-          name.value = Name;
-          status.value = Status;
-          resolve(response.data);
+      getUserInfo()
+        .then((data) => {
+          console.log(data)
+          id.value = data.id;
+          nickname.value = data.nickname;
+          avatar.value = data.avatar;
+          cellphone.value = data.cellphone;
+          email.value = data.email;
+          active.value = data.active;
+          status.value = data.status;
+          console.log(data.id,data.nickname)
+          resolve(data);
         })
         .catch(error => {
           reject(error);
@@ -68,13 +62,18 @@ export const useUserStore = defineStore('user', () => {
     });
   }
 
+  function getAccountInfo() {
+    return new Promise<UserInfo>((resolve, reject) => {
+      
+    })
+  }
   // 注销
   function logout() {
     return new Promise<void>((resolve, reject) => {
       logoutApi(id.value)
         .then(() => {
           resetRouter();
-          resetToken();
+          resetUser();
           resolve();
         })
         .catch(error => {
@@ -84,34 +83,35 @@ export const useUserStore = defineStore('user', () => {
   }
 
   // 重置
-  function resetToken() {
+  function resetUser() {
     removeToken();
-    token.value = '';
+    removeId();
     id.value = '';
-    name.value = '';
+    token.value = '';
+    nickname.value = '';
     avatar.value = '';
+    cellphone.value = '';
+    email.value = '';
     active.value = false;
-    staff.value = false;
-    admin.value = false;
-    joined.value = '';
-    name.value = '';
-    status.value = '';
+    status.value = false;
   }
+
+
+
+
   return {
-    token,
     id,
-    username,
+    token,
     avatar,
+    nickname,
+    cellphone,
+    email,
     active,
-    staff,
-    joined,
-    name,
     status,
-    admin,
     login,
     getInfo,
     logout,
-    resetToken
+    resetUser
   };
 });
 

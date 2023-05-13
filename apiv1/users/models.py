@@ -7,7 +7,7 @@ from django.contrib.auth.models import UserManager,PermissionsMixin,AbstractBase
 # )
 from django.conf import settings
 from rest_framework.authtoken.models import Token
-from utils.utils import get_RandomString,get_RandomPassword,send_mail
+from auth.utils import get_RandomString,get_RandomPassword,send_mail
 from .utils import AnyUserManager,AdminUserManager
 
 def user_img_path(instance, filename):
@@ -167,6 +167,8 @@ class AnyUser(UserBase):
         ordering = ('id',)
         verbose_name = 'user'
         verbose_name_plural = 'users'
+
+
 
 
 '''

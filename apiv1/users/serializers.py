@@ -14,7 +14,7 @@ from .models import AnyUser as User,AdminUser
 from .utils import UsernameField,PasswordField,CellphoneField,AuthCode6Field
 from .exceptions import UserAlreadyExists
 
-from utils.utils import get_RandomPassword,get_RandomString
+from auth.utils import get_RandomPassword,get_RandomString
 
 
 ''' 以下是基类序列器 '''

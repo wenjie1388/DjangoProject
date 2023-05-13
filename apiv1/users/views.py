@@ -19,12 +19,13 @@ from rest_framework.status import (
     HTTP_500_INTERNAL_SERVER_ERROR
 )
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,authentication_classes,permission_classes
 from rest_framework.settings import api_settings
 from rest_framework import authentication, permissions,mixins
 from rest_framework.generics import  ListAPIView,ListCreateAPIView
 from rest_framework import viewsets
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 import jwt,datetime,django_redis 
 from .models import AnyUser as User,AdminUser
@@ -45,8 +46,8 @@ from .serializers import (
    AdminUserLoginSerializer,
    )
 from .exceptions import UserAlreadyExists
-from utils.crypto import CryptoAES
-from utils.utils import JwtToken,send_mail
+from auth.crypto import CryptoAES
+from auth.utils import JwtToken,send_mail
 
 
 
@@ -65,18 +66,15 @@ def AnyUserLoginView(request):
     if method == "username":
         serializer = AnyUserLoginUsernameSerializer(data=req_params)
         serializer.is_valid(raise_exception=True)
-          
         try:
           # 获取用户信息
           username = serializer.validated_data['username']
           user = User.objects.get(username=username)
         except User.DoesNotExist:
           return Response({"msg":f"账户：{username} 不存在。"},status=HTTP_400_BAD_REQUEST)
-        
     elif method == "cell":
         serializer = AnyUserLoginCellSerializer(data=req_params)
         serializer.is_valid(raise_exception=True)
-        
         try:
           # 获取用户信息
           cell = serializer.validated_data['cell']
@@ -88,7 +86,6 @@ def AnyUserLoginView(request):
     elif method == "email":
         serializer = AnyUserLoginEmailSerializer(data=req_params)
         serializer.is_valid(raise_exception=True)
-        
         try:
           # 获取用户信息
           email = serializer.validated_data['email']
@@ -354,7 +351,10 @@ def Logout(request,uid):
         return Response(data={"msg":"用户不存在",},status=HTTP_400_BAD_REQUEST)
     return Response(data={"msg":"退出成功",},status=HTTP_200_OK)
 
+
 @api_view(['GET'])
+@authentication_classes((BasicAuthentication,))
+@permission_classes((IsAuthenticated,))
 def Repetition(request,name):
     ''' 查询用户名是否已存在 '''
     try:
@@ -365,6 +365,8 @@ def Repetition(request,name):
         return Response(data={"msg":"用户名不存在"},status=HTTP_204_NO_CONTENT)
     return Response(data={"msg":"OK"},status=HTTP_200_OK)
         
+
+
 class UserInfoCreateDelete(APIView):
     def get(self,request,uid):
         ''' 获取指定用户信息 '''

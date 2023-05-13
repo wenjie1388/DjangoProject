@@ -1,21 +1,45 @@
 import request from '@/utils/request';
 import { AxiosPromise } from 'axios';
-import { UserForm, UserInfo, UserPageResult, UserQuery } from './types';
+import { UserForm, UserInfo,UpdateUserInfo,UpdateUserAccountInfo, UserPageResult, UserQuery } from './types';
 
 /**
  * 登录成功后获取指定用户信息（昵称、头像、权限集合和角色集合）
  */
-export function getUserInfo(id:string): AxiosPromise<UserInfo> {
+export function getUserInfo(): AxiosPromise<UserInfo> {
   return request({
-    url: '/v1/users/'+id,
+    url: '/v1/users',
     method: 'get'
   });
 }
 
 /**
+ * 更新用户的部分信息
+ */
+export function updateUserInfo(userDate:object): AxiosPromise<UpdateUserInfo> {
+  return request({
+    url: '/v1/users',
+    method: 'update',
+    data: userDate,
+  });
+}
+
+
+/**
+ * 获取用户account信息
+ */
+export function getUserAccountInfoAPI(userAccount:object): AxiosPromise<UpdateUserAccountInfo> {
+  return request({
+    url: '/v1/users',
+    method: 'update',
+    data: userDate,
+  });
+}
+
+
+/**
  * 获取用户查询列表
  */
-export function QueryUserList(queryParams: UserQuery): AxiosPromise<UserPageResult> {
+export function queryUserList(queryParams: UserQuery): AxiosPromise<UserPageResult> {
   return request({
     url: '/v1/users/',
     method: 'get',
@@ -23,11 +47,8 @@ export function QueryUserList(queryParams: UserQuery): AxiosPromise<UserPageResu
   });
 }
 
-
-
 /**
  * 获取用户分页列表
- *
  * @param queryParams
  */
 export function listUserPages(queryParams: UserQuery): AxiosPromise<UserPageResult> {

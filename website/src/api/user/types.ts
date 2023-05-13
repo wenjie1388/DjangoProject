@@ -4,9 +4,29 @@
 export interface UserInfo {
   nickname: string;
   avatar: string;
-  roles: string[];
-  perms: string[];
+  active: boolean;
+  status: boolean;
 }
+
+
+/**
+ * 更新用户的信息参数
+ */
+export interface UpdateUserInfo{
+  id: string;
+  nickname: string;
+}
+
+/**
+ * 更新用户的Account信息参数
+ */
+export interface UpdateUserAccountInfo{
+  id: string;
+  password: string;
+  cellphone: string;
+  email: string;
+}
+
 /**
  * 用户查询参数
  */

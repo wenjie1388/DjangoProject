@@ -1,15 +1,15 @@
 import request from '@/utils/request';
 import { AxiosPromise } from 'axios';
-import { LoginData, TokenResult, VerifyCode } from './types';
+import { LoginDataC, TokenResult, VerifyCode,Captcha } from './types';
 
 /**
  *
  * @param data {LoginForm}
  * @returns
  */
-export function loginApi(paramsData: LoginData): AxiosPromise<TokenResult> {
+export function loginApi(paramsData: LoginDataC): AxiosPromise<TokenResult> {
   return request({
-    url: 'v1/user/adminuser/login',
+    url: 'v1/users/login',
     method: 'get',
     params: paramsData
   });
@@ -26,22 +26,16 @@ export function logoutApi(id:string) {
 }
 
 /**
- * 获取图片验证码
+ * 获取6位的验证码
  */
-export function getCaptcha(): AxiosPromise<VerifyCode> {
+export function getCaptchaApi(username:string): AxiosPromise<Captcha> {
   return request({
-    url: '/captcha?t=' + new Date().getTime().toString(),
-    method: 'get'
+    url: '/v1/auth/captcha',
+    method: 'get',
+    params: {
+      'username': username
+    },
   });
 }
 
-/**
- * 获取手机验证码
- */
-export function getSmsCaptcha(cell:string): AxiosPromise<VerifyCode> {
-  return request({
-    url: '/v1/utils/smscode',
-    method: 'get',
-    params:{'cell':cell}
-  });
-}
+
