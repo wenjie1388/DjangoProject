@@ -1,14 +1,14 @@
 import request from '@/utils/request';
 import { AxiosPromise } from 'axios';
-import {  } from './types';
+import { CarouselType } from './types';
 
 
 /**
  * 获取首页轮播图
  */
-export function Carousel() { 
-  request({
-    url: '/api/v1/menus/' + ids,
-    method: 'delete'
+export function getCarouselAPI():AxiosPromise<CarouselType> { 
+  return  request({
+    url: '/v1/carousel',
+    method: 'get'
   });
 }

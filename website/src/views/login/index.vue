@@ -19,16 +19,16 @@
                 placeholder="8-24，数字、字母与符号_,.!#~?&^" maxlength="24" />
             </el-form-item>
             <el-form-item label="验证码：" prop="captcha">
-              <el-input v-model="loginData.captcha" type="input" autocomplete="off" maxlength="6" size="" width="50px"
+              <el-input v-model="captcha" type="input" autocomplete="off" maxlength="6" size="" width="50px"
                 class="inputCode-con" placeholder="******" />
-              <el-button @click="sendCode(loginRef)" :disabled="isdisabled">
+              <el-button @click="sendCode(loginRef)" validate="d" :disabled="isdisabled">
                 <span v-if="!isdisabled">发送验证码</span>
                 <span v-else>{{ time60s }} 秒后重试</span>
               </el-button>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm(loginRef)" :isdisabled="isdisabled">登录</el-button>
-              <el-button type="primary" @click="registerForm(loginRef)">注册</el-button>
+              <el-button type="primary" @click="forget()">注册</el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -46,7 +46,7 @@
 <script setup lang="ts">
 // 页面依赖
 import { reactive, ref, toRefs } from 'vue';
-import type { FormInstance, FormRules } from 'element-plus'
+import type { FormInstance, FormRules, FormValidateCallback } from 'element-plus'
 import router from "@/router";
 import { ElMessage } from 'element-plus';
 
@@ -56,8 +56,8 @@ const userStore = useUserStore();
 
 // API依赖
 import { LocationQuery, LocationQueryValue, useRoute } from "vue-router";
-import { getCaptchaApi } from "@/api/auth";
-import { LoginDataC, Captcha } from "@/api/auth/types";
+import { verifyCaptchaApi, addCaptchaApi } from "@/api/auth";
+import { LoginData, Captcha } from "@/api/auth/types";
 
 // 倒计时时长
 const time60s = ref(60);
@@ -85,14 +85,15 @@ const isdisabled = ref(false);
  */
 const isasterisk = ref(true);
 
-const route = useRoute();
+// const route = useRoute();
 const loginRef = ref<FormInstance>();
-const loginData = ref<LoginDataC>({
+const loginData = reactive<LoginData>({
   username: "",
   password: "",
-  captcha: ""
 });
-const loginRules = reactive<FormRules>({
+const captcha = ref();
+
+const loginRules = ref<FormRules>({
   username: [
     { required: true, message: '账号不能空', trigger: 'change' },
     { min: 6, max: 24, message: '长度在6-24之间', trigger: 'change' },
@@ -101,66 +102,65 @@ const loginRules = reactive<FormRules>({
     { required: true, message: '密码不能空', trigger: 'change' },
     { min: 8, max: 24, message: '长度在8-24之间', trigger: 'change' },
   ],
-  captcha: [
-    { required: true, message: '验证码不能空', trigger: 'change' },
-    { min: 6, max: 6, message: '长度为6', trigger: 'change' },
-  ],
 });
-
 
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      loading.value = true;
-      userStore
-        .login(loginData.value)
-        .then(() => {
-          router.push('/');
-        })
-        .catch(() => {
-          ElMessage({
-            message: '用户名或密码错误',
-            type: 'warning'
+      // 验证码校验
+      if (captcha.value === userStore.captcha) {
+        console.log(userStore.captcha);
+        loading.value = true;
+        userStore.login(loginData)
+          .then(() => {
+            router.push('/');
+          })
+          .catch(() => {
+            ElMessage.warning('用户名或密码错误');
+            loading.value = false;
+          })
+          .finally(() => {
+            loading.value = false;
           });
-        })
-        .finally(() => {
-          loading.value = false;
-        })
+
+      } else {
+        ElMessage.warning("验证码错误");
+
+      }
     } else {
-      isasterisk.value = false
-      ElMessage({
-        message: '填写不完整',
-        type: 'warning',
-      })
+      isasterisk.value = false;
     }
   })
 };
 
-const registerForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
+const forget = () => {
+  router.push('/register');
 };
 
+
 const sendCode = async (formEl: FormInstance | undefined) => {
-  if (formEl?.validateField(["username", "password"])) {
-    // 倒计时
-    const timer = await setInterval(() => {
-      isdisabled.value = true;
-      time60s.value -= 1;
-      if (time60s.value == 0) {
-        isdisabled.value = false;
-        time60s.value = 60;
-        clearTimeout(timer);
-      };
-    }, 1000);
-    const captcha = await getCaptchaApi(loginData.value.username)
-      .then((data) => {
-        const { captcha } = data;
-        console.log(captcha, data);
-      });
-  };
+  console.log(loginData.username);
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      userStore.getCaptcha(loginData.username)
+        .then(() => {
+          // 倒计时
+          const timer = setInterval(() => {
+            isdisabled.value = true;
+            time60s.value -= 1;
+            if (time60s.value == 0) {
+              isdisabled.value = false;
+              time60s.value = 60;
+              clearTimeout(timer);
+            };
+          }, 1000);
+        });
+    }
+  })
+
 };
 
 </script>

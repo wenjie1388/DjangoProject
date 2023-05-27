@@ -5,23 +5,38 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'home',
     component: () => import('@/views/index.vue'),
     meta: { auth: false },
   },
   {
-    path: '/bbs',
-    component: () => import('@/views/bbs/index.vue'),
+    path: '/course',
+    component: () => import('@/views/course/index.vue'),
     meta: { auth: false },
   },
-  
   {
     path: '/login',
-    name: 'login',
     component: () => import('@/views/login/index.vue'),
     meta: { auth: false },
   },
   {
+    path: '/register',
+    component: () => import('@/views/register/index.vue'),
+    meta: { auth: false },
+  },
+  
+  {
+    path: '/search',
+    component: () => import('@/views/search/index.vue'),
+    props: route => ({ query: route.query.q })
+  },
+  {
+    // 阅读文章
+    path: '/articles/:id',
+    component: () => import('@/views/articles/index.vue'),
+    meta: { auth: false },
+  },
+  {
+    // 用户中心
     path: '/user-center/:id/',
     name:'userCenter',
     component: () => import('@/views/userCenter/index.vue'),
@@ -53,6 +68,52 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: { auth: true },
       },
     ],
+  },
+  {
+    // 内容管理
+    path: '/my-blog/:id',
+    name:'myBlog',
+    component: () => import('@/views/myBlog/index.vue'),
+    meta: { auth: true },
+    redirect: { name: 'home'},
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        component: () => import('@/views/myBlog/components/index.vue'),
+      },
+      
+      {
+        path: 'edit',
+        name: 'edit',
+        component: () => import('@/views/myBlog/components/edit/index.vue'),
+        props: route => ({ query: route.query.q }),
+
+      },
+      {
+
+        path: 'content',
+        name: 'content',
+        component: () => import('@/views/myBlog/components/content/index.vue'),
+      },
+      {
+        path: 'comment',
+        name: 'comment',
+        component: () => import('@/views/myBlog/components/comment/index.vue'),
+      },
+      {
+        path: 'allColumnList',
+        name: 'allColumnList',
+        component: () => import('@/views/myBlog/components/allColumnList/index.vue'),
+      },
+    ]
+  },
+  
+  {
+    path: '/blog/:uid',
+    name:'blog',
+    component: () => import('@/views/blog/index.vue'),
+    meta: { auth: false },
   },
   {
     path: '/404',

@@ -1,97 +1,100 @@
 <template>
-  <el-row :gutter="0">
+  <el-row :gutter="14">
     <el-col :span="12" :offset="2">
       <div class="carousel-box grid-content" style="margin-left: 0px;">
-        <el-carousel indicator-position="outside">
-          <el-carousel-item v-for="item in 4" :key="item">
-            <h3 text="2xl" justify="center">{{ item }}</h3>
+        <el-carousel>
+          <el-carousel-item v-for="user, index in carousels" :key="index">
+            <el-image style="width:940px; height: 300px" :src="user.imgurl" fit="scale-down" />
           </el-carousel-item>
         </el-carousel>
       </div>
     </el-col>
-    <el-col :span="6" style="margin-left: 20px;">
-      <el-card class="news-card">
+    <el-col :span="6" style=" padding-top: 5px;">
+      <!-- <el-card class="news-card">
         <template #header>
           <div class="card-header">
-            <span>热点</span>
+            <span>热点新闻</span>
             <el-button class="button" text>更多</el-button>
           </div>
         </template>
-        <a v-for="info in hotnewsdata" :key="info.id" :href="'www.news.comd/' + info.id" class="text-item">
-          <div class="news-title">{{ info.title }}</div>
-          <div class="news-digest">{{ info.digest }}</div>
+        <a v-for="user in hotnews" :key="user.id" href="#" class="text-item">
+          <div class="news-title">{{ user.title }}</div>
+          <div class="news-digest">{{ user.digest }}</div>
         </a>
-      </el-card>
+      </el-card> -->
     </el-col>
   </el-row>
 
-  <el-row :gutter="0">
+  <el-row :gutter="14">
     <el-col :span="12" :offset="2">
       <el-tabs v-model="activetabs" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="推荐" name="Recommend">
-          <div class="Recommend-box" v-for="info in Recommenddata" style="display: flex;">
+          <el-card class="box-card" v-for="user, index in recommendedList" :key="index" shadow="hover"
+            v-infinite-scroll="getRecommendedAritcle" :infinite-scroll-disabled="redisabled">
             <div class="left">
-              <a :href="info.URL">
-                <img :src="info.URL" alt="">
-              </a>
+              <router-link :to="{ path: '/articles/' + user.id }">
+                <el-image style="width: 200px; height: 100px" :src="user.imgUrl" href="#" fit="scale-down" />
+              </router-link>
             </div>
             <div class="right" style="">
-              <a href="#">
-                <div class="title">{{ info.title }}</div>
-                <div class="digest">{{ info.digest }}</div>
-              </a>
+              <div class="title"><router-link :to="{ path: '/articles/' + user.id }">{{ user.title }}</router-link></div>
+              <div class="digest"><router-link :to="{ path: '/articles/' + user.id }">{{ user.digest }}</router-link>
+              </div>
               <div class="tags">
-                <a href="#">
-                  <el-icon>
-                    <Pointer />
-                  </el-icon>
-                  <span>{{ info.num }} 赞</span>
-                </a>
-                <a href="#"></a>
-                <a href="#">作者：{{ info.author }}</a>
+                <span>{{ user.upvote }} 赞</span>
+                <router-link :to="{ path: '/blog/' + user.id }">{{ user.author }}</router-link>
               </div>
             </div>
-          </div>
+          </el-card>
         </el-tab-pane>
         <el-tab-pane label="热榜" name="HotList">
-          <div class="HotList-box" v-for="info in dataHotList" style="display: flex;">
+          <el-card class="box-card" v-for="user in hotList" :key="user.id" shadow="hover"
+            v-infinite-scroll="getHotListAritcle" :infinite-scroll-disabled="infinitedisabled.hot">
             <div class="left">
-              <a :href="info.URL">
-                <img :src="info.URL" alt="">
+              <a href="/articles">
+                <img :src="user.imgUrl" alt="">
               </a>
             </div>
             <div class="right" style="">
-              <a href="#">
-                <div class="title">{{ info.title }}</div>
-                <div class="digest">{{ info.digest }}</div>
-              </a>
+              <div class="title"><router-link :to="{ path: '/articles/' + user.id }">{{ user.title }}</router-link></div>
+              <div class="digest"><router-link :to="{ path: '/articles/' + user.id }">{{ user.digest }}</router-link>
+              </div>
               <div class="tags">
-                <a href="#">
-                  <el-icon>
-                    <Pointer />
-                  </el-icon>
-                  <span>{{ info.num }} 赞</span>
-                </a>
-                <a href="#"></a>
-                <a href="#">作者：{{ info.author }}</a>
+                <span>{{ user.upvote }} 赞</span>
+                <router-link :to="{ path: '/blog/' + user.id }">{{ user.author }}</router-link>
               </div>
             </div>
-          </div>
+          </el-card>
         </el-tab-pane>
       </el-tabs>
     </el-col>
-    <el-col :span="6" style="margin-left: 20px;">
-      <!-- 预留位 -->
-      <!-- <div class="grid-content hot-news"></div> -->
+    <el-col :span="6">
+      <!-- 向你推荐 -->
+      <!-- <el-card class="activity-card">
+        <template #header>
+          <div class="card-header">
+            <b>推荐活动</b>
+            <a href="#" style="float: right;">更多活动</a>
+          </div>
+        </template>
+        <div v-for="user in recommendedActivity" :key="user.id" class="activity-item">
+          <router-link to="#">
+            <span>{{ user.title }} </span>
+            <el-icon>
+              <ArrowRightBold />
+            </el-icon>
+          </router-link>
+        </div>
+      </el-card> -->
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts" setup>
 // 页面依赖
-import { ref, onMounted } from 'vue'
-import type { TabsPaneContext, } from 'element-plus'
-import { Pointer } from '@element-plus/icons-vue'
+import { ref, onMounted, reactive, computed } from 'vue';
+import type { TabsPaneContext, } from 'element-plus';
+import { Pointer, ArrowRightBold } from '@element-plus/icons-vue';
 
 // cookie 依赖
 import { getId, getToken } from "@/utils/auth";
@@ -100,172 +103,134 @@ import { getId, getToken } from "@/utils/auth";
 import { useUserStore } from "@/store/modules/user";
 const userStore = useUserStore();
 
-const activetabs = ref('Recommend')
-const count = ref(0)
-const load = () => {
-  count.value += 2
-}
-// const news_count = ref(6)
-const dataHotList = [
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '【云原生 | 51】Docker三剑客之Docker Compose第二节',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-    num: '12',
-    author: '小鹏linux',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '算法leetcode｜25. K 个一组翻转链表（rust重拳出击）',
-    digest: '给你链表的头节点 head ，每 k 个节点一组进行翻转，请你返回修改后的链表。k 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。',
-    num: '23',
-    author: '二当家的白帽子',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '【最优潮流】直流最优潮流(OPF)课设（Matlab代码实现）',
-    digest: '最优潮流(OPF)是指在满足电网约束的同时，以最小的成本将负荷分配给电厂。描述为在满足网络(潮流)约束的情况下最小化所有承诺的工厂的总燃料成本的优化问题。',
-    num: '0',
-    author: '@橘柑橙柠桔柚',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '很喜欢这个数字',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-    num: '10',
-    author: '认真学习的小雅兰.',
-  },
-]
+// API 依赖
+import { getCarouselAPI } from "@/api/media/index";
+import { ArticlesAPI, HotNewsAPI } from "@/api/articles/index";
+import { getActivityRecommendationApi } from "@/api/activity/index";
 
-const Recommenddata = [
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '【云原生 | 51】Docker三剑客之Docker Compose第二节',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-    num: '12',
-    author: '小鹏linux',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '算法leetcode｜25. K 个一组翻转链表（rust重拳出击）',
-    digest: '给你链表的头节点 head ，每 k 个节点一组进行翻转，请你返回修改后的链表。k 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。',
-    num: '23',
-    author: '二当家的白帽子',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '【最优潮流】直流最优潮流(OPF)课设（Matlab代码实现）',
-    digest: '最优潮流(OPF)是指在满足电网约束的同时，以最小的成本将负荷分配给电厂。描述为在满足网络(潮流)约束的情况下最小化所有承诺的工厂的总燃料成本的优化问题。',
-    num: '0',
-    author: '@橘柑橙柠桔柚',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '很喜欢这个数字',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-    num: '10',
-    author: '认真学习的小雅兰.',
-  },
-]
+// 数据类型依赖
 
-const Attentiondata = [
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '【云原生 | 51】Docker三剑客之Docker Compose第二节',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-    num: '12',
-    author: '小鹏linux',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '算法leetcode｜25. K 个一组翻转链表（rust重拳出击）',
-    digest: '给你链表的头节点 head ，每 k 个节点一组进行翻转，请你返回修改后的链表。k 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。',
-    num: '23',
-    author: '二当家的白帽子',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '【最优潮流】直流最优潮流(OPF)课设（Matlab代码实现）',
-    digest: '最优潮流(OPF)是指在满足电网约束的同时，以最小的成本将负荷分配给电厂。描述为在满足网络(潮流)约束的情况下最小化所有承诺的工厂的总燃料成本的优化问题。',
-    num: '0',
-    author: '@橘柑橙柠桔柚',
-  },
-  {
-    URL: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    title: '很喜欢这个数字',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-    num: '10',
-    author: '认真学习的小雅兰.',
-  },
-]
+const infinitedisabled = reactive({
+  recommend: false,
+  hot: true
+})
 
-const hotnewsdata = [
-  {
-    id: '1',
-    title: '【云原生 | 51】Docker三剑客之Docker Compose第二节',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-  },
-  {
-    id: '2',
-    title: '算法leetcode｜25. K 个一组翻转链表（rust重拳出击）',
-    digest: '给你链表的头节点 head ，每 k 个节点一组进行翻转，请你返回修改后的链表。k 是一个正整数，它的值小于或等于链表的长度。如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。',
-  },
-  {
-    id: '3',
-    title: '【最优潮流】直流最优潮流(OPF)课设（Matlab代码实现）',
-    digest: '最优潮流(OPF)是指在满足电网约束的同时，以最小的成本将负荷分配给电厂。描述为在满足网络(潮流)约束的情况下最小化所有承诺的工厂的总燃料成本的优化问题。',
-  },
-  {
-    id: '4',
-    title: '很喜欢这个数字',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-  },
-  {
-    id: '5',
-    title: '很喜欢这个数字',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-  },
-  {
-    id: '6',
-    title: '很喜欢这个数字6',
-    digest: '对于Compose来说，大部分命令的对象既可以是项目本身，也可以指定为项目中的服务或者容器。如果没有特别说明，命令对象将是项目，这意味着项目中所有的服务都会受到命令影响。',
-  },
-]
+
+// const noMore = computed(() => recommendedList >= 20);
+const loading = ref(false);
+const redisabled = ref(true);
+const activetabs = ref('Recommend');
+
+// 定义走马灯
+const carousels = ref();
+// 定义推荐文章
+const recommendedList = ref();
+// 定义热门文章
+const hotList = ref();
+// 定义热门新闻
+const hotnews = ref();
+// 定义推荐活动
+const recommendedActivity = ref();
+
+
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event)
+  // console.log(tab, event)
 }
 
-async function getCarousel() {
+// 推荐文章
+function getRecommendedAritcle() {
+  redisabled.value = false;
+  setTimeout(() => {
+    ArticlesAPI('03010101').then(async (data) => {
+      recommendedList.value += data;
+      infinitedisabled.recommend = true;
+    });
+  }, 2000)
+}
 
+
+// 热榜文章
+function getHotListAritcle() {
+  infinitedisabled.hot = false;
+  ArticlesAPI('03010102').then((data) => {
+    hotList.value += data;
+    infinitedisabled.hot = true;
+  });
 };
+
+
+// 走马灯
+function InitCarousel() {
+  getCarouselAPI().then((data) => {
+    carousels.value = data;
+  });
+}
+
+// 热点新闻
+function InitHotNews() {
+  HotNewsAPI()
+    .then((data) => {
+      hotnews.value = data;
+    })
+}
+
+// 推荐文章
+function InitRecommendedAritcle() {
+  ArticlesAPI('03010101')
+    .then(async (data) => {
+      recommendedList.value = data;
+    });
+}
+
+// 热榜文章
+function InitHotListAritcle() {
+  ArticlesAPI('03010102')
+    .then((data) => {
+      hotList.value = data;
+    });
+};
+
+// 活动推荐
+function InitActivityRecommendationApi() {
+  getActivityRecommendationApi()
+    .then((data) => {
+      recommendedActivity.value = data;
+    })
+};
+
+
 onMounted(() => {
   // 初始化轮播图
-  getCarousel();
+  InitCarousel();
   // 初始化热点
+  InitHotNews();
   // 初始化推荐
+  InitRecommendedAritcle();
   // 初始化热榜
+  InitHotListAritcle();
+  // 初始化推荐活动
+  InitActivityRecommendationApi();
 })
 </script>
 
-<style lang="scss">
+
+<style  lang="scss">
 .el-col {
   border-radius: 4px;
 }
 
-.grid-content {}
 
 .news-card {
 
   .card-header,
   .el-card__header {
 
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+    // padding-left: 10px;
+    // padding-right: 10px;
+    // padding-bottom: 0px;
+    // padding-top: 0px;
 
-    .button {}
   }
 
   .el-card__body {
@@ -305,13 +270,20 @@ onMounted(() => {
 
 }
 
-.Attention-box,
-.Recommend-box,
-.HotList-box {
+.box-card {
   /* border: solid 1px #e0e0e0; */
-  border-top: solid 1px #e0e0e0;
-  border-bottom: solid 1px #e0e0e0;
-  margin-bottom: 18px;
+  margin-top: 15px;
+  display: flex;
+  border-radius: 4px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  margin: 15px;
+
+  .el-card__body {
+    display: flex;
+
+  }
 
   .left {
     display: flex;
@@ -320,7 +292,7 @@ onMounted(() => {
 
     a {
       img {
-        width: 178px;
+        width: 200px;
         height: 100px;
       }
     }
@@ -331,38 +303,34 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
 
-    a {
-      color: black;
+    .title {
 
-      .title {
-        color: #e0e0e0;
-        font-size: 18px;
-        font-weight: 500;
-        color: #222226;
-        overflow: hidden;
-        white-space: normal;
-        word-break: break-word;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        line-height: 25px;
-        margin-bottom: 4px;
-      }
-
-      .digest {
-        font-size: 14px;
-        font-weight: 400;
-        color: #555666;
-        overflow: hidden;
-        white-space: normal;
-        word-break: break-word;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-      }
-
+      color: #e0e0e0;
+      font-size: 18px;
+      font-weight: 500;
+      color: #222226;
+      overflow: hidden;
+      white-space: normal;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      line-height: 25px;
+      margin-bottom: 4px;
     }
 
+    .digest {
+      height: 40px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #555666;
+      overflow: hidden;
+      white-space: normal;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
 
     .tags {
       display: -webkit-box;
@@ -376,5 +344,31 @@ onMounted(() => {
       }
     }
   }
+}
+
+.box-card:hover {
+  background-color: #f5f5f5;
+}
+
+.activity-card {
+  margin-top: 15px;
+
+  .el-card__header {
+    padding: 24px;
+  }
+
+  .activity-item {
+    margin-bottom: 9px;
+  }
+
+  span,
+  i {
+    vertical-align: middle;
+  }
+
+  i {
+    float: right;
+  }
+
 }
 </style>

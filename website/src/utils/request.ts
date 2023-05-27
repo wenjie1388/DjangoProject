@@ -18,6 +18,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (request: AxiosRequestConfig) => {
+    console.log(request.url)
     if (!request.headers) {
       throw new Error(
         `Expected 'config' and 'config.headers' not to be undefined`
@@ -38,6 +39,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response: AxiosResponse) => {
     const { status,statusText } = response;
+    console.log(status)
     if (status == '200') {
       return response.data;
     } else {
@@ -49,6 +51,7 @@ service.interceptors.response.use(
     }
   },
   (error: any) => {
+    ElMessage.error(error);
     return Promise.reject(error);
   }
 );

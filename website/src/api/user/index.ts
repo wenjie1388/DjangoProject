@@ -1,11 +1,11 @@
 import request from '@/utils/request';
 import { AxiosPromise } from 'axios';
-import { UserForm, UserInfo,UpdateUserInfo,UpdateUserAccountInfo, UserPageResult, UserQuery } from './types';
+import { UserForm, userInfo,UpdateUserInfo,AccountInfo, UserPageResult, UserQuery } from './types';
 
 /**
- * 登录成功后获取指定用户信息（昵称、头像、权限集合和角色集合）
+ * 获取用户简洁的信息（昵称、头像、权限集合和角色集合）
  */
-export function getUserInfo(): AxiosPromise<UserInfo> {
+export function getUsersInfo(): AxiosPromise<UserInfo> {
   return request({
     url: '/v1/users',
     method: 'get'
@@ -13,25 +13,16 @@ export function getUserInfo(): AxiosPromise<UserInfo> {
 }
 
 /**
- * 更新用户的部分信息
+ * 获取指定用户的指定信息
+ * @param path_id 01040201:用户简易信息；01040203:获取用户电子名片
+ * @param  v_id:APi版本
+ * @param u_id:用户id
+ * @returns 
  */
-export function updateUserInfo(userDate:object): AxiosPromise<UpdateUserInfo> {
+export function getUserInfo(v_id:string,path_id:string,uid:string|string[]){
   return request({
-    url: '/v1/users',
-    method: 'update',
-    data: userDate,
-  });
-}
-
-
-/**
- * 获取用户account信息
- */
-export function getUserAccountInfoAPI(userAccount:object): AxiosPromise<UpdateUserAccountInfo> {
-  return request({
-    url: '/v1/users',
-    method: 'update',
-    data: userDate,
+    url: '/'+v_id+ '/users/'+path_id+'/'+uid,
+    method: 'get',
   });
 }
 
@@ -48,142 +39,29 @@ export function queryUserList(queryParams: UserQuery): AxiosPromise<UserPageResu
 }
 
 /**
- * 获取用户分页列表
- * @param queryParams
+ * 更新用户信息
+ * @param path_id 01040401:个人资料； 01040402:账号信息
+ * @param u_id 用户id
+ * @param updateForm 更新表单
+ * @returns 
  */
-export function listUserPages(queryParams: UserQuery): AxiosPromise<UserPageResult> {
-// export function listUserPages(): AxiosPromise<UserPageResult> {
+export function updateUserInfoAPI(path_id:string,u_id:string,updateForm:object): AxiosPromise {
   return request({
-    url: '/api/v1/users/',
+    url: '/v1/users/'+path_id + '/' +u_id,
+    method: 'update',
+    data: updateForm,
+  });
+}
+
+/**
+ * @param 用户动作API 
+ * @param path_id：010501：点赞，010502：收藏 ；uid 用户id
+ * @returns 
+ */
+export function userActionApi(path_id:string,u_id: string) {
+  return request({
+    url: '/v1/users/'+path_id+'/'+u_id,
     method: 'get',
-    // params: queryParams
-  });
-  
-}
-
-/**
- * 获取用户表单详情
- *
- * @param userId
- */
-export function getUserForm(userId: number): AxiosPromise<UserForm> {
-  return request({
-    url: '/api/v1/users/' + userId + '/form',
-    method: 'get'
   });
 }
 
-/**
- * 添加用户
- *
- * @param data
- */
-export function addUser(data: any) {
-  return request({
-    url: '/api/v1/users',
-    method: 'post',
-    data: data
-  });
-}
-
-/**
- * 修改用户
- *
- * @param id
- * @param data
- */
-export function updateUser(id: number, data: UserForm) {
-  return request({
-    url: '/api/v1/users/' + id,
-    method: 'put',
-    data: data
-  });
-}
-
-/**
- * 修改用户状态
- *
- * @param id
- * @param status
- */
-export function updateUserStatus(id: number, status: number) {
-  return request({
-    url: '/api/v1/users/' + id + '/status',
-    method: 'patch',
-    params: { status: status }
-  });
-}
-
-/**
- * 修改用户密码
- *
- * @param id
- * @param password
- */
-export function updateUserPassword(id: number, password: string) {
-  return request({
-    url: '/api/v1/users/' + id + '/password',
-    method: 'patch',
-    params: { password: password }
-  });
-}
-
-/**
- * 删除用户
- *
- * @param ids
- */
-export function deleteUsers(ids: string) {
-  return request({
-    url: '/api/v1/users/' + ids,
-    method: 'delete'
-  });
-}
-
-/**
- * 下载用户导入模板
- *
- * @returns
- */
-export function downloadTemplate() {
-  return request({
-    url: '/api/v1/users/template',
-    method: 'get',
-    responseType: 'arraybuffer'
-  });
-}
-
-/**
- * 导出用户
- *
- * @param queryParams
- * @returns
- */
-export function exportUser(queryParams: UserQuery) {
-  return request({
-    url: '/api/v1/users/_export',
-    method: 'get',
-    params: queryParams,
-    responseType: 'arraybuffer'
-  });
-}
-
-/**
- * 导入用户
- *
- * @param file
- */
-export function importUser(deptId: number, roleIds: string, file: File) {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('deptId', deptId.toString());
-  formData.append('roleIds', roleIds);
-  return request({
-    url: '/api/v1/users/_import',
-    method: 'post',
-    data: formData,
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  });
-}

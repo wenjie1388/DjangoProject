@@ -46,15 +46,19 @@
 <script setup lang="ts">
 // 系统依赖
 import { reactive, ref } from 'vue';
+
+// Element 依赖
 import type { FormInstance, FormRules } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
 // APi依赖
-import { updateUserInfo } from '@/api/user/index';
+import { updateUserInfoAPI } from '@/api/user/index';
 
 // 状态管理依赖
 import { useUserStore } from "@/store/modules/user";
 import { useAppStore } from "@/store/modules/app";
 const userStore = useUserStore();
+
 const ruleFormRef = ref<FormInstance>();
 
 // 初始化禁用
@@ -77,8 +81,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      updateUserInfo(ruleForm)
-        .then((data) => {
+      userStore.updateInfo(ruleForm)
+        .then(() => {
           ruleForm.nickname = userStore.nickname
           isDisabled.value = true
         })
