@@ -111,7 +111,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (valid) {
       // 验证码校验
       if (captcha.value === userStore.captcha) {
-        console.log(userStore.captcha);
         loading.value = true;
         userStore.login(loginData)
           .then(() => {
@@ -147,6 +146,7 @@ const sendCode = async (formEl: FormInstance | undefined) => {
     if (valid) {
       userStore.getCaptcha(loginData.username)
         .then(() => {
+          console.log(userStore.captcha);
           // 倒计时
           const timer = setInterval(() => {
             isdisabled.value = true;
@@ -160,7 +160,6 @@ const sendCode = async (formEl: FormInstance | undefined) => {
         });
     }
   })
-
 };
 
 </script>

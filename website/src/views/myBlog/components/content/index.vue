@@ -35,8 +35,8 @@
               <el-col :span="3">
                 <div class="item" style="text-align: right;">{{ info.create_date }}</div>
                 <div class="item action">
-                  <RouterLink to="#">浏览</RouterLink>
-                  <RouterLink to="#">编辑</RouterLink>
+                  <RouterLink :to="{ path: '/articles/' + info.id }">浏览</RouterLink>
+                  <RouterLink :to="{ path: '/my-blog/' + info.id + '/edit/' }">编辑</RouterLink>
                   <RouterLink to="#">删除</RouterLink>
                 </div>
               </el-col>

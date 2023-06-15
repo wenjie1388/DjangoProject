@@ -30,8 +30,6 @@ INSTALLED_APPS = [
     'article.apps.ArticleConfig',
     # 'course.apps.CourseConfig',
     'utils.apps.UtilsConfig',
-    # 'auth.apps.AuthConfig',
-
 
     'rest_framework',
     'corsheaders',
@@ -39,16 +37,18 @@ INSTALLED_APPS = [
 ]
 # from django.middleware.security import SecurityMiddleware
 MIDDLEWARE = [
+    # 跨域中间件 
     'corsheaders.middleware.CorsMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+from django.contrib.sessions.middleware import SessionMiddleware
 ROOT_URLCONF = 'apiv1.urls'
 
 TEMPLATES = [
@@ -128,7 +128,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ####################### 用于验证的模型
-AUTH_USER_MODEL = "users.AdminUser"
+AUTH_USER_MODEL = "users.Admin"
 
 
 
@@ -183,8 +183,10 @@ REST_FRAMEWORK = {
               # 'rest_framework.authentication.SessionAuthentication',     # 
               # 'rest_framework.authentication.BasicAuthentication',       
           ),
+          'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+          'PAGE_SIZE': 10
         }
-from rest_framework.authentication import TokenAuthentication,BasicAuthentication,SessionAuthentication
+from rest_framework.authentication import SessionAuthentication
 # 配置redis数据库
 CACHES = {
     'default': {
@@ -205,6 +207,13 @@ CACHES = {
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
              "CONNECTION_POOL_KWARGS": {"max_connections": 100}, # 最大的连接池数量，django-redis 使用 redis.py 的连接池，默认不关闭连接，尽可能重用连接 
+        },
+    },
+    "token": {  # 存储 验证码
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS3_LOCATION,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },
     },
     "staks": {  # 存储 验证码
@@ -263,9 +272,72 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
+# =============================================== #
+# **************** 日志 配置 ***************** #
+# =============================================== #
 
-
-
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    # 'filters': {
+    #     'special': {
+    #         '()': 'project.logging.SpecialFilter',
+    #         'foo': 'bar',
+    #     },
+    #     'require_debug_true': {
+    #         '()': 'django.utils.log.RequireDebugTrue',
+    #     },
+    # },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            # 'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            # 'filters': ['special']
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            # 'class': 'logging.FileHandler',
+            'class': "logging.FileHandler",
+            'filename':'log/log.txt',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'django.request': {
+            # 'handlers': ['mail_admins'],
+            'handlers': ['file',],
+            # 'level': 'ERROR',
+            'level': 'DEBUG',
+            # * propagate 是指
+            'propagate': False,
+        },
+        'myproject.custom': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+            # 'filters': ['special']
+        }
+    }
+}
 
 
 

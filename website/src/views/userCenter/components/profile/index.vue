@@ -83,13 +83,13 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     if (valid) {
       userStore.updateInfo(ruleForm)
         .then(() => {
-          ruleForm.nickname = userStore.nickname
-          isDisabled.value = true
+          ruleForm.nickname = userStore.nickname;
+          isDisabled.value = true;
         })
     } else {
       console.log('error submit!', fields);
     }
-  })
+  });
 };
 
 const resetForm = (formEl: FormInstance | undefined) => {

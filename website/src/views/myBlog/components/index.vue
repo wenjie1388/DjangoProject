@@ -49,7 +49,7 @@ const userCard = reactive({
 });
 
 function initUserCard() {
-  getUserInfo('v1', '01040203', userStore.id)
+  getUserInfo('v2', '01040203', userStore.id)
     .then((data) => {
       userCard.id = data.id;
       userCard.nickname = data.nickname;

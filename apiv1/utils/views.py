@@ -19,9 +19,8 @@ from .tasks import send_mail_code
 from .utils import get_RandomString,get_auth_code_6
 from .serializer import CellphoneSerializer,EmailSerializer
 
-
+'''
 class CaptchaViews(APIView):
-   
    key = None
    value = None
 
@@ -41,6 +40,8 @@ class CaptchaViews(APIView):
       # 邮箱验证码
       pass
       
+'''
+
 
 ''' 手机验证码接口 '''
 @api_view(['GET'])
@@ -93,4 +94,33 @@ def EmailCodeView(request, *args, **kwargs):
 
 
 
-# class 
+
+''' 验证码 '''
+class CaptchaView(APIView):
+  
+  
+  def get(self,request,*args, **kwargs):
+    captcha = request.query_params.get('captcha')
+    account = request.query_params.get('account')
+    redis_connec = django_redis.get_redis_connection('verify_code')
+    
+    if redis_connec.get(account) == None:
+      return Response({"message":"无此账号！"},status=HTTP_204_NO_CONTENT)
+    
+    if redis_connec.get(account) != captcha.encode():
+      return Response({"message":"验证码错误！"},status=HTTP_204_NO_CONTENT)
+    
+    if redis_connec.ttl(account) == -2:
+      return Response({"message":"验证码超时，请重新获取！"},status=HTTP_204_NO_CONTENT)
+    
+    return Response({"message":"OK"},status=HTTP_200_OK)
+    
+      
+  
+  
+  def post(self,request,*args, **kwargs):
+    import random
+    captcha = "".join(random.choice('1234567890') for a in range(6))
+    redis_connec = django_redis.get_redis_connection('verify_code') 
+    redis_connec.set(request.data.get('account'),captcha,60*3)
+    return Response({"message":captcha},status=HTTP_204_NO_CONTENT)

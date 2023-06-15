@@ -26,10 +26,10 @@ import { getUserInfo } from '@/api/user';
 const initHistory = ref();
 
 function InitBrowsingHistory() {
-  getUserInfo('v1', '01040204', userStore.id)
+  getUserInfo('v2', '01040204', userStore.id)
     .then((data) => {
       initHistory.value = data;
-    })
+    });
 };
 
 

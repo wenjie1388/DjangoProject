@@ -16,6 +16,8 @@ urlpatterns = [
     
     re_path(r"^nav2$",Nav2ModelViewsets.as_view({"get":"list","post":"create"}),name='nav2'),
     re_path(r"^nav2/(?P<id>.+)$",Nav2ModelViewsets.as_view({"get":"retrieve","put":"update","patch":"partial_update","delete":"destroy"}),name='nav2_'),
+
+    # re_path(r"(?P<pathId>[0-9]{8})")
 ]
 
 router.register(r'',ArticleModelViewsets)

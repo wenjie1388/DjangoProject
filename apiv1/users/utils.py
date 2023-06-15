@@ -9,8 +9,7 @@ from rest_framework.fields import CharField as _CharField
 from rest_framework.serializers import Serializer
 from rest_framework.permissions import BasePermission
 
-from auth.utils import username_re,email_re,cellphone_re,password_re,auth_code_6_re,get_RandomPassword
-
+from utils.utils import username_re,email_re,cellphone_re,password_re,auth_code_6_re,get_RandomPassword
 
 ''' 以下是重写 DRF 的 CharField.to_internal_value() 和 RegexField 以及 增加自定义字段 CheckPassword 和 VerificationCode'''
 
@@ -137,3 +136,8 @@ class AdminUserManager(BaseManager):
 
 
 ''' 以下是各种功能函数 '''
+
+
+def getInitUsername():
+  import random,string
+  return "name"+''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(20))

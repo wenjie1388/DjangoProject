@@ -1,21 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import UserManager,PermissionsMixin,AbstractBaseUser,AbstractUser as _AbstractUser
+from django.contrib.auth.models import User
 # from django.contrib.auth.hashers import (
 #     check_password,
 #     is_password_usable,
 #     make_password,
 # )
 from django.conf import settings
+from django.forms import ValidationError
 from rest_framework.authtoken.models import Token
-from auth.utils import get_RandomString,get_RandomPassword,send_mail
+from rest_framework.response import Response
+from rest_framework.status import (
+    HTTP_204_NO_CONTENT,
+)
+from utils.utils import get_RandomString,get_RandomPassword,send_mail
 from .utils import AnyUserManager,AdminUserManager
 
 def user_img_path(instance, filename):
     return 'users/{0}/{1}{2}'.format(instance.course.id,get_RandomString(24), filename)
 
-class UserBase(models.Model):
+class UserBase(AbstractBaseUser):
     ''' 用户基表 '''
-    GENDER = [
+    MALE = [
         ('M','男'),
         ('F','女'),
     ]
@@ -29,24 +35,26 @@ class UserBase(models.Model):
         max_length=128,
         help_text="6-20个字符、密码不能与用户名相同、^[a-zA-Z](?![a-zA-Z]{5,19}$)([a-zA-Z0-9_.@$!%*#_~?&^]{5,19}$)",
     )
-    cell = models.CharField(
+    cellphone = models.CharField(
         verbose_name='手机号',
         max_length=128,
+        blank=True,
         unique=True,
+        null=True,
     )
     name = models.CharField(
         verbose_name='姓名',
         max_length=128,
+        blank=True,
     )
-    idcard = models.CharField(
+    id_card = models.CharField(
         verbose_name='身份证件',
         max_length=128,
-        unique=True,
     )
-    gender = models.CharField( 
+    male = models.CharField( 
         verbose_name='性别',
         max_length=128,
-        choices=GENDER,
+        choices=MALE,
         help_text="M是男；F是女！",
         blank=True,
     )
@@ -60,6 +68,7 @@ class UserBase(models.Model):
         max_length=128,
         blank=True,
         unique=True,
+        null=True,
     )
     address = models.CharField(
         verbose_name="居住地",
@@ -76,8 +85,12 @@ class UserBase(models.Model):
         default=False,
     )
 
+    EMAIL_FIELD = "email"
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["email"]
+
     class Meta:
-        abstract = True
+      abstract = True
     
     @property
     def is_anonymous(self):
@@ -86,23 +99,23 @@ class UserBase(models.Model):
         anonymous users.
         """
         return False
+    
+    def get_jwt_auth(self):
+        return ''
+    
+
     # def set_password(self, raw_password):
     #     self.password = make_password(raw_password)
     #     self._password = raw_password
 
-    # def check_password(self, raw_password):
-    #     """
-    #     Return a boolean of whether the raw_password was correct. Handles
-    #     hashing formats behind the scenes.
-    #     """
-    #     def setter(raw_password):
-    #         self.set_password(raw_password)
-    #         # Password hash upgrades shouldn't be considered password changes.
-    #         self._password = None
-    #         self.save(update_fields=["password"])
-
-    #     return check_password(raw_password, self.password, setter)
-    
+    def check_password(self, raw_password):
+        if self.password != raw_password:
+          # raise ValidationError(self.errors)
+          return False
+        return True
+        
+        
+        
     def email_user(self, subject, message,to_email ,from_email=settings.EMAIL_HOST_USER, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [to_email], **kwargs)
@@ -111,8 +124,8 @@ class UserBase(models.Model):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
 
-# class AdminUser(UserBase,PermissionsMixin):
-class AdminUser(UserBase):
+
+class Admin(UserBase):
     DEPARTMENT = [
         ('D','开发部门'),
         ('A','审核部门'),
@@ -149,7 +162,7 @@ class AdminUser(UserBase):
         verbose_name = 'admin'
         verbose_name_plural = 'admins'
 
-class AnyUser(UserBase):
+class User(UserBase):
     ''' User 表 '''
     introduction = models.TextField(
         verbose_name="个性签名",
@@ -164,7 +177,7 @@ class AnyUser(UserBase):
     objects = AnyUserManager()
     class Meta:
         db_table = 'user'
-        ordering = ('id',)
+        ordering = ('id','date_joined')
         verbose_name = 'user'
         verbose_name_plural = 'users'
 

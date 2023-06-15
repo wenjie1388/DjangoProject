@@ -9,12 +9,12 @@ from django.contrib.auth.hashers import (
     is_password_usable,
     make_password,
 )
-from .models import AnyUser as User,AdminUser
+from .models import User,Admin
 
-from .utils import UsernameField,PasswordField,CellphoneField,AuthCode6Field
+from apiv1.filter import UsernameField,PasswordField,CellphoneField,AuthCode6Field,Captcha6Field,AccountField
 from .exceptions import UserAlreadyExists
 
-from auth.utils import get_RandomPassword,get_RandomString
+from utils.utils import get_RandomPassword,get_RandomString
 
 
 ''' 以下是基类序列器 '''
@@ -24,58 +24,89 @@ class LoginBaseSerializer(serializers.Serializer):
 
 class RegisterBaseSerializer(serializers.Serializer):
     ''' 注册基类 '''
+    username = UsernameField()
     password = PasswordField()
-    code = AuthCode6Field()
-
-    def create(self):
-      email=self.validated_data.get("email",None)
-      cell=self.validated_data.get("cell",None)
-      pw=self.validated_data.get("password",None)
-      username=get_RandomString(24)
+    
+    # def create(self):
+    def create(self, validated_data):
+      return User.objects.create(**validated_data)
+    
+    def save(self, **kwargs):
+      return User.objects.create(**self.validated_data)
       
-      if email is not None:
-        # 邮箱注册
-        user_info = {"username":username,"password":pw,"email":email}
-
-      elif cell is not None:
-        # 手机号码注册
-        user_info = {"username":username,"password":pw,"cell":cell}
-      else:
-          return 0
       
-      try:
-        User.objects.create(**user_info)
-      except IntegrityError:
-          return 0
-      return user_info
 
 
 ''' 以下是AnyUser模型的序列器 '''
 
-class AnyUserModelSerializer(serializers.ModelSerializer):
+class UserModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = ('address','avatar','idcard','name','introduction')
         # 将exclude属性设置成一个从序列化器中排除的字段列表。
         # 但是你也可以使用depth选项轻松生成嵌套关联：
         # fields = ('__all__')
+    
+    def save(self, **kwargs):
+      assert hasattr(self, '_errors'), (
+          'You must call `.is_valid()` before calling `.save()`.'
+      )
 
-class AnyUserLoginEmailSerializer(LoginBaseSerializer):
-    email = serializers.EmailField()
+      assert not self.errors, (
+          'You cannot call `.save()` on a serializer with invalid data.'
+      )
 
-class AnyUserLoginUsernameSerializer(LoginBaseSerializer):
-    username = UsernameField()
+      # Guard against incorrect use of `serializer.save(commit=False)`
+      assert 'commit' not in kwargs, (
+          "'commit' is not a valid keyword argument to the 'save()' method. "
+          "If you need to access data before committing to the database then "
+          "inspect 'serializer.validated_data' instead. "
+          "You can also pass additional keyword arguments to 'save()' if you "
+          "need to set extra attributes on the saved model instance. "
+          "For example: 'serializer.save(owner=request.user)'.'"
+      )
 
-class AnyUserLoginCellSerializer(LoginBaseSerializer):
-    cell = CellphoneField()
+      assert not hasattr(self, '_data'), (
+          "You cannot call `.save()` after accessing `serializer.data`."
+          "If you need to access data before committing to the database then "
+          "inspect 'serializer.validated_data' instead. "
+      )
 
-class AnyUserRegisterEmailSerializer(RegisterBaseSerializer):
+      validated_data = {**self.validated_data, **kwargs}
+
+      if self.instance is not None:
+          self.instance = self.update(self.instance, validated_data)
+          assert self.instance is not None, (
+              '`update()` did not return an object instance.'
+          )
+      else:
+          self.instance = self.create(validated_data)
+          assert self.instance is not None, (
+              '`create()` did not return an object instance.'
+          )
+
+      return self.instance
+    
+class UserLoginSerializer(serializers.Serializer):
+    # action = serializers.RegexField(
+    #     r'^[0-9]{6}$', 
+    #     max_length=6, 
+    #     min_length=6, 
+    # )
+    account = AccountField()
+    password = PasswordField()
+    # captcha = Captcha6Field()
+
+
+
+
+class RegisterEmailSerializer(RegisterBaseSerializer):
     ''' 邮箱注册序列器 '''
     email=serializers.EmailField()
 
-class AnyUserRegisterCellSerializer(RegisterBaseSerializer):
+class RegisterCellSerializer(RegisterBaseSerializer):
     ''' 手机号注册序列器 '''
-    cell = CellphoneField()
+    cellphone = CellphoneField()
 
 class AnyUserListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -83,7 +114,7 @@ class AnyUserListSerializer(serializers.ModelSerializer):
         exclude = ('address','avatar','idcard','name','introduction')
         # 将exclude属性设置成一个从序列化器中排除的字段列表。
         # 但是你也可以使用depth选项轻松生成嵌套关联：
-        # fields = ('id','username','cell','gender','name','idcard','email','is_active','last_login','date_joined')
+        # fields = ('id','username','cellphone','gender','name','idcard','email','is_active','last_login','date_joined')
 
 class AnyUserCreateSerializer(serializers.Serializer):
     ''' 添加用户序列器 '''
@@ -94,7 +125,7 @@ class AnyUserCreateSerializer(serializers.Serializer):
     email=serializers.EmailField()
     is_anonymous=serializers.BooleanField()
     username = UsernameField()
-    cell = CellphoneField()
+    cellphone = CellphoneField()
     gender=serializers.ChoiceField(
         choices=GENDER
         )
@@ -123,11 +154,11 @@ class AdminUserLoginSerializer(LoginBaseSerializer):
 
 class AdminUserListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AdminUser
+        model = Admin
         # exclude = ('address','avatar')
         # 将exclude属性设置成一个从序列化器中排除的字段列表。
         # 但是你也可以使用depth选项轻松生成嵌套关联：
-        # fields = ('id','username','cell','gender','name','idcard','email','is_active','last_login','date_joined')
+        # fields = ('id','username','cellphone','gender','name','idcard','email','is_active','last_login','date_joined')
     
 class AdminUserCreateSerializer(serializers.Serializer):
     ''' 添加管理员 序列器'''
@@ -135,13 +166,20 @@ class AdminUserCreateSerializer(serializers.Serializer):
     email = serializers.EmailField()
     
     def create(self,validated_data):
-        return AdminUser.objects.create(**validated_data)
+        return Admin.objects.create(**validated_data)
     
 class AdminUserModelSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = AdminUser
+        model = Admin
         exclude = ('address','avatar')
+
+
+
+class AnyuserModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
 
 
 

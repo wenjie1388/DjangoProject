@@ -31,7 +31,6 @@ const userStore = useUserStore();
 // 初始化默认路由
 const defaultActive = ref('profile');
 
-
 const SelectOpen = (key: string, keyPath: string[]) => {
   // '/user-center/' + { $route.params.id } + 'profile'
   const path = '/user-center/' + userStore.id + '/' + key;

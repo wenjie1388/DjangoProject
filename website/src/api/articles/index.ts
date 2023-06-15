@@ -179,7 +179,7 @@ export function ArticleReadingAPI(Article_id:string | string []): AxiosPromise<A
  */
 export function ArticleGuide6API(uid:string | string []): AxiosPromise<ArticleGuide6Type>{
   return request({
-    url: '/v1/articles/03010105/'+uid,
+    url: '/v1/articles/03010106/'+uid,
     method: 'get',
   });
 };

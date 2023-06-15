@@ -17,6 +17,7 @@ cellphone_re = r'^1[3-9][0-9]{9}$'
 # email_regex = r'^[\w]+@[\w]+.com$'
 email_re = r'\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}'
 auth_code_6_re=r'(?![a-zA-Z]{6})(?![0-9]{6})(^[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]$)'
+
 smscode_re= r'^(?![0-9]+$)(?![a-zA-Z]+$)([a-z-A-Z0-9]{6}$)'
 gender_re = r'^[MF]{1}$'
 

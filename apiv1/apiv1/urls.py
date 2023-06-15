@@ -13,8 +13,16 @@ urlpatterns = [
     re_path(r'^api-token-auth/$',views.obtain_auth_token), # post 方法
     # path('admin/', admin.site.urls),
     re_path(r'^api/v1/users/',include('users.urls')),
+    
     re_path(r'^api/v1/articles/', include('article.urls')),
+    re_path(r'^api/v2/articles/', include('article.urls')),
+    
+    
     re_path(r'^api/v1/utils/',include('utils.urls')),
-    re_path(r'^api/v1/auth/',include('auth.urls')),
+    
+    
+    # re_path(r'^api/v1/auth/',include('auth.urls')),
+    
+    
     re_path(r'media/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
 ]

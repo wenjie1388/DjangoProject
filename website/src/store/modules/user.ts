@@ -81,7 +81,7 @@ export const useUserStore = defineStore('user', () => {
   // 获取账号信息
   function getAccountInfo() { 
     return new Promise<UserInfo>((resolve, reject) => {
-      getUserInfo('01040202',id.value)
+      getUserInfo('v2','01040202',id.value)
         .then((data) => {
           password.value = data.password;
           email.value = data.email;
@@ -103,7 +103,7 @@ export const useUserStore = defineStore('user', () => {
     return new Promise<UserInfo>((resolve, reject) => {
       addCaptchaApi(account)
         .then((data) => {
-          captcha.value = data.captcha;
+          captcha.value = data.code;
           resolve();
         })
         .catch((error) => { 

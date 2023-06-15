@@ -1,5 +1,3 @@
-from django.contrib.auth import views
-
 from django.conf import settings
 from django.core.cache import cache
 from django.contrib.auth.hashers import check_password,make_password
@@ -18,7 +16,7 @@ from rest_framework.status import (
     HTTP_400_BAD_REQUEST,HTTP_401_UNAUTHORIZED,HTTP_404_NOT_FOUND,HTTP_405_METHOD_NOT_ALLOWED,HTTP_406_NOT_ACCEPTABLE,
     HTTP_500_INTERNAL_SERVER_ERROR
 )
-from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.models import Token as _Token
 from rest_framework.decorators import api_view,authentication_classes,permission_classes
 from rest_framework.settings import api_settings
 from rest_framework import authentication, permissions,mixins
@@ -26,18 +24,17 @@ from rest_framework.generics import  ListAPIView,ListCreateAPIView
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.exceptions import ErrorDetail, ValidationError
 import jwt,datetime,django_redis 
-from .models import AnyUser as User,AdminUser
+from .models import User,Admin
 from .serializers import (
-   AnyUserLoginUsernameSerializer,
-   AnyUserLoginCellSerializer,
-   AnyUserLoginEmailSerializer,
-   AnyUserModelSerializer,
+   UserLoginSerializer,
+   
+   UserModelSerializer,
    AnyUserCreateSerializer,
    AnyUserListSerializer,
-   AnyUserRegisterCellSerializer,
-   AnyUserRegisterEmailSerializer,
+   RegisterCellSerializer,
+   RegisterEmailSerializer,
   
    AdminUserModelSerializer,
    AdminUserLoginSerializer,
@@ -46,11 +43,15 @@ from .serializers import (
    AdminUserLoginSerializer,
    )
 from .exceptions import UserAlreadyExists
-from auth.crypto import CryptoAES
-from auth.utils import JwtToken,send_mail
+from utils.crypto import CryptoAES
+from utils.utils import JwtToken,send_mail
+from utils.models import Token
 
 
+import logging
 
+logger = logging.getLogger('django.request')
+logger.handlers
 
 ''' 以下是AnyUser的接口 '''
 
@@ -172,15 +173,128 @@ def AnyUserRegisterView(request):
     return Response(status=HTTP_201_CREATED)
 
 
+class UserLoginView(APIView):
+  serializer_class = UserLoginSerializer
+   
+  def get(self,request, *args, **kwargs):
+    # *
+      query_params = request.query_params
+      serializer = self.serializer_class(data=query_params)
+      serializer.is_valid(raise_exception=True)
+      action = query_params.get('action')
+      # 数据校验成功后进入用户信息对比
+      try:
+        if action == '010201':
+          user = User.objects.get(cellphone=serializer.validated_data['account'])
+        elif action == '010202':
+          user = User.objects.get(email=serializer.validated_data['account'])
+        elif action == '010203':
+          user = User.objects.get(username=serializer.validated_data['account'])
+        else:
+          return Response({'message':f'action:，不存在！'},status=HTTP_400_BAD_REQUEST)
+      except User.DoesNotExist:
+        return Response({"message":"此账号未注册！"},status=HTTP_204_NO_CONTENT)         
+      # except KeyError:
+      #    return Response({'message':f'action:，不存在！'},status=HTTP_400_BAD_REQUEST)
+      
+      _password = query_params['password']
+
+      if not user.check_password(_password):
+         return Response({'message':f'用户名或密码错误！'},status=HTTP_400_BAD_REQUEST)
+      
+      key = Token.generate_key2(
+        headers={'typ':'jwt','alg':'HS256'},
+        payload={'id':user.id,#自定义用户ID
+        'username':user.id,#自定义用户名
+        'exp':datetime.datetime.utcnow() + datetime.timedelta(days=7),# 设置超时时间，7 天内
+        },
+      )
+      try:
+        token = Token.objects.create(key=key.decode(),user_id=user.id)
+      except IntegrityError:
+        return Response({'message':f'已经登录'},status=HTTP_400_BAD_REQUEST)
 
 
-class AnyUserViewset(viewsets.ModelViewSet):
+      return Response({
+        "id":user.id,
+        "nickname":user.username,
+        "token":token.key
+        },status=HTTP_200_OK)
+    
+      
+   
+
+
+class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = AnyUserModelSerializer
-    lookup_field = "id"
+    lookup_field = None
+    authentication_classes = []
+    serializer_class = []
 
-class AnyUserListCreateView():
+    
+    """
+    Create a model instance.
+    """
+    def create(self, request, *args, **kwargs):
+      action = request.query_params.get('action')
+      actions = self.get_post_actions(request.data)
+      try:
+        action_dic = actions[action]
+      except KeyError:
+        logger.debug(f'action:{action}，不存在！')
+        return  Response({'message':f'action:，不存在！'},status=HTTP_400_BAD_REQUEST)
+      serializer_class = self.get_serializer_class(action)
+      serializer = serializer_class(data=action_dic["dicdata"])
+      serializer.is_valid(raise_exception=True)
+      try:
+        self.perform_create(serializer)
+      except IntegrityError:
+        return Response({"message":"已经存在！"}, status=HTTP_400_BAD_REQUEST)
+      headers = self.get_success_headers(serializer.data)
+      return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
 
+    def perform_create(self, serializer):
+        serializer.save()
+        
+    def get_post_actions(self,reqdata):
+      from .utils import getInitUsername
+      actions = {
+        # * 3 手机注册
+        '010103':{
+          "dicdata":{"username":getInitUsername(),"cellphone":reqdata.get('account'),'password':reqdata.get('password')},
+          "serializer_class":RegisterCellSerializer,
+          },
+        # * 4 邮箱注册
+        '010104':{
+          "dicdata":{"username":getInitUsername(),"email":reqdata.get('account'),'password':reqdata.get('password')},
+          "serializer_class":RegisterEmailSerializer,
+          },
+      }
+      return actions
+    
+    def get_serializer_class(self,action):
+      
+      serializer_dict = {
+        '010103':RegisterCellSerializer,
+        '010104':RegisterEmailSerializer,
+      }
+      self.serializer_class = serializer_dict.get(action,None)
+      return super().get_serializer_class()
+
+   
+
+class Action(type):
+  dicdata = None
+  serializer_class = None
+  
+  def __init__(self, dicdata, serializer_class):
+    self.dicdata = dicdata
+    self.serializer_class = serializer_class
+
+
+
+
+class AnyUserListCreateView(APIView):
     queryset = User.objects.all()
     serializer_class = [AnyUserListSerializer,AnyUserCreateSerializer] 
 
@@ -263,8 +377,8 @@ class AdminUserLoginView(APIView):
 
       # 判断用户名是否存在；
       try:
-          user = AdminUser.objects.get(username=serializer.validated_data['username'])
-      except AdminUser.DoesNotExist:
+          user = Admin.objects.get(username=serializer.validated_data['username'])
+      except Admin.DoesNotExist:
         return Response({"msg":"用户不存在"},status=HTTP_400_BAD_REQUEST)  
 
       # 用户存在，进行密码校验
@@ -288,8 +402,8 @@ class AdminUserLoginView(APIView):
       },status=HTTP_200_OK)
 
 class AdminUserView(APIView):
-    '''  用户列表|新增 AdminUser  '''
-    queryset = AdminUser.objects.all()
+    '''  用户列表|新增 Admin  '''
+    queryset = Admin.objects.all()
     serializer_class = [AdminUserListSerializer,AdminUserCreateSerializer]
 
     def get(self,request, *args, **kwargs):
@@ -299,7 +413,7 @@ class AdminUserView(APIView):
       return Response({'total':total,'list':serializer.data},status=HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
-      """ 添加 AdminUser 记录
+      """ 添加 Admin 记录
       request.data:
         username:
 
@@ -309,10 +423,10 @@ class AdminUserView(APIView):
       serializer = self.serializer_class[1](data=request.data)
       if not serializer.is_valid(raise_exception=True):
         return Response(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
-      total = AdminUser.objects.filter(username=serializer.validated_data['username']).count()
+      total = Admin.objects.filter(username=serializer.validated_data['username']).count()
       if total > 0:
          return Response({_('message'):_('User already exists')},status=HTTP_400_BAD_REQUEST)
-      pw = AdminUser.get_initial_password()
+      pw = Admin.get_initial_password()
       user_dict = {**serializer.validated_data,**{'password':pw}}
       adminuser_obj = serializer.create(user_dict)
       serializer = AdminUserListSerializer(adminuser_obj,many=False)
@@ -333,8 +447,8 @@ class PurchaseList(ListAPIView):
         # return User.objects.filter(purchaser__username=username)
     
 
-    ''' 检索|更新|删除 AdminUser'''
-    # queryset = AdminUser.objects.all()
+    ''' 检索|更新|删除 Admin'''
+    # queryset = Admin.objects.all()
     # serializer_class = AdminUserListSerializer 
 
 
