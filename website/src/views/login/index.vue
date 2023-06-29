@@ -112,7 +112,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       // 验证码校验
       if (captcha.value === userStore.captcha) {
         loading.value = true;
-        userStore.login(loginData)
+        userStore.login("010203", loginData)
           .then(() => {
             router.push('/');
           })
@@ -140,16 +140,16 @@ const forget = () => {
 
 
 const sendCode = async (formEl: FormInstance | undefined) => {
-  console.log(loginData.username);
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
+      isdisabled.value = true;
       userStore.getCaptcha(loginData.username)
         .then(() => {
           console.log(userStore.captcha);
           // 倒计时
           const timer = setInterval(() => {
-            isdisabled.value = true;
+
             time60s.value -= 1;
             if (time60s.value == 0) {
               isdisabled.value = false;

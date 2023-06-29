@@ -59,8 +59,7 @@ def SMSCodeView(request):
       redis_connec.set(serializer.validated_data['cell'],smscode,60*10)
     except ConnectionError:
       return Response({'msg':"ConnectionError：无法连接 redis "},status=HTTP_500_INTERNAL_SERVER_ERROR)
-    except ResponseError:
-      Response({'msg':["ResponseError：redis 启动保护模式 "]},status=HTTP_500_INTERNAL_SERVER_ERROR)
+    
     # if is_save == True :
       # 3. 通过 供应商 发送短信。
       # pass

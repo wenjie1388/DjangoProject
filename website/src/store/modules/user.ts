@@ -11,8 +11,13 @@ import { getToken, setToken, removeToken, setId, getId, removeId } from '@/utils
 
 // api/auth
 import { loginApi, logoutApi,addCaptchaApi } from '@/api/auth';
-// /api/user
-import { getUserInfo, getAccountInfoAPI, updateUserInfoAPI, updateAccountInfoAPI } from '@/api/user';
+// user API
+import {
+  getUserInfoApi,
+  getAccountInfoAPI,
+  patchUserInfoApi,
+  updateAccountInfoAPI
+} from '@/api/user';
 
 // 数据类型依赖
 import { LoginDataC,captchaEmailInfo,captchaPhoneInfo } from '@/api/auth/types';
@@ -22,12 +27,16 @@ export const useUserStore = defineStore('user', () => {
   // state
   
   // 个人资料
-  const id = ref<string>('');
-  const nickname = ref<string>(''); // 网名
-
-  const token = ref<string>(getToken() || '');
+  const id = ref<number>('');
+  const nickname = ref<string>('');
+  const male = ref<string>(''); // 性别
+  const introduction = ref<string>('');
+  const address = ref<string>('');
   const avatar = ref<string>(''); // 用户头像
-  const active = ref<boolean>(false); // false=无法登录
+
+  // 权限信息
+  const token = ref<string>(getToken() || '');
+  const is_activate = ref<boolean>(true); // True-账号已激活，能登录；反之则不能登录
   const status = ref<boolean>(false); // true=重新登录
 
   // 账号信息
@@ -35,21 +44,29 @@ export const useUserStore = defineStore('user', () => {
   const cellphone = ref<string>(''); // 手机
   const email = ref<string>(''); // 邮箱
   
-  // 临时用的验证码
-  const captcha =ref<string>(''); // 验证码
+  // 实名认证
+  const is_authenticated= ref<boolean>(false); // True-通过实名验证；
+  const name = ref<string>(''); // 姓名
+  const id_card= ref<string>('');  // 身份证号
+
+  // 辅助信息
+  const captcha = ref<string>(''); // 验证码
+  const last_login = ref<string>('');
+  const date_joined = ref<string>('');
+  
 
   // actions
   // 登录
-  function login(loginData) {
+  function login(version,LoginForm) {
     return new Promise<void>((resolve, reject) => {
-      loginApi(loginData)
+      loginApi(version,LoginForm)
         .then((data) => {
-          const { tokenType, accessToken } = data;
-          token.value = tokenType + " " + accessToken; // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
-          id.value = data.id;
-          getInfo(id.value);
+          const { id, nickname, token } = data;
+          console.log(data.id);
+          token.value = token; // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
+          id.value = id;
+          nickname.value = nickname;
           setToken(token.value);
-          setId(id.value);
           resolve();
         })
         .catch(error => {
@@ -59,17 +76,24 @@ export const useUserStore = defineStore('user', () => {
   }
 
   // 获取个人资料(用户昵称、角色集合、权限集合)
-  function getInfo() {
-    return new Promise<UserInfo>((resolve, reject) => {
-      getUserInfo('v1','01040201',id.value)
+  function getInfo(version,) {
+    return new Promise<void>((resolve, reject) => {
+      getUserInfoApi(version,id.value)
         .then((data) => {
-          console.log(data)
-          id.value = data.id;
-          nickname.value = data.nickname;
-          avatar.value = data.avatar;
-          active.value = data.active;
+          console.log(data.male)
+          male.value = data.male;
+          introduction.value = data.introduction;
+          address.value = data.address;
+          is_activate.value = data.is_activate;
           status.value = data.status;
-          console.log(data.id,data.nickname)
+          password.value = data.password;
+          cellphone.value = data.cellphone;
+          email.value = data.email;
+          is_authenticated.value = data.is_authenticated;
+          name.value = data.name;
+          id_card.value = data.id_card;
+          date_joined.value = data.date_joined;
+          last_login.value = data.last_login;
           resolve(data);
         })
         .catch(error => {
@@ -78,32 +102,17 @@ export const useUserStore = defineStore('user', () => {
     });
   }
 
-  // 获取账号信息
-  function getAccountInfo() { 
-    return new Promise<UserInfo>((resolve, reject) => {
-      getUserInfo('v2','01040202',id.value)
-        .then((data) => {
-          password.value = data.password;
-          email.value = data.email;
-          cellphone.value = data.cellphone;
-          resolve();
-        })
-        .catch((error) => { 
-          reject(error);
-        });
-    })
-  }
-
   /**
-   * 获取验证码
+   * 生成验证码
    * @param captchaInfo 验证码参数
    * @returns 
    */
   function getCaptcha(account:string) { 
-    return new Promise<UserInfo>((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       addCaptchaApi(account)
         .then((data) => {
-          captcha.value = data.code;
+          const { message } = data;
+          captcha.value = message;
           resolve();
         })
         .catch((error) => { 
@@ -138,7 +147,7 @@ export const useUserStore = defineStore('user', () => {
    */
   function updateAccountInfo(accountForm:AccountInfo) { 
     return new Promise<UserInfo>((resolve, reject) => {
-      updateUserInfoAPI('01040402',id.value,accountForm)
+      updateUserInfoApi('01040402',id.value,accountForm)
         .then((data) => {
           password.value = data.password;
           email.value = data.email;
@@ -151,6 +160,11 @@ export const useUserStore = defineStore('user', () => {
     })
   }
 
+  function updateProfile(dataForm) {
+    return new Promise<UserInfo>((resolve, reject) => { 
+      patchUserInfoApi('010601',id.value,dataForm)
+    })
+  }
 
   // 注销
   function logout() {

@@ -1,4 +1,6 @@
 import { SmsCode } from './types';
+
+
 /**
  * 登录数据类型（带验证码的）
  */
@@ -8,24 +10,6 @@ export interface LoginDataC {
   captcha: string;
 }
 
-/**
- * 注册数据类型（带验证码的）
- */
-export interface registerDataC {
-  username: string;
-  password: string;
-  checkPass: string;
-  captcha: string;
-}
-
-
-/**
- * 登录数据类型（不带验证码的）
- */
-export interface LoginData {
-  username: string;
-  password: string;
-}
 
 
 

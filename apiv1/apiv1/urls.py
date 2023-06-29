@@ -19,6 +19,7 @@ urlpatterns = [
     
     
     re_path(r'^api/v1/utils/',include('utils.urls')),
+    re_path(r'^api/v1/auths/',include('auths.urls')),
     
     
     # re_path(r'^api/v1/auth/',include('auth.urls')),

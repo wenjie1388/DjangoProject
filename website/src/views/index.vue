@@ -1,5 +1,5 @@
 <template>
-  <el-row :gutter="14">
+  <!-- <el-row :gutter="14">
     <el-col :span="12" :offset="2">
       <div class="carousel-box grid-content" style="margin-left: 0px;">
         <el-carousel>
@@ -10,21 +10,9 @@
       </div>
     </el-col>
     <el-col :span="6" style=" padding-top: 5px;">
-      <!-- <el-card class="news-card">
-        <template #header>
-          <div class="card-header">
-            <span>热点新闻</span>
-            <el-button class="button" text>更多</el-button>
-          </div>
-        </template>
-        <a v-for="user in hotnews" :key="user.id" href="#" class="text-item">
-          <div class="news-title">{{ user.title }}</div>
-          <div class="news-digest">{{ user.digest }}</div>
-        </a>
-      </el-card> -->
     </el-col>
-  </el-row>
-
+  </el-row> -->
+  <!-- 
   <el-row :gutter="14">
     <el-col :span="12" :offset="2">
       <el-tabs v-model="activetabs" class="demo-tabs" @tab-click="handleClick">
@@ -69,8 +57,8 @@
       </el-tabs>
     </el-col>
     <el-col :span="6">
-      <!-- 向你推荐 -->
-      <!-- <el-card class="activity-card">
+
+<el-card class="activity-card">
         <template #header>
           <div class="card-header">
             <b>推荐活动</b>
@@ -85,9 +73,9 @@
             </el-icon>
           </router-link>
         </div>
-      </el-card> -->
-    </el-col>
-  </el-row>
+      </el-card>
+  </el-col>
+  </el-row>  -->
 </template>
 
 <script lang="ts" setup>
@@ -202,15 +190,15 @@ function InitActivityRecommendationApi() {
 
 onMounted(() => {
   // 初始化轮播图
-  InitCarousel();
+  // InitCarousel();
   // 初始化热点
-  InitHotNews();
+  // InitHotNews();
   // 初始化推荐
-  InitRecommendedAritcle();
+  // InitRecommendedAritcle();
   // 初始化热榜
-  InitHotListAritcle();
+  // InitHotListAritcle();
   // 初始化推荐活动
-  InitActivityRecommendationApi();
+  // InitActivityRecommendationApi();
 })
 </script>
 

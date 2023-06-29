@@ -1,4 +1,5 @@
 
+from typing import Any
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
@@ -104,35 +105,6 @@ class IsActivateUser(BasePermission):
     def has_permission(self, request, view):
         return bool(request.user and request.user.is_active)
 
-
-
-''' 以下是所有 user 管理器 '''
-
-class BaseManager(Manager):
-    
-    @classmethod
-    def normalize_email(cls, email):
-        """
-        Normalize the email address by lowercasing the domain part of it.
-        """
-        email = email or ""
-        try:
-            email_name, domain_part = email.strip().rsplit("@", 1)
-        except ValueError:
-            pass
-        else:
-            email = email_name + "@" + domain_part.lower()
-        return email
-    
-    def make_random_password(self,length=24,):
-        return get_RandomPassword(length)
-
-class AnyUserManager(BaseManager):
-    pass
-
-
-class AdminUserManager(BaseManager):
-    pass
 
 
 ''' 以下是各种功能函数 '''

@@ -17,35 +17,57 @@ from .exceptions import UserAlreadyExists
 from utils.utils import get_RandomPassword,get_RandomString
 
 
-''' 以下是基类序列器 '''
+''' 登录反序列器 '''
 
 class LoginBaseSerializer(serializers.Serializer):
-    password = PasswordField()
+  password = PasswordField()
 
-class RegisterBaseSerializer(serializers.Serializer):
-    ''' 注册基类 '''
-    username = UsernameField()
-    password = PasswordField()
-    
-    # def create(self):
-    def create(self, validated_data):
-      return User.objects.create(**validated_data)
-    
-    def save(self, **kwargs):
-      return User.objects.create(**self.validated_data)
-      
-      
+class CellphoneLoginSerializer(LoginBaseSerializer):
+  account = CellphoneField()
+
+class EmailLoginSerializer(LoginBaseSerializer):
+  account = serializers.EmailField()
+
+class UsernameLoginSerializer(LoginBaseSerializer):
+  account = UsernameField()
 
 
-''' 以下是AnyUser模型的序列器 '''
+
+
+class UserLoginSerializer(serializers.Serializer):
+  account = AccountField()
+  password = PasswordField()
+
+
+
+
+class UserRegisterSerializer(serializers.Serializer):
+  account = AccountField()
+  password = PasswordField()
+  
+  def get_initial_password(self):
+    ''' 返回随机密码 '''
+    return get_RandomPassword(24)
+  
+  def save(self):
+    import re
+    validated_data={
+      'username': 'email_'+self.validated_data['account']  if re.search('@',self.validated_data['account']) else 'phone_'+self.validated_data['account'],
+      "email" if re.search('@',self.validated_data['account']) else "cellphone":self.validated_data['account'],
+      "password":self.validated_data['password']
+    }
+ 
+    return User.objects.create(**validated_data)
+
+
 
 class UserModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ('address','avatar','idcard','name','introduction')
+        # exclude = ('address','avatar','idcard','name','introduction')
         # 将exclude属性设置成一个从序列化器中排除的字段列表。
         # 但是你也可以使用depth选项轻松生成嵌套关联：
-        # fields = ('__all__')
+        fields = ('__all__')
     
     def save(self, **kwargs):
       assert hasattr(self, '_errors'), (
@@ -87,26 +109,6 @@ class UserModelSerializer(serializers.ModelSerializer):
 
       return self.instance
     
-class UserLoginSerializer(serializers.Serializer):
-    # action = serializers.RegexField(
-    #     r'^[0-9]{6}$', 
-    #     max_length=6, 
-    #     min_length=6, 
-    # )
-    account = AccountField()
-    password = PasswordField()
-    # captcha = Captcha6Field()
-
-
-
-
-class RegisterEmailSerializer(RegisterBaseSerializer):
-    ''' 邮箱注册序列器 '''
-    email=serializers.EmailField()
-
-class RegisterCellSerializer(RegisterBaseSerializer):
-    ''' 手机号注册序列器 '''
-    cellphone = CellphoneField()
 
 class AnyUserListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -140,9 +142,7 @@ class AnyUserCreateSerializer(serializers.Serializer):
             return pw
         return User
     
-    def get_initial_password(self):
-        ''' 返回初始密码 '''
-        return get_RandomPassword(24)
+
 
 
 

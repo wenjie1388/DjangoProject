@@ -1,12 +1,58 @@
+import { formContextKey } from "element-plus";
+
+
+
+
 /**
- * 登录用户信息
+ * 登录表单
  */
-export interface UserInfo {
-  nickname: string;
-  avatar: string;
-  active: boolean;
-  status: boolean;
+export interface LoginFormT {
+  account: string;
+  password: string;
 }
+
+/**
+ * @param 登录-Response
+ */
+export interface LoginResponT {
+    id: number;
+    nickname: string;
+    token: string;
+}
+
+
+/**
+ * @param 注册表单
+ */
+export interface RegisterFormT {
+  account: string;
+  password: string;
+}
+
+
+
+
+/**
+ * @param 用户信息
+ */
+export interface UserInfoT {
+    address: string;
+    avatar: string;
+    cellphone: string;
+    date_joined: string;
+    email: string;
+    id: number;
+    id_card: string;
+    introduction: string;
+    is_activate: boolean;
+    is_authenticated: boolean;
+    last_login: string;
+    male: string;
+    name: string;
+    password: string;
+    username: string;
+}
+
 
 
 /**

@@ -14,7 +14,6 @@ from rest_framework.status import (
     HTTP_204_NO_CONTENT,
 )
 from utils.utils import get_RandomString,get_RandomPassword,send_mail
-from .utils import AnyUserManager,AdminUserManager
 
 def user_img_path(instance, filename):
     return 'users/{0}/{1}{2}'.format(instance.course.id,get_RandomString(24), filename)
@@ -103,19 +102,6 @@ class UserBase(AbstractBaseUser):
     def get_jwt_auth(self):
         return ''
     
-
-    # def set_password(self, raw_password):
-    #     self.password = make_password(raw_password)
-    #     self._password = raw_password
-
-    def check_password(self, raw_password):
-        if self.password != raw_password:
-          # raise ValidationError(self.errors)
-          return False
-        return True
-        
-        
-        
     def email_user(self, subject, message,to_email ,from_email=settings.EMAIL_HOST_USER, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [to_email], **kwargs)
@@ -123,6 +109,16 @@ class UserBase(AbstractBaseUser):
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
+
+
+
+# class BaseManager():
+#   pass
+''' 以下是所有 user 管理器 '''
+class UserManager(models.Manager):
+    pass
+class AdminUserManager(models.Manager):
+    pass
 
 
 class Admin(UserBase):
@@ -163,26 +159,32 @@ class Admin(UserBase):
         verbose_name_plural = 'admins'
 
 class User(UserBase):
-    ''' User 表 '''
-    introduction = models.TextField(
-        verbose_name="个性签名",
-        max_length=200,
-        blank=True,
-    )
-    
-    is_activate = models.BooleanField(
-        verbose_name="是否已激活",
-        default=True,
-    )
-    objects = AnyUserManager()
-    class Meta:
-        db_table = 'user'
-        ordering = ('id','date_joined')
-        verbose_name = 'user'
-        verbose_name_plural = 'users'
-
-
-
+  
+  ''' User 表 '''
+  introduction = models.TextField(
+      verbose_name="个性签名",
+      max_length=200,
+      blank=True,
+  )
+  
+  is_activate = models.BooleanField(
+      verbose_name="是否已激活",
+      default=True,
+  )
+  objects = UserManager()
+  
+  class Meta:
+      db_table = 'user'
+      ordering = ('id','date_joined')
+      verbose_name = 'user'
+      verbose_name_plural = 'users'
+  
+  def check_password(self, raw_password)-> bool:
+    if self.password != raw_password:
+      # raise ValidationError(self.errors)
+      return False
+    return True
+  
 
 '''
 class SMSCode(models.Model):
@@ -223,6 +225,7 @@ class LogRegister(models.Model):
     expiresDate= models.DateTimeField(default=now()+timedelta(minutes=30))
 
 '''
+
 
 
 

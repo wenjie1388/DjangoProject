@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'article.apps.ArticleConfig',
     # 'course.apps.CourseConfig',
     'utils.apps.UtilsConfig',
+    'auths.apps.AuthsConfig',
 
     'rest_framework',
     'corsheaders',

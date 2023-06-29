@@ -51,8 +51,6 @@ import { reactive, ref } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
 
-// APi依赖
-import { updateUserInfoAPI } from '@/api/user/index';
 
 // 状态管理依赖
 import { useUserStore } from "@/store/modules/user";

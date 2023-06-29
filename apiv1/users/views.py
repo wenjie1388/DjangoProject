@@ -10,6 +10,7 @@ from django.utils.translation import gettext as _
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
 from rest_framework.generics import GenericAPIView,RetrieveDestroyAPIView
 from rest_framework.status import (
     HTTP_200_OK,HTTP_201_CREATED,HTTP_202_ACCEPTED,HTTP_204_NO_CONTENT,
@@ -29,12 +30,11 @@ import jwt,datetime,django_redis
 from .models import User,Admin
 from .serializers import (
    UserLoginSerializer,
+   UserRegisterSerializer,
    
    UserModelSerializer,
    AnyUserCreateSerializer,
    AnyUserListSerializer,
-   RegisterCellSerializer,
-   RegisterEmailSerializer,
   
    AdminUserModelSerializer,
    AdminUserLoginSerializer,
@@ -175,121 +175,80 @@ def AnyUserRegisterView(request):
 
 class UserLoginView(APIView):
   serializer_class = UserLoginSerializer
-   
+  
   def get(self,request, *args, **kwargs):
-    # *
-      query_params = request.query_params
-      serializer = self.serializer_class(data=query_params)
-      serializer.is_valid(raise_exception=True)
-      action = query_params.get('action')
-      # 数据校验成功后进入用户信息对比
-      try:
-        if action == '010201':
-          user = User.objects.get(cellphone=serializer.validated_data['account'])
-        elif action == '010202':
-          user = User.objects.get(email=serializer.validated_data['account'])
-        elif action == '010203':
-          user = User.objects.get(username=serializer.validated_data['account'])
-        else:
-          return Response({'message':f'action:，不存在！'},status=HTTP_400_BAD_REQUEST)
-      except User.DoesNotExist:
-        return Response({"message":"此账号未注册！"},status=HTTP_204_NO_CONTENT)         
-      # except KeyError:
-      #    return Response({'message':f'action:，不存在！'},status=HTTP_400_BAD_REQUEST)
-      
-      _password = query_params['password']
-
-      if not user.check_password(_password):
-         return Response({'message':f'用户名或密码错误！'},status=HTTP_400_BAD_REQUEST)
-      
-      key = Token.generate_key2(
-        headers={'typ':'jwt','alg':'HS256'},
-        payload={'id':user.id,#自定义用户ID
-        'username':user.id,#自定义用户名
-        'exp':datetime.datetime.utcnow() + datetime.timedelta(days=7),# 设置超时时间，7 天内
-        },
-      )
-      try:
-        token = Token.objects.create(key=key.decode(),user_id=user.id)
-      except IntegrityError:
-        return Response({'message':f'已经登录'},status=HTTP_400_BAD_REQUEST)
-
-
-      return Response({
-        "id":user.id,
-        "nickname":user.username,
-        "token":token.key
-        },status=HTTP_200_OK)
+    import re
+    query_params = request.query_params
+    serializer = self.serializer_class(data=query_params)
+    serializer.is_valid(raise_exception=True)
+    account = serializer.validated_data.get('account',None)
+    password = serializer.validated_data.get('password',None)
     
-      
-   
+    # 查询用户账号密码
+    try:
+      user = User.objects.get(email=account) if re.search('@',account) else  User.objects.get(cellphone=account)
+    except User.DoesNotExist:
+      return Response({"message":"此账号未注册！"},status=HTTP_204_NO_CONTENT)         
+
+    
+    # 匹配密码
+    if not user.check_password(password):
+      return Response({'message':f'用户名或密码错误！'},status=HTTP_400_BAD_REQUEST)
+    
+    # 生成 token
+    key = Token.generate_key2(
+      headers={'typ':'jwt','alg':'HS256'},
+      payload={'id':user.id,#自定义用户ID
+      'username':user.id,#自定义用户名
+      'exp':datetime.datetime.utcnow() + datetime.timedelta(days=7),# 设置超时时间，7 天内
+      },
+    )
+    try:
+      token = Token.objects.create(key=key.decode(),user_id=user.id)
+    except IntegrityError:
+      token = Token.objects.get(user_id=user.id)
+
+
+    return Response({
+      "id":user.id,
+      "nickname":user.username,
+      "token":token.key
+      },status=HTTP_200_OK)
+  
 
 
 class UserViewset(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    lookup_field = None
-    authentication_classes = []
-    serializer_class = []
+  queryset = User.objects.all()
+  lookup_field = 'id'
+  # authentication_classes = []
+  serializer_class = UserModelSerializer
+  
 
-    
-    """
-    Create a model instance.
-    """
-    def create(self, request, *args, **kwargs):
-      action = request.query_params.get('action')
-      actions = self.get_post_actions(request.data)
-      try:
-        action_dic = actions[action]
-      except KeyError:
-        logger.debug(f'action:{action}，不存在！')
-        return  Response({'message':f'action:，不存在！'},status=HTTP_400_BAD_REQUEST)
-      serializer_class = self.get_serializer_class(action)
-      serializer = serializer_class(data=action_dic["dicdata"])
-      serializer.is_valid(raise_exception=True)
-      try:
-        self.perform_create(serializer)
-      except IntegrityError:
-        return Response({"message":"已经存在！"}, status=HTTP_400_BAD_REQUEST)
-      headers = self.get_success_headers(serializer.data)
-      return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
+  def create(self, request, *args, **kwargs):
+    import re
+    serializer = UserRegisterSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    try:
+      serializer.save()
+    except IntegrityError:
+      return Response({"message":"手机或邮箱不可用！"}, status=HTTP_400_BAD_REQUEST)
+    headers = self.get_success_headers(serializer.data)
+    return Response(serializer.data, status=HTTP_201_CREATED, headers=headers)
 
-    def perform_create(self, serializer):
-        serializer.save()
-        
-    def get_post_actions(self,reqdata):
-      from .utils import getInitUsername
-      actions = {
-        # * 3 手机注册
-        '010103':{
-          "dicdata":{"username":getInitUsername(),"cellphone":reqdata.get('account'),'password':reqdata.get('password')},
-          "serializer_class":RegisterCellSerializer,
-          },
-        # * 4 邮箱注册
-        '010104':{
-          "dicdata":{"username":getInitUsername(),"email":reqdata.get('account'),'password':reqdata.get('password')},
-          "serializer_class":RegisterEmailSerializer,
-          },
-      }
-      return actions
-    
-    def get_serializer_class(self,action):
-      
-      serializer_dict = {
-        '010103':RegisterCellSerializer,
-        '010104':RegisterEmailSerializer,
-      }
-      self.serializer_class = serializer_dict.get(action,None)
-      return super().get_serializer_class()
-
+  def retrieve(self, request, *args, **kwargs):
+     return super().retrieve(request, *args, **kwargs)
+   
+  def list(self, request, *args, **kwargs):
+     return super().list(request, *args, **kwargs)
+   
+  def destroy(self, request, *args, **kwargs):
+    try:
+      User.objects.get(id=kwargs['id']).delete()
+    except User.DoesNotExist:
+      return Response(status=HTTP_400_BAD_REQUEST)
+    return Response(status=HTTP_204_NO_CONTENT)
    
 
-class Action(type):
-  dicdata = None
-  serializer_class = None
-  
-  def __init__(self, dicdata, serializer_class):
-    self.dicdata = dicdata
-    self.serializer_class = serializer_class
 
 
 

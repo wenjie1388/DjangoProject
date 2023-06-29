@@ -55,6 +55,7 @@ const route = useRoute();
 import { getCarouselAPI } from "@/api/media/index";
 import { exitApi } from "@/api/auth/index";
 
+
 const isLogin = ref(false);
 const input1 = ref('');
 const handleSelect = (key: string, keyPath: string[]) => {
@@ -105,12 +106,15 @@ function exit() {
 
 
 onMounted(() => {
-  // 初始化用户
-  initUser();
+
+  if (getToken() == '') {
+    console.log('未登录');
+  } else {
+    // 初始化用户
+    initUser();
+  }
 
   // 初始化轮播图
-  getCarousel();
-
 
 });
 </script>
