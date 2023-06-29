@@ -1,0 +1,2473 @@
+DEBUG 2023-06-07 00:18:26,677 views 18000 21212 action:010105Ôºå‰∏çÂ≠òÂú®ÔºÅ
+WARNING 2023-06-07 00:18:26,679 log 18000 21212 Bad Request: /api/v2/users/
+WARNING 2023-06-11 22:05:16,019 log 17816 13132 Not Found: /api/v2/articles
+ERROR 2023-06-11 22:13:17,379 log 21724 3336 Internal Server Error: /api/v2/articles/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\authentication.py", line 42, in authenticate
+    raise NotImplementedError(".authenticate() must be overridden.")
+NotImplementedError: .authenticate() must be overridden.
+WARNING 2023-06-14 00:00:19,849 log 6496 21320 Not Found: /
+WARNING 2023-06-14 00:00:19,934 log 6496 21320 Not Found: /favicon.ico
+ERROR 2023-06-14 00:04:18,560 log 22804 26332 Internal Server Error: /api/v1/users/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 45, in list
+    serializer = self.get_serializer(queryset, many=True)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 108, in get_serializer
+    serializer_class = self.get_serializer_class()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 122, in get_serializer_class
+    assert self.serializer_class is not None, (
+AssertionError: 'AnyUserViewset' should either include a `serializer_class` attribute, or override the `get_serializer_class()` method.
+ERROR 2023-06-14 00:04:58,553 log 13064 6640 Internal Server Error: /api/v1/users/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 45, in list
+    serializer = self.get_serializer(queryset, many=True)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 108, in get_serializer
+    serializer_class = self.get_serializer_class()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 122, in get_serializer_class
+    assert self.serializer_class is not None, (
+AssertionError: 'UserViewset' should either include a `serializer_class` attribute, or override the `get_serializer_class()` method.
+ERROR 2023-06-14 00:05:41,449 log 23340 23272 Internal Server Error: /api/v1/users/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 45, in list
+    serializer = self.get_serializer(queryset, many=True)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 108, in get_serializer
+    serializer_class = self.get_serializer_class()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 122, in get_serializer_class
+    assert self.serializer_class is not None, (
+AssertionError: 'UserViewset' should either include a `serializer_class` attribute, or override the `get_serializer_class()` method.
+WARNING 2023-06-14 00:18:13,353 log 8000 20972 Not Found: /api/v2/users/
+WARNING 2023-06-14 00:18:52,232 log 10624 8892 Not Found: /api/v2/users/
+ERROR 2023-06-14 00:20:31,251 log 10624 8892 Internal Server Error: /api/v1/users/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 253, in create
+    self.perform_create(serializer)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 258, in perform_create
+    serializer.save()
+  File "D:\blog\DjangoProject\apiv1\users\serializers.py", line 35, in save
+    return User.objects.create(**self.validated_data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 669, in create
+    obj = self.model(**kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 585, in __init__
+    raise TypeError(
+TypeError: User() got unexpected keyword arguments: 'cell'
+ERROR 2023-06-14 00:22:09,425 log 24468 21072 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 192, in get
+    '010201':User.objects.get(cell=self.query_params['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 636, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1420, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1438, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1445, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1532, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1562, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1407, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1217, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1709, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'cell' into field. Choices are: address, article, avatar, cellphone, date_joined, email, id, id_card, introduction, is_activate, is_authenticated, last_login, male, name, password, username
+ERROR 2023-06-14 00:23:47,025 log 7860 5964 Internal Server Error: /api/v1/users/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '18121622641' for key 'user.cellphone'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 253, in create
+    self.perform_create(serializer)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 258, in perform_create
+    serializer.save()
+  File "D:\blog\DjangoProject\apiv1\users\serializers.py", line 35, in save
+    return User.objects.create(**self.validated_data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\contrib\auth\base_user.py", line 68, in save
+    super().save(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.IntegrityError: (1062, "Duplicate entry '18121622641' for key 'user.cellphone'")
+ERROR 2023-06-14 00:25:13,217 log 20452 8092 Internal Server Error: /api/v1/users/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '18121622641' for key 'user.cellphone'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\blog\DjangoProject\apiv1\users\serializers.py", line 36, in save
+    return User.objects.create(**self.validated_data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\contrib\auth\base_user.py", line 68, in save
+    super().save(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.IntegrityError: (1062, "Duplicate entry '18121622641' for key 'user.cellphone'")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 253, in create
+    self.perform_create(serializer)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 258, in perform_create
+    serializer.save()
+  File "D:\blog\DjangoProject\apiv1\users\serializers.py", line 38, in save
+    raise '“—æ≠◊¢≤·'
+TypeError: exceptions must derive from BaseException
+WARNING 2023-06-14 00:27:31,053 log 8236 6392 Bad Request: /api/v1/users/
+ERROR 2023-06-14 00:56:40,677 log 13320 13532 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 186, in get
+    action = self.query_params.get('action')
+AttributeError: 'UserLoginView' object has no attribute 'query_params'
+ERROR 2023-06-14 00:57:43,639 log 492 16076 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    action = self.query_params.get('action')
+AttributeError: 'UserLoginView' object has no attribute 'query_params'
+ERROR 2023-06-14 01:04:27,440 log 18648 20784 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1048, "Column 'user_id' cannot be null")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 206, in get
+    token = Token.objects.create()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\authtoken\models.py", line 33, in save
+    return super().save(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+ERROR 2023-06-14 01:10:00,111 log 5312 4120 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 204, in get
+    token = Token.objects.create()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+TypeError: save() missing 2 required positional arguments: 'headers' and 'payload'
+ERROR 2023-06-14 01:14:53,069 log 25456 6292 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 203, in get
+    user.check_password(_password)
+  File "D:\blog\DjangoProject\apiv1\users\models.py", line 113, in check_password
+    raise Response({"Message":"”√ªß√˚ªÚ√‹¬Î¥ÌŒÛ£°"},status=HTTP_204_NO_CONTENT)
+TypeError: exceptions must derive from BaseException
+ERROR 2023-06-14 01:16:08,512 log 19828 1080 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 203, in get
+    user.check_password(_password)
+  File "D:\blog\DjangoProject\apiv1\users\models.py", line 114, in check_password
+    raise ValidationError(self.errors)
+AttributeError: 'User' object has no attribute 'errors'
+ERROR 2023-06-14 01:16:32,940 log 22920 17748 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 203, in get
+    user.check_password(_password)
+  File "D:\blog\DjangoProject\apiv1\users\models.py", line 114, in check_password
+    raise ValidationError('”√ªß√˚ªÚ√‹¬Î¥ÌŒÛ£°')
+django.core.exceptions.ValidationError: ['”√ªß√˚ªÚ√‹¬Î¥ÌŒÛ£°']
+ERROR 2023-06-14 01:25:12,205 log 11220 9048 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 191, in get
+    '010202':User.objects.get(email=serializer.validated_data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 198, in get
+    print(actions[action])
+UnboundLocalError: local variable 'actions' referenced before assignment
+ERROR 2023-06-14 01:27:34,893 log 9724 20300 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 195, in get
+    if not user.check_password(_password):
+  File "D:\blog\DjangoProject\apiv1\users\models.py", line 114, in check_password
+    raise False
+TypeError: exceptions must derive from BaseException
+WARNING 2023-06-14 01:28:34,522 log 16620 24764 Bad Request: /api/v1/users/login
+ERROR 2023-06-14 01:33:49,008 log 14512 8292 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    print(self.get_get_actions(data=query_params)[action])
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 219, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:34:32,213 log 22280 11672 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    print(self.get_get_actions(data=query_params))
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 219, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:35:43,962 log 23628 21000 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    print(self.get_get_actions(data=query_params))
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 219, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+WARNING 2023-06-14 01:35:46,429 log 16812 5812 Bad Request: /api/v1/users/login
+WARNING 2023-06-14 01:38:11,512 log 9052 26240 Bad Request: /api/v1/users/login
+WARNING 2023-06-14 01:38:32,992 log 9052 26240 Bad Request: /api/v1/users/login
+ERROR 2023-06-14 01:40:06,737 log 7980 14696 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 189, in get
+    user = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 220, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 192, in get
+    print(user)
+UnboundLocalError: local variable 'user' referenced before assignment
+ERROR 2023-06-14 01:41:35,786 log 26276 2376 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 220, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:42:16,387 log 8856 13604 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 221, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:42:21,049 log 8856 13604 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 221, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:43:00,153 log 15252 15088 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 222, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:43:23,725 log 7304 19940 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 223, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:43:26,429 log 7304 19940 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 223, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:44:03,756 log 18664 9320 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 225, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:44:23,663 log 10156 21988 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 225, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:45:25,832 log 20084 15772 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 225, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:45:31,447 log 20084 15772 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 225, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:45:55,958 log 20084 15772 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 225, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:46:07,813 log 9416 14968 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 225, in get_get_actions
+    '010202':User.objects.get(email=data['account']),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 650, in get
+    raise self.model.DoesNotExist(
+users.models.User.DoesNotExist: User matching query does not exist.
+ERROR 2023-06-14 01:50:32,637 log 1868 7284 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 185, in get
+    actions = self.get_get_actions(serializer.validated_data)
+AttributeError: 'UserLoginView' object has no attribute 'get_get_actions'
+WARNING 2023-06-14 01:50:51,796 log 7180 20084 Bad Request: /api/v1/users/login
+ERROR 2023-06-14 01:52:38,016 log 7180 20084 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    token = Token.save(
+TypeError: save() missing 1 required positional argument: 'self'
+ERROR 2023-06-14 01:54:49,226 log 26164 22772 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    token = Token.save(
+TypeError: save() missing 1 required positional argument: 'self'
+ERROR 2023-06-14 01:54:54,856 log 26164 22772 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    token = Token.save(
+TypeError: save() missing 1 required positional argument: 'self'
+ERROR 2023-06-14 01:55:00,895 log 10232 25280 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    token = Token.save(
+TypeError: save() missing 1 required positional argument: 'self'
+ERROR 2023-06-14 01:56:40,425 log 9884 9144 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 213, in get
+    token = Token.objects.create(user_id=user.id)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+TypeError: save() missing 2 required positional arguments: 'headers' and 'payload'
+ERROR 2023-06-14 02:00:29,857 log 11836 20560 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    token = Token.save(
+TypeError: save() missing 1 required positional argument: 'self'
+ERROR 2023-06-14 02:01:32,366 log 26048 10144 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    token = Token.save(
+TypeError: save() missing 1 required positional argument: 'self'
+ERROR 2023-06-14 02:05:29,115 log 26276 23780 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+TypeError: generate_key2() missing 1 required positional argument: 'self'
+ERROR 2023-06-14 02:05:41,912 log 11976 14228 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 68, in generate_key2
+    return jwt.encode(headers=headers,payload=payload,key=settings.SECRET_KEY,algorithm=headers['alg'])
+AttributeError: 'dict' object has no attribute 'encode'
+ERROR 2023-06-14 02:06:55,100 log 22692 10044 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 68, in generate_key2
+    return jwt.encode(headers=str(headers),payload=str(payload),key=settings.SECRET_KEY,algorithm=headers['alg'])
+AttributeError: 'dict' object has no attribute 'encode'
+ERROR 2023-06-14 02:06:59,910 log 22692 10044 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 68, in generate_key2
+    return jwt.encode(headers=str(headers),payload=str(payload),key=settings.SECRET_KEY,algorithm=headers['alg'])
+AttributeError: 'dict' object has no attribute 'encode'
+ERROR 2023-06-14 02:07:12,204 log 22060 13760 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 68, in generate_key2
+    return jwt.encode(headers=str(headers),payload=str(payload),key=settings.SECRET_KEY,algorithm=headers['alg'])
+AttributeError: 'dict' object has no attribute 'encode'
+ERROR 2023-06-14 02:08:31,745 log 2556 16824 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 68, in generate_key2
+    return jwt.encode(headers,payload,key=settings.SECRET_KEY,algorithm=headers['alg'])
+AttributeError: 'dict' object has no attribute 'encode'
+ERROR 2023-06-14 02:09:22,130 log 22772 24248 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 55, in generate_key2
+    return jwt.encode(headers,payload,key=settings.SECRET_KEY,algorithm=headers['alg'])
+TypeError: encode() got multiple values for argument 'key'
+ERROR 2023-06-14 02:10:35,602 log 8204 24384 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 55, in generate_key2
+    return jwt.encode(headers,payload,settings.SECRET_KEY,algorithm=headers['alg'])
+TypeError: encode() got multiple values for argument 'algorithm'
+ERROR 2023-06-14 02:11:50,565 log 1592 7776 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 55, in generate_key2
+    return jwt.encode(headers,payload,settings.SECRET_KEY,headers['alg'])
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\jwt\api_jwt.py", line 64, in encode
+    return super(PyJWT, self).encode(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\jwt\api_jws.py", line 96, in encode
+    header.update(headers)
+ValueError: dictionary update sequence element #0 has length 1; 2 is required
+ERROR 2023-06-14 02:15:02,800 log 23880 11252 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 205, in get
+    key = Token.generate_key2(
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 55, in generate_key2
+    return jwt.encode(payload,settings.SECRET_KEY,headers)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\jwt\api_jwt.py", line 64, in encode
+    return super(PyJWT, self).encode(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\jwt\api_jws.py", line 88, in encode
+    if algorithm not in self._valid_algs:
+TypeError: unhashable type: 'dict'
+ERROR 2023-06-14 02:15:59,252 log 10156 1448 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.DataError: (1406, "Data too long for column 'key' at row 1")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 213, in get
+    token = Token.objects.create(key=key,user_id=user.id)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 22, in save
+    return super().save(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.DataError: (1406, "Data too long for column 'key' at row 1")
+ERROR 2023-06-14 02:17:28,059 log 18468 14144 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 216, in get
+    "nickname":user.nickname,
+AttributeError: 'User' object has no attribute 'nickname'
+ERROR 2023-06-14 02:18:00,922 log 16572 14480 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '2' for key 'usertoken.user_id'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 213, in get
+    token = Token.objects.create(key=key,user_id=user.id)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 22, in save
+    return super().save(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.IntegrityError: (1062, "Duplicate entry '2' for key 'usertoken.user_id'")
+ERROR 2023-06-14 02:19:46,926 log 17540 11580 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 213, in get
+    token = Token.objects.create(key=key,user=user.id)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 669, in create
+    obj = self.model(**kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 561, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\fields\related_descriptors.py", line 338, in __set__
+    super().__set__(instance, value)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\fields\related_descriptors.py", line 235, in __set__
+    raise ValueError(
+ValueError: Cannot assign "2": "Token.user" must be a "User" instance.
+ERROR 2023-06-14 02:20:32,678 log 24508 11740 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 213, in get
+    token = Token.objects.create(key=key,user=user.id)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 669, in create
+    obj = self.model(**kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 561, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\fields\related_descriptors.py", line 338, in __set__
+    super().__set__(instance, value)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\fields\related_descriptors.py", line 235, in __set__
+    raise ValueError(
+ValueError: Cannot assign "2": "Token.user" must be a "User" instance.
+ERROR 2023-06-14 02:20:44,548 log 24068 26312 Internal Server Error: /api/v1/users/login
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '2' for key 'usertoken.user_id'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 213, in get
+    token = Token.objects.create(key=key,user_id=user.id)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\blog\DjangoProject\apiv1\utils\models.py", line 22, in save
+    return super().save(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 148, in execute
+    result = self._query(query)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\cursors.py", line 310, in _query
+    conn.query(q)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 548, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 775, in _read_query_result
+    result.read()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 1156, in read
+    first_packet = self.connection._read_packet()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\connections.py", line 725, in _read_packet
+    packet.raise_for_error()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\protocol.py", line 221, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\pymysql\err.py", line 143, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.IntegrityError: (1062, "Duplicate entry '2' for key 'usertoken.user_id'")
+WARNING 2023-06-14 02:23:45,286 log 6740 11696 Bad Request: /api/v1/users/login
+WARNING 2023-06-28 22:21:08,325 log 10968 23952 Bad Request: /api/v1/users/
+WARNING 2023-06-28 22:21:21,828 log 10968 23952 Bad Request: /api/v1/users/
+WARNING 2023-06-28 22:21:47,511 log 10968 23952 Bad Request: /api/v1/users/
+ERROR 2023-06-28 22:22:53,944 log 10968 23952 Internal Server Error: /api/v1/users/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 244, in create
+    serializer.save()
+  File "D:\blog\DjangoProject\apiv1\users\serializers.py", line 55, in save
+    'username': 'phone_'+self.validated_data['account']  if re.search('@',validated_data['account']) else 'email_'+self.validated_data['account'],
+UnboundLocalError: local variable 'validated_data' referenced before assignment
+ERROR 2023-06-28 22:26:01,620 log 23880 12628 Internal Server Error: /api/v1/users/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 244, in create
+    serializer.save()
+  File "D:\blog\DjangoProject\apiv1\users\serializers.py", line 55, in save
+    'username': 'phone_'+self.validated_data['account']  if re.search('@',self.validated_data['account']) else 'email_'+self.validated_data['account'],
+KeyError: 'account'
+WARNING 2023-06-28 22:30:47,397 log 19268 5680 Bad Request: /api/v1/users/login
+WARNING 2023-06-28 22:35:44,930 log 25384 11584 Bad Request: /api/v1/users/login
+WARNING 2023-06-28 22:35:51,726 log 25384 11584 Bad Request: /api/v1/users/login
+ERROR 2023-06-28 22:38:30,920 log 9572 24668 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 55, in retrieve
+    serializer = self.get_serializer(instance)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 110, in get_serializer
+    return serializer_class(*args, **kwargs)
+TypeError: 'list' object is not callable
+ERROR 2023-06-28 22:38:59,470 log 13692 24044 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 55, in retrieve
+    serializer = self.get_serializer(instance)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 110, in get_serializer
+    return serializer_class(*args, **kwargs)
+TypeError: 'list' object is not callable
+WARNING 2023-06-28 22:44:24,432 log 24084 28300 Not Found: /api/v1/users/220000201111128632/
+ERROR 2023-06-28 22:47:38,355 log 14400 22364 Internal Server Error: /api/v1/users/640000197201310373/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 237, in retrieve
+    return super().retrieve(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 96, in get_object
+    obj = get_object_or_404(queryset, **filter_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 19, in get_object_or_404
+    return _get_object_or_404(queryset, *filter_args, **filter_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\shortcuts.py", line 85, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 636, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1420, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1438, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1445, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1532, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1562, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1407, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1217, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1709, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'uid' into field. Choices are: address, article, avatar, cellphone, date_joined, email, id, id_card, introduction, is_activate, is_authenticated, last_login, male, name, password, username
+ERROR 2023-06-28 22:47:47,734 log 14400 22364 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 237, in retrieve
+    return super().retrieve(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 96, in get_object
+    obj = get_object_or_404(queryset, **filter_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 19, in get_object_or_404
+    return _get_object_or_404(queryset, *filter_args, **filter_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\shortcuts.py", line 85, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 636, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1420, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1438, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1445, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1532, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1562, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1407, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1217, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1709, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'uid' into field. Choices are: address, article, avatar, cellphone, date_joined, email, id, id_card, introduction, is_activate, is_authenticated, last_login, male, name, password, username
+WARNING 2023-06-28 22:48:56,200 log 17396 28424 Method Not Allowed: /api/v1/users/
+WARNING 2023-06-28 22:52:47,947 log 11136 14260 Not Found: /api/v1/users/
+WARNING 2023-06-28 22:53:21,204 log 19724 23584 Method Not Allowed: /api/v1/users/
+ERROR 2023-06-28 23:31:21,368 log 22428 24044 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 243, in retrieve
+    return super().retrieve(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 88, in get_object
+    assert lookup_url_kwarg in self.kwargs, (
+AssertionError: Expected view UserViewset to be called with a URL keyword argument named "id". Fix your URL conf, or set the `.lookup_field` attribute on the view correctly.
+ERROR 2023-06-28 23:31:57,520 log 10004 15896 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 243, in retrieve
+    return super().retrieve(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\mixins.py", line 54, in retrieve
+    instance = self.get_object()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 96, in get_object
+    obj = get_object_or_404(queryset, **filter_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\generics.py", line 19, in get_object_or_404
+    return _get_object_or_404(queryset, *filter_args, **filter_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\shortcuts.py", line 85, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 636, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1420, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1438, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\query.py", line 1445, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1532, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1562, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1407, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1217, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\db\models\sql\query.py", line 1709, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'uid' into field. Choices are: address, article, avatar, cellphone, date_joined, email, id, id_card, introduction, is_activate, is_authenticated, last_login, male, name, password, username
+WARNING 2023-06-28 23:32:17,495 log 12868 13624 Method Not Allowed: /api/v1/users/
+WARNING 2023-06-28 23:32:27,488 log 12868 13624 Method Not Allowed: /api/v1/users/
+WARNING 2023-06-28 23:35:05,634 log 26560 12896 Method Not Allowed: /api/v1/users/
+WARNING 2023-06-28 23:35:08,460 log 26560 12896 Method Not Allowed: /api/v1/users/
+WARNING 2023-06-28 23:42:08,501 log 29668 10868 Not Found: /api/v1/users/630000197601071517/
+ERROR 2023-06-29 00:12:53,048 log 20148 22992 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 245, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+ERROR 2023-06-29 00:14:18,960 log 11248 24832 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 245, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+ERROR 2023-06-29 00:15:41,858 log 11248 24832 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 245, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+ERROR 2023-06-29 00:15:51,488 log 11248 24832 Internal Server Error: /api/v1/users/'99927'/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 245, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+ERROR 2023-06-29 00:16:01,387 log 11248 24832 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 245, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+ERROR 2023-06-29 00:16:14,354 log 11248 24832 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 245, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+ERROR 2023-06-29 00:16:27,271 log 11248 24832 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 245, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+ERROR 2023-06-29 00:17:31,442 log 12840 1648 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 246, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+ERROR 2023-06-29 00:17:52,766 log 18956 15744 Internal Server Error: /api/v1/users/99927/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\users\views.py", line 246, in destroy
+    User.objects.get(id=args['id']).delete()
+TypeError: tuple indices must be integers or slices, not str
+WARNING 2023-06-29 00:18:44,439 log 10224 28016 Bad Request: /api/v1/users/99927/
+WARNING 2023-06-29 00:19:26,989 log 25124 20852 Bad Request: /api/v1/users/99927/
+WARNING 2023-06-29 00:19:44,008 log 25124 20852 Bad Request: /api/v1/users/99927/
+WARNING 2023-06-29 02:01:42,947 log 18140 25192 Bad Request: /api/v1/users/
+WARNING 2023-06-29 02:05:27,660 log 18140 25192 Bad Request: /api/v1/users/login
+WARNING 2023-06-29 02:06:03,370 log 18140 25192 Bad Request: /api/v1/users/login
+WARNING 2023-06-29 03:28:17,907 log 3576 27680 Method Not Allowed: /api/v1/auths/captcha/
+ERROR 2023-06-29 04:02:46,425 log 27548 28304 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 24, in post
+    account = serializer.validated_data['account']
+KeyError: 'account'
+ERROR 2023-06-29 04:03:29,843 log 6228 10772 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 715, in connect
+    sock = self.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 716, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 781, in _connect
+    raise err
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 769, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [WinError 10061] ”…”⁄ƒø±Íº∆À„ª˙ª˝º´æ‹æ¯£¨Œﬁ∑®¡¨Ω”°£
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 26, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1255, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 1481, in get_connection
+    connection.connect()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 721, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 192.168.139.129:6379. ”…”⁄ƒø±Íº∆À„ª˙ª˝º´æ‹æ¯£¨Œﬁ∑®¡¨Ω”°£.
+ERROR 2023-06-29 04:05:43,547 log 6228 10772 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 26, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
