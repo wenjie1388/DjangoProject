@@ -1,14 +1,17 @@
-from rest_framework.serializers import Serializer,ModelSerializer
+from rest_framework import serializers
 
 from apiv1.filter import AccountField,Captcha6Field
 
-class CreateCaptchaSerializer(Serializer):
-  account = AccountField
+class CreateCaptchaSerializer(serializers.Serializer):
+  account = AccountField()
   
     
-class verifyCaptchaSerializer(Serializer):
-  account = AccountField
-  captcha = Captcha6Field
+class verifyCaptchaSerializer(serializers.Serializer):
+  account = AccountField()
+  captcha = serializers.CharField(
+    max_length = 6,
+    min_length = 6
+  )
   
   
   

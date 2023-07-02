@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_204_NO_CONTENT,
 )
-from utils.utils import get_RandomString,get_RandomPassword,send_mail
+from utils.utils import get_RandomString,get_RandomPassword
 
 def user_img_path(instance, filename):
     return 'users/{0}/{1}{2}'.format(instance.course.id,get_RandomString(24), filename)

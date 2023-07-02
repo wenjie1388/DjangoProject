@@ -44,7 +44,7 @@ from .serializers import (
    )
 from .exceptions import UserAlreadyExists
 from utils.crypto import CryptoAES
-from utils.utils import JwtToken,send_mail
+from utils.utils import JwtToken
 from utils.models import Token
 
 
@@ -178,6 +178,7 @@ class UserLoginView(APIView):
   
   def get(self,request, *args, **kwargs):
     import re
+    
     query_params = request.query_params
     serializer = self.serializer_class(data=query_params)
     serializer.is_valid(raise_exception=True)

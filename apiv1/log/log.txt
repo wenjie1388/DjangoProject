@@ -2471,3 +2471,550 @@ Traceback (most recent call last):
   File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
     raise DataError(
 redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 00:28:58,997 log 6784 12112 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 23, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 00:34:30,355 log 24356 496 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 27, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 00:35:53,309 log 26064 23716 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 28, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 00:36:10,731 log 26064 23716 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 28, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 00:36:56,690 log 26064 23716 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 28, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 00:37:23,266 log 26064 23716 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 28, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 00:37:50,870 log 28868 276 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 29, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+WARNING 2023-06-30 00:57:47,092 log 20500 6496 Method Not Allowed: /api/v1/auths/captcha/
+WARNING 2023-06-30 01:01:41,037 log 20812 11364 Bad Request: /api/v1/auths/captcha/
+WARNING 2023-06-30 01:10:23,577 log 3436 15096 Bad Request: /api/v1/auths/captcha/
+ERROR 2023-06-30 01:13:08,940 log 15308 8280 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 30, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 01:14:52,395 log 9732 24132 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 31, in post
+    redis_conne.set(account,captcha,60*10)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\commands\core.py", line 2302, in set
+    return self.execute_command("SET", *pieces, **options)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1258, in execute_command
+    return conn.retry.call_with_retry(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1259, in <lambda>
+    lambda: self._send_command_parse_response(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\client.py", line 1234, in _send_command_parse_response
+    conn.send_command(*args)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 916, in send_command
+    self._command_packer.pack(*args),
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 558, in pack
+    for arg in map(self.encode, args):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\redis\connection.py", line 114, in encode
+    raise DataError(
+redis.exceptions.DataError: Invalid input of type: 'NoneType'. Convert to a bytes, string, int or float first.
+ERROR 2023-06-30 01:31:33,294 log 4960 24616 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 34, in post
+    asyncio.run(self.send_mail_captcha(captcha,account))
+  File "C:\ProgramData\miniconda3\envs\blog\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\asyncio\base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 43, in send_mail_captcha
+    send_mail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 131, in send_messages
+    sent = self._send(message)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 149, in _send
+    self.connection.sendmail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\smtplib.py", line 871, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (501, b'Mail from address must be same as authorization user.', 'a.fnxrwxuuy@ivytpdbw.ng')
+ERROR 2023-06-30 01:33:24,633 log 18812 26880 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 34, in post
+    self.send_mail_captcha(captcha,account)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 43, in send_mail_captcha
+    send_mail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 131, in send_messages
+    sent = self._send(message)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 149, in _send
+    self.connection.sendmail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\smtplib.py", line 871, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (501, b'Mail from address must be same as authorization user.', 'l.lhdjikxqt@pfndtwl.sz')
+ERROR 2023-06-30 01:35:23,490 log 18812 26880 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 34, in post
+    self.send_mail_captcha(captcha,account)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 43, in send_mail_captcha
+    send_mail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 131, in send_messages
+    sent = self._send(message)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 149, in _send
+    self.connection.sendmail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\smtplib.py", line 885, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'E1N5f3': (501, b'Bad address syntax. http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000730')}
+ERROR 2023-06-30 01:38:46,226 log 18812 26880 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 34, in post
+    self.send_mail_captcha(captcha,account)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 43, in send_mail_captcha
+    send_mail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 131, in send_messages
+    sent = self._send(message)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 149, in _send
+    self.connection.sendmail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\smtplib.py", line 885, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'J6W2l9': (501, b'Bad address syntax. http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000730')}
+WARNING 2023-06-30 01:39:16,102 log 18812 26880 Bad Request: /api/v1/auths/captcha/
+ERROR 2023-06-30 01:39:24,204 log 18812 26880 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 34, in post
+    self.send_mail_captcha(captcha,account)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 43, in send_mail_captcha
+    send_mail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 131, in send_messages
+    sent = self._send(message)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 149, in _send
+    self.connection.sendmail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\smtplib.py", line 885, in sendmail
+    raise SMTPRecipientsRefused(senderrs)
+smtplib.SMTPRecipientsRefused: {'z9h4k6': (501, b'Bad address syntax. http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=20022&&no=1000730')}
+ERROR 2023-06-30 01:39:32,868 log 18812 26880 Internal Server Error: /api/v1/auths/captcha/
+Traceback (most recent call last):
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 34, in post
+    self.send_mail_captcha(captcha,account)
+  File "D:\blog\DjangoProject\apiv1\auths\views.py", line 43, in send_mail_captcha
+    send_mail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\__init__.py", line 87, in send_mail
+    return mail.send()
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\message.py", line 298, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 131, in send_messages
+    sent = self._send(message)
+  File "C:\ProgramData\miniconda3\envs\blog\lib\site-packages\django\core\mail\backends\smtp.py", line 149, in _send
+    self.connection.sendmail(
+  File "C:\ProgramData\miniconda3\envs\blog\lib\smtplib.py", line 871, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (501, b'Mail from address must be same as authorization user.', 't.cyguh@mduf.bi')
+WARNING 2023-06-30 01:46:41,611 log 24960 9924 Bad Request: /api/v1/auths/captcha/
+WARNING 2023-06-30 01:50:12,880 log 24960 9924 Bad Request: /api/v1/auths/captcha/
+WARNING 2023-06-30 02:01:35,551 log 7864 27940 Bad Request: /api/v1/auths/captcha/
+WARNING 2023-06-30 02:01:45,617 log 7864 27940 Bad Request: /api/v1/auths/captcha/
+WARNING 2023-06-30 02:02:35,969 log 15944 15548 Bad Request: /api/v1/auths/captcha/
+WARNING 2023-06-30 02:02:46,714 log 15944 15548 Bad Request: /api/v1/auths/captcha/
+WARNING 2023-06-30 02:04:26,170 log 27772 9916 Bad Request: /api/v1/auths/captcha/
+WARNING 2023-06-30 02:07:05,606 log 6512 24184 Bad Request: /api/v1/auths/captcha/
